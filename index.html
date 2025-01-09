@@ -7,8 +7,23 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&display=swap">
 <style>
-body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
+body,h1,h2,h3,h4,h5,h6 {font-family: "Playfair Display", sans-serif}
+/* Enhance headings for a mystical feel */
+h1, h2, h3 {
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+        }
+
+        /* Add an elegant, subtle style to paragraphs */
+        p {
+            font-weight: 400;
+            font-style: italic;
+            letter-spacing: 0.5px;
+            line-height: 1.8;
+        }
 
 body, html {
   height: 100%;
@@ -19,10 +34,21 @@ body, html {
 .bgimg-1 {
   background-position: center;
   background-size: cover;
-  /* TODO insert wanderer */
   background-image: url('Res/Wanderer.jpg');
   min-height: 100%;
 }
+     /* Navbar Styling */
+     #myNavbar {
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            position: fixed;
+            top: 0;
+            width: 100%;
+        }
+
+        #myNavbar.visible {
+            opacity: 1;
+        }
 
 .w3-bar .w3-button {
   padding: 16px;
@@ -62,14 +88,16 @@ body, html {
 <!-- Header with full-height image -->
 <header class="bgimg-1 w3-display-container w3-grayscale-min" id="home">
   <div class="w3-display-left w3-text-white" style="padding:48px">
-    <span class="w3-jumbo w3-hide-small">Software Developer - Connor Dalley</span><br>
-    <span class="w3-xxlarge w3-hide-large w3-hide-medium">
-“I wish it need not have happened in my time," said Frodo.
-"So do I," said Gandalf, "and so do all who live to see such times. But that is not for them to decide. All we have to decide is what to do with the time that is given us.”
-      - J.R.R. Tolkien, The Fellowship of the Ring
-</span><br>
-    <span class="w3-large">Connor Dalley</span>
-    <p><a href="#contact" class="w3-button w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off">Contact Info</a></p>
+    <span class="w3-jumbo w3-hide-small">Connor Dalley - Software Developer</span><br>
+    <span class="w3-xxlarge w3-hide-large w3-hide-medium"> Connor Dalley</span><br>
+    <span class="w3-large">"All we have to decide is what to do with the time that is given us.”<br>
+      - J.R.R. Tolkien, The Fellowship of the Ring</span>
+    <p>
+      <a href="#about" class="w3-button w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off">About Me</a>
+      <a href="#work" class="w3-button w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off">Projects</a> 
+      <a href="#edu" class="w3-button w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off">Education</a>
+      <a href="#contact" class="w3-button w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off">Contact Info</a>
+    </p>
   </div> 
   <div class="w3-display-bottomleft w3-text-grey w3-large" style="padding:24px 48px">
     <i class="fa fa-facebook-official w3-hover-opacity"></i>
@@ -89,7 +117,7 @@ body, html {
     <div class="w3-quarter">
       <i class="fa fa-desktop w3-margin-bottom w3-jumbo w3-center"></i>
       <p class="w3-large">Technical Skills</p>
-      <p>I am proficient in various programming languages, including Python, Java, and C++, enabling me to develop a wide range of software applications efficiently.</p>
+      <p>I am proficient in various programming languages, including Python, C#, and C++, enabling me to develop a wide range of software applications efficiently.</p>
     </div>
     <div class="w3-quarter">
       <i class="fa fa-heart w3-margin-bottom w3-jumbo"></i>
@@ -110,18 +138,17 @@ body, html {
 </div>
 
 <!-- Education Section - "We know design" -->
-<div class="w3-container w3-grey" style="padding:128px 16px">
-  <div class="w3-row-padding">
-    <div class="w3-col m6">
+<div class="w3-container w3-grey" style="padding:128px 16px; display: flex; flex-direction: column; align-items: center; text-align: center;">
+  <div>
       <h3>My Educational Journey</h3>
-      <p>Discover the courses I have completed, encompassing a wide range of topics in software development, computer science, and beyond. Each course has equipped me with the skills and knowledge to excel in the tech industry.</p>
-      <p><a href="#edu" class="w3-button w3-black"><i class="fa fa-th"> </i> See Coursework</a></p>
-    </div>
-    <div class="w3-col m6">
-      <img class="w3-image w3-round-large" src="Res/U_campus.jpg" alt="Buildings" width="600" height="400">
-    </div>
+      <p>During my time at the University of Utah, I have found the experience to be incredibly valuable, both personally and academically. The university's rigorous computer science curriculum has provided me with a strong foundation in core programming principles, data structures, and algorithms, while also exposing me to advanced topics such as artificial intelligence, computer security, and software development methodologies. Beyond the coursework, the collaborative environment has allowed me to work alongside talented peers on challenging projects, fostering teamwork and critical thinking skills that are essential in the tech industry. The mentorship from professors and opportunities for hands-on learning through labs and capstone projects have further reinforced my technical knowledge and problem-solving abilities. Additionally, the diverse campus culture and extracurricular activities have encouraged personal growth, helping me develop leadership, time management, and effective communication skills. This holistic educational experience has prepared me to take on complex challenges and pursue a fulfilling career in software development with confidence.</p>
+  </div>
+  <div style="margin-top: 32px;">
+      <img class="w3-image w3-round-large" src="Res/Old utah.jpg" alt="Buildings" style="max-width: 100%; height: auto;">
+      <p><a href="#edu" class="w3-button w3-black"><i class="fa fa-th"></i> See Coursework</a></p>
   </div>
 </div>
+
 
 <!-- Team Section -->
 <!-- Team Section -->
@@ -197,7 +224,7 @@ body, html {
     </div>
     <div class="w3-third">
         <ul class="w3-ul w3-white w3-hover-shadow">
-            <li class="w3-red w3-xlarge w3-padding-32">Software</li>
+            <li class="w3-black w3-xlarge w3-padding-32">Software</li>
             <li class="w3-padding-16"><b>CS 3500 Software Practice</b></li>
             <li class="w3-padding-16"><b>CS 3505 Software Practice II</b></li>
             <li class="w3-padding-16"><b>CS 4530 Mobile App Programming</b></li>
@@ -218,20 +245,52 @@ body, html {
 </div>
 
 <!-- Contact Section -->
-<div class="w3-container w3-light-grey" style="padding:128px 16px" id="contact">
-    <h3 class="w3-center">CONTACT</h3>
-    <p class="w3-center w3-large">Drop Me a Line:</p>
-    <div style="margin-top:48px; display: flex; flex-direction: column; align-items: center;">
-      <p style="display: flex; align-items: center;"><i class="fa fa-phone fa-fw w3-xxlarge w3-margin-right"></i> Phone:  (801)-309-8729</p>
-      <p style="display: flex; align-items: center;"><i class="fa fa-envelope fa-fw w3-xxlarge w3-margin-right"></i> Email: connor_dalley@protonmail.com</p>
-      <div style="display: flex; justify-content: center; align-items: center; height: auto;">
-      </div>
-    </div>
+<!-- Contact Section -->
+<div class="w3-container w3-light-grey" style="padding:80px 32px;" id="contact">
+  <h3 class="w3-center" style="margin-bottom: 24px;">CONTACT</h3>
+  <p class="w3-center w3-large">Drop Me a Line:</p>
+
+  <div style="margin-top:48px; display: flex; flex-direction: column; align-items: center; gap: 32px;">
+
+      <!-- Phone Section -->
+      <p style="display: flex; align-items: center; gap: 16px; font-size: 1.2rem;">
+          <i class="fa fa-phone fa-fw w3-xxlarge"></i> 
+          <span>Phone: (801)-309-8729</span>
+      </p>
+
+      <!-- Email Section -->
+      <p style="display: flex; align-items: center; gap: 16px; font-size: 1.2rem;">
+          <i class="fa fa-envelope fa-fw w3-xxlarge"></i> 
+          <span>Email: connor_dalley@protonmail.com</span>
+      </p>
   </div>
+</div>
+
 <!-- Footer -->
 <footer class="w3-center w3-black w3-padding-64">
   <a href="#home" class="w3-button w3-light-grey"><i class="fa fa-arrow-up w3-margin-right"></i>To the top</a>
 </footer>
+<!-- JavaScript for Navbar Effect and Sidebar -->
+<script>
+  // Navbar gradual appearance on scroll
+  window.addEventListener("scroll", function () {
+      var navbar = document.getElementById("myNavbar");
+      if (window.scrollY > 100) {
+          navbar.classList.add("visible");
+      } else {
+          navbar.classList.remove("visible");
+      }
+  });
+
+  // Sidebar open/close functions
+  function w3_open() {
+      document.getElementById("mySidebar").style.display = "block";
+  }
+
+  function w3_close() {
+      document.getElementById("mySidebar").style.display = "none";
+  }
+</script>
 
 </body>
 </html>
