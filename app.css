@@ -1,0 +1,98 @@
+@font-face {
+  font-family: 'Tahoma';
+  src: url('/fonts/tahoma.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-family: "Tahoma", serif;
+    font-size: 18px;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    display: flex; flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+}
+.main_section {
+    display: flex;
+    height: 94%;
+    background-image: url('/Res/background.jpg');
+    background-size: cover;      /* fills the area, crops if needed */
+    background-position: center; /* keeps the focal point centered */
+    background-repeat: no-repeat;
+    align-items: start;
+    justify-content: start;
+}
+.start_bar { 
+    display: flex;
+    height: 6%;
+    background: linear-gradient(to bottom, #3B73E8 0%, #245EDC 40%, #1A4FC4 100%);
+    align-items: space-between;
+    justify-content: space-between;
+}
+
+.main_section button {
+    display: flex;
+    flex-direction: column;
+    margin: 1rem;
+    height: 3rem;
+    width: 3rem;
+}
+.start_button {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    border-radius: 0 4px 4px 0;  /* right side rounded only */
+  /* or more pill-like: */
+    border-radius: 0 12px 12px 0;
+
+  /* 3D beveled border */
+    border-top: 1px solid #6AE04E;     /* bright top */
+    border-left: 1px solid #6AE04E;    /* bright left */
+    border-bottom: 1px solid #1A4A10;  /* dark bottom */
+    border-right: 1px solid #1A4A10;   /* dark right */
+
+    padding: 0 14px 0 8px;  /* more padding on right than left */
+    width: 6.25rem;
+    font-size: 1.25rem;
+    transform: skewX(-8deg);
+    background: linear-gradient(to bottom, #54C93A 0%, #3C9A2A 50%, #2A7A1A 100%);
+    transition: background 0.1s ease;
+    color: #FFFFFF;
+    text-shadow: 1px 1px 1px #1A4A10;
+
+}
+.start_button img{
+    width: 1.5rem;
+    height: 1.5rem;
+}
+.start_button:hover {
+  background: linear-gradient(to bottom, #6AE04E 0%, #4DB838 50%, #357A22 100%);
+  /* brighter, more saturated green */
+}
+.start_button:active {
+  background: linear-gradient(to bottom, #2A7A1A 0%, #3C9A2A 50%, #54C93A 100%);
+  /* flipped — gives that "pressed in" feel */
+}
+.system_tray {
+    display: flex;
+    background-color: #1B3EA6;
+    color: #FFFFFF;
+    font-size: 0.75rem;
+    padding: 0 0.5rem;
+    align-items: center;
+    justify-content: center;
+  
+}
