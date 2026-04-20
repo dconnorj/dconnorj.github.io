@@ -27,7 +27,7 @@ main {
 }
 .main_section {
     display: flex;
-    height: 94%;
+    height: 97.5%;
     background-image: url('/Res/background.jpg');
     background-size: cover;      /* fills the area, crops if needed */
     background-position: center; /* keeps the focal point centered */
@@ -37,7 +37,7 @@ main {
 }
 .start_bar { 
     display: flex;
-    height: 6%;
+    height: 2.5%;
     background: linear-gradient(to bottom, #3B73E8 0%, #245EDC 40%, #1A4FC4 100%);
     align-items: space-between;
     justify-content: space-between;
@@ -52,9 +52,9 @@ main {
 }
 .start_button {
     display: flex;
-    justify-content: space-evenly;
+    gap: .25rem;
     align-items: center;
-    border-radius: 0 4px 4px 0;  /* right side rounded only */
+    /* border-radius: 0 4px 4px 0;  right side rounded only */
   /* or more pill-like: */
     border-radius: 0 12px 12px 0;
 
@@ -64,8 +64,8 @@ main {
     border-bottom: 1px solid #1A4A10;  /* dark bottom */
     border-right: 1px solid #1A4A10;   /* dark right */
 
-    padding: 0 14px 0 8px;  /* more padding on right than left */
-    width: 6.25rem;
+    padding: 0.15rem 0rem 0.25rem 0.25rem;
+    width: 6rem;
     font-size: 1.25rem;
     transform: skewX(-8deg);
     background: linear-gradient(to bottom, #54C93A 0%, #3C9A2A 50%, #2A7A1A 100%);
@@ -88,7 +88,13 @@ main {
 }
 .system_tray {
     display: flex;
-    background-color: #1B3EA6;
+    background: linear-gradient(
+    to bottom,
+    #128CE7 0%,
+    #1085E2 40%,
+    #1189E5 100%
+  );
+    border-left: solid black .10rem;
     color: #FFFFFF;
     font-size: 0.75rem;
     padding: 0 0.5rem;
