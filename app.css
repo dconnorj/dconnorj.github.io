@@ -40,10 +40,17 @@ h4 {
   font-size: x-small;
 }
 
+.left_desktop{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 main {
     display: flex; flex-direction: column;
     height: 100vh;
     width: 100vw;
+    position: relative;
 }
 .main_section {
     display: flex;
@@ -58,7 +65,7 @@ main {
 .icons{
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: start;
   padding: 1rem 0 0 1rem;
 }
 .start_bar { 
@@ -106,7 +113,7 @@ main {
     background: linear-gradient(to bottom, #54C93A 0%, #3C9A2A 50%, #2A7A1A 100%);
     transition: background 0.1s ease;
     color: #FFFFFF;
-    text-shadow: 1px 1px 1px #1A4A10;
+    text-shadow: 1px 1px 1px black;
 
 }
 .start_button img{
@@ -140,4 +147,79 @@ main {
 }
 .system_tray img{
   height: 1rem;
+}
+start-menu {
+  display: none;          /* hidden by default */
+  position: absolute;
+  bottom: 2.5%;           /* sits right above the start bar */
+  left: 0;
+  z-index: 999;           /* priority over everything else */
+  background: linear-gradient(to bottom, #1a5fb4, #2a6dd9);
+  color: white;
+  min-width: 300px;
+}
+
+start-menu.open {
+  display: flex;
+  flex-direction: column;
+  border-top: solid 0.2rem #5796E1 ;
+  border-bottom: solid 0.2rem #1857BF;
+  border-right: solid 0.2rem #1857BF;
+  border-left: solid 0.2rem #1857BF;
+  border-radius: 0.5rem;
+}
+start-menu img{
+  max-height: 2rem;
+}
+
+.top_start_menu{
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding: 0.5rem 0rem 0.5rem 0.25rem;
+  gap: 0.5rem;
+  background: linear-gradient(to bottom, #3B73E8 0%, #245EDC 40%, #1A4FC4 100%);
+  text-shadow: 1px 1px 1px black;
+  border-bottom: 0.2rem solid;
+  border-image: linear-gradient(to right, white, #FFC48D, #D3E5FA) 1;
+}
+.top_start_menu img{
+  border: solid 0.2rem #F2F0EF;
+  border-radius: 0.5rem;
+  max-height: 3rem;
+  box-shadow: 1px 1px 5px black;
+}
+.middle_start_menu{
+  display: flex;
+  justify-content: start;
+
+}
+.left_start_menu{
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  background-color: white;
+  color: black;
+  min-width: 50%;
+  color: #6A6A8D;
+  padding: 0.5rem;
+  gap: 0.5rem;
+}
+.right_start_menu{
+  display: flex;
+  flex-direction: column;
+  background-color: #D3E5FA;
+  min-width: 50%;
+  color: #4777C0;
+}
+.top_left_start{
+  display: flex;
+  flex-direction: column;
+  padding: 0.4rem;
+  border-bottom: 0.12rem solid #EAEAE5;
+  gap: 0.5rem;
+}
+.top_left_start_item{
+  display: flex;
+  gap: 0.1rem;
 }
