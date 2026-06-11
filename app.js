@@ -1,7 +1,7 @@
 ////////////////////////
 // StartMenu Components
 ///////////////////////
-function makeAppImageList(cname, arr, image_map, subheads) {
+function makeAppImageList(cname, arr, image_map, subheads, bold) {
   let item = `<div class="${cname}">`;
   arr.forEach(app => {
     const entry = image_map.get(app);
@@ -18,10 +18,16 @@ function makeAppImageList(cname, arr, image_map, subheads) {
                     </div>
                 </div>`;
     }
-    else{
+    else if(bold){
         item += `<div class="${cname}_item">
                     <img src="${entry[0]}" alt="${entry[1]}">
                     <h3>${app}</h3>
+                </div>`;
+    }
+    else{
+        item += `<div class="${cname}_item">
+                    <img src="${entry[0]}" alt="${entry[1]}">
+                    <p>${app}</p>
                 </div>`;
     }
   });
@@ -58,15 +64,27 @@ class StartMenu extends HTMLElement{
             </div>
             <div class="middle_start_menu">
                 <div class="left_start_menu">
-                    ${makeAppImageList("top_left_start", ["Projects", "Contact Info"], image_map, subheads)}
-                    ${makeAppImageList("bottom_left_start", ["About Me", "Music Player", "Media Player", "Paint", "Notepad"], image_map, subheads)}
+                    ${makeAppImageList("top_left_start", ["Projects", "Contact Info"], image_map, subheads, false)}
+                    ${makeAppImageList("bottom_left_start", ["About Me", "Music Player", "Media Player", "Paint", "Notepad"], image_map, subheads, false)}
+                    <button class="allprograms">
+                        <h3>All Programs</h3>
+                        <img src="/Res/all_progs.svg" alt="all programs">
+                    </button>
                 </div>
                 <div class="right_start_menu">
-                    ${makeAppImageList("top_right_start", ["Github", "LinkedIn"], image_map, subheads)}
-                    ${makeAppImageList("bottom_right_start", ["Command Prompt", "Resume", "Minesweeper", "Spider Solitaire", "Image Viewer"], image_map, subheads)}
+                    ${makeAppImageList("top_right_start", ["Github", "LinkedIn"], image_map, subheads, true)}
+                    ${makeAppImageList("bottom_right_start", ["Command Prompt", "Resume", "Minesweeper", "Spider Solitaire", "Image Viewer"], image_map, subheads, false)}
                 </div>
             </div>
             <div class="bottom_start_menu">
+                <div>
+                    <img src="/Res/Logout.png" alt="log off button">
+                    <p>Log Off</p>
+                </div>
+                <div>
+                    <img src="/Res/Power.png" alt="Shut Down Button">
+                    <p>Shut Down</p>
+                </div>
             </div>
         </div>
         `;
