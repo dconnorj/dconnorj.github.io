@@ -1,7 +1,7 @@
 ////////////////////////
 // StartMenu Components
 ///////////////////////
-function makeAppImageList(cname, arr, image_map, subheads, bold) {
+function makeAppImageList(cname, arr, image_map, subheads, bold, use_subheads) {
   let item = `<div class="${cname}">`;
   arr.forEach(app => {
     const entry = image_map.get(app);
@@ -9,7 +9,7 @@ function makeAppImageList(cname, arr, image_map, subheads, bold) {
       console.error(`No image_map entry found for: "${app}"`);
       return;
     }
-    if (subheads.has(app)){
+    if (use_subheads && subheads.has(app)){
         item += `<div class="${cname}_item">
                     <img src="${entry[0]}" alt="${entry[1]}">
                     <div>
@@ -64,16 +64,16 @@ class StartMenu extends HTMLElement{
             </div>
             <div class="middle_start_menu">
                 <div class="left_start_menu">
-                    ${makeAppImageList("top_left_start", ["Projects", "Contact Info"], image_map, subheads, false)}
-                    ${makeAppImageList("bottom_left_start", ["About Me", "Music Player", "Media Player", "Paint", "Notepad"], image_map, subheads, false)}
+                    ${makeAppImageList("top_left_start", ["Projects", "Contact Info"], image_map, subheads, false, true)}
+                    ${makeAppImageList("bottom_left_start", ["About Me", "Music Player", "Media Player", "Paint", "Notepad"], image_map, subheads, false, true)}
                     <button class="allprograms">
                         <h3>All Programs</h3>
                         <img src="/Res/all_progs.svg" alt="all programs">
                     </button>
                 </div>
                 <div class="right_start_menu">
-                    ${makeAppImageList("top_right_start", ["Github", "LinkedIn"], image_map, subheads, true)}
-                    ${makeAppImageList("bottom_right_start", ["Command Prompt", "Resume", "Minesweeper", "Spider Solitaire", "Image Viewer"], image_map, subheads, false)}
+                    ${makeAppImageList("top_right_start", ["Github", "LinkedIn"], image_map, subheads, true, true)}
+                    ${makeAppImageList("bottom_right_start", ["Command Prompt", "Resume", "Minesweeper", "Spider Solitaire", "Image Viewer"], image_map, subheads, false, true)}
                 </div>
             </div>
             <div class="bottom_start_menu">
@@ -92,7 +92,135 @@ class StartMenu extends HTMLElement{
 }
 customElements.define("start-menu", StartMenu);
 
-document.querySelector('.start_button').addEventListener('click', () => {
-  document.querySelector('start-menu').classList.toggle('open');
+const startButton = document.querySelector('.start_button');
+const startMenu = document.querySelector('start-menu');
+
+startButton.addEventListener('click', (e) => {
+  e.stopPropagation(); // prevents the click from bubbling to document
+  startMenu.classList.toggle('open');
+  startButton.classList.toggle('dimmed'); // dim the button when open
 });
 
+// close when clicking outside
+document.addEventListener('click', (e) => {
+  if (!startMenu.contains(e.target)) {
+    startMenu.classList.remove('open');
+    startButton.classList.remove('dimmed');
+  }
+});
+
+const allProgramsBtn = startMenu.querySelector('.allprograms');
+
+const allApps = [
+  "About Me", "Resume", "Projects", "Contact Info",
+  "Media Player", "Music Player", "Command Prompt",
+  "Minesweeper", "Notepad", "Paint", "Github",
+  "LinkedIn", "Image Viewer", "Spider Solitaire"
+];
+
+// build the popup once
+const allProgramsPopup = document.createElement('div');
+allProgramsPopup.classList.add('all_programs_popup');
+allProgramsPopup.innerHTML = makeAppImageList("all_programs_list", allApps, image_map, subheads, false, false);
+startMenu.appendChild(allProgramsPopup);
+
+let hideTimeout;
+
+allProgramsBtn.addEventListener('mouseenter', () => {
+  clearTimeout(hideTimeout);
+  allProgramsPopup.classList.add('open');
+});
+
+allProgramsBtn.addEventListener('mouseleave', () => {
+  hideTimeout = setTimeout(() => {
+    allProgramsPopup.classList.remove('open');
+  }, 100); // small delay gives cursor time to reach the popup
+});
+
+allProgramsPopup.addEventListener('mouseenter', () => {
+  clearTimeout(hideTimeout); // cursor made it to the popup, cancel hide
+});
+
+allProgramsPopup.addEventListener('mouseleave', () => {
+  hideTimeout = setTimeout(() => {
+    allProgramsPopup.classList.remove('open');
+  }, 100);
+});
+
+////////////////////////
+// Tray Components
+///////////////////////
+const trayPopup = document.createElement('div');
+trayPopup.classList.add('tray_popup');
+document.body.appendChild(trayPopup);
+
+const trayItems = [
+  {
+    selector: '.tray_info',
+    hoverText: 'System Info',
+    clickContent: '<p>CPU: 100% <br> RAM: 4GB</p>'
+  },
+  {
+    selector: '.toggle_crt',
+    hoverText: 'Toggle CRT Effect',
+    clickContent: '<p>CRT mode toggled</p>'
+  },
+  {
+    selector: '.toggle_fullscreen',
+    hoverText: 'Toggle Fullscreen',
+    clickContent: '<p>Fullscreen toggled</p>'
+  }
+];
+
+function positionAbove(btn) {
+  requestAnimationFrame(() => {
+    const rect = btn.getBoundingClientRect();
+    const popupRect = trayPopup.getBoundingClientRect();
+    trayPopup.style.left = `${rect.left + (rect.width / 2) - (popupRect.width / 2)}px`;
+    trayPopup.style.top = `${rect.top - popupRect.height - 8}px`;
+  });
+}
+
+let trayHideTimeout;
+
+trayItems.forEach(({ selector, hoverText, clickContent }) => {
+  const btn = document.querySelector(selector);
+  if (!btn) return;
+
+  btn.addEventListener('mouseenter', () => {
+    clearTimeout(trayHideTimeout);
+    trayPopup.innerHTML = `<p>${hoverText}</p>`;
+    trayPopup.classList.add('open');
+    positionAbove(btn);
+  });
+
+  btn.addEventListener('mouseleave', () => {
+    trayHideTimeout = setTimeout(() => {
+      trayPopup.classList.remove('open');
+    }, 100);
+  });
+
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    trayPopup.innerHTML = clickContent;
+    trayPopup.classList.add('open');
+    positionAbove(btn);
+  });
+});
+
+document.addEventListener('click', (e) => {
+  if (!trayItems.some(({ selector }) => e.target.closest(selector))) {
+    trayPopup.classList.remove('open');
+  }
+});
+
+function updateTime() {
+  const now = new Date();
+  document.querySelector('.active_time').textContent = now.toLocaleTimeString([], {
+    hour: '2-digit',
+    minute: '2-digit'
+  });
+}
+
+updateTime();
+setInterval(updateTime, 1000);
