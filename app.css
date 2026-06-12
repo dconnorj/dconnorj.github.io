@@ -443,7 +443,10 @@ body.crt-active .crt_overlay {
 }
 
 @keyframes crt-flicker {
-  0%   { opacity: 0.97; }
-  50%  { opacity: 1; }
-  100% { opacity: 0.98; }
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.985; }
+}
+
+body.crt-active .crt_overlay {
+  animation: crt-flicker 0.5s ease-in-out infinite;
 }
