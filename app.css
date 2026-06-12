@@ -13,6 +13,7 @@
 html {
     font-family: "Tahoma", serif;
     font-size: 18px;
+    
 }
 
 button{
@@ -25,6 +26,16 @@ button{
 body {
     display: flex;
     flex-direction: column;
+}
+html, body{
+  overflow: -moz-scrollbars-none; /* old Firefox */
+  scrollbar-width: none;          /* Firefox */
+  -ms-overflow-style: none;       /* IE/Edge */
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Edge Chromium */
 }
 
 h1 {
@@ -345,17 +356,94 @@ start-menu img{
   display: block;
 }
 .tray_popup {
-  position: absolute;
+  position: fixed;
   display: none;
   z-index: 1000;
-  left: -20%;
   background-color: #FDFDDB;
   color: black;
   padding: 0.4rem;
-  font-size: 0.75rem;
+  font-size: 0.65rem;
+  transition: opacity 0.15s ease;
+  max-width:16.5rem;
 
 }
 
 .tray_popup.open {
   display: block;
+}
+
+.tray_popup.has-arrow::after {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 90%;
+  transform: translateX(-50%);
+  border-width: 8px 8px 0 8px;
+  border-style: solid;
+  border-color: #FDFDDB transparent transparent transparent;
+}
+
+.tray_info_box{
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 0.4rem;
+}
+
+.tray_info_box img{
+  height: 1rem;
+}
+.tray_info_heading{
+  display: flex;
+  align-items:center;
+  justify-content: start;
+  gap: 0.25rem;
+}
+.close_info_box{
+  display: flex;
+  justify-content: start;
+  padding-left:2.7rem;
+}
+.close_info_box img{
+  filter: grayscale(100%);
+  transition: filter 0.2s ease;
+}
+.close_info_box img:hover{
+  filter: grayscale(0%);
+}
+
+.crt_overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none; /* lets clicks pass through to the page */
+  z-index: 9999; /* above everything */
+  opacity: 0; /* hidden by default */
+}
+
+body.crt-active .crt_overlay {
+  opacity: 1;
+
+  /* scanlines */
+  background-image: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.15) 0px,
+    rgba(0, 0, 0, 0.15) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+
+  /* vignette */
+  box-shadow: inset 0 0 10rem rgba(0, 0, 0, 0.5);
+
+  /* subtle flicker */
+  animation: crt-flicker 0.15s infinite;
+}
+
+@keyframes crt-flicker {
+  0%   { opacity: 0.97; }
+  50%  { opacity: 1; }
+  100% { opacity: 0.98; }
 }

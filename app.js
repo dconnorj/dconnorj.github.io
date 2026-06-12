@@ -158,7 +158,19 @@ const trayItems = [
   {
     selector: '.tray_info',
     hoverText: 'System Info',
-    clickContent: '<p>CPU: 100% <br> RAM: 4GB</p>'
+    clickContent: `
+      <div class="tray_info_box">
+        <div class="tray_info_heading">
+          <img src="Res/Information.png">
+          <h3>Welcome to Connor Dalley XP!</h3>
+          <div class="close_info_box">
+            <img src="Res/Exit.png">
+          </div>
+        </div>
+        <p>A showcase of my abilities and achivments, created in homage to Windows XP, the greatest OS of all time!</p>
+        <p>Get Started: About Me | My Projects</p>
+      </div>
+    `
   },
   {
     selector: '.toggle_crt',
@@ -172,15 +184,91 @@ const trayItems = [
   }
 ];
 
-function positionAbove(btn) {
+function positionCentered(btn) {
+  trayPopup.style.left = '0px';
+  trayPopup.style.top = '0px';
+
   requestAnimationFrame(() => {
     const rect = btn.getBoundingClientRect();
     const popupRect = trayPopup.getBoundingClientRect();
+
     trayPopup.style.left = `${rect.left + (rect.width / 2) - (popupRect.width / 2)}px`;
     trayPopup.style.top = `${rect.top - popupRect.height - 8}px`;
   });
 }
 
+function positionAboveOffset(btn) {
+  trayPopup.style.left = '0px';
+  trayPopup.style.top = '0px';
+
+  requestAnimationFrame(() => {
+    const rect = btn.getBoundingClientRect();
+    const popupRect = trayPopup.getBoundingClientRect();
+    const buttonCenter = rect.left + (rect.width / 2);
+
+    const left = Math.max(8, buttonCenter - (popupRect.width * 0.9));
+    trayPopup.style.left = `${left}px`;
+    trayPopup.style.top = `${rect.top - popupRect.height - 8}px`;
+  });
+}
+
+////////////////////////
+// Fullscreen Toggle
+///////////////////////
+const fullscreenBtn = document.querySelector('.toggle_fullscreen');
+const fullscreenImg = fullscreenBtn.querySelector('img');
+
+function toggleFullscreen() {
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen();
+  } else {
+    document.exitFullscreen();
+  }
+}
+
+function updateFullscreenIcon() {
+  if (document.fullscreenElement) {
+    fullscreenImg.src = '/Res/IE Shrink Image.png';
+    fullscreenImg.alt = 'exit fullscreen';
+  } else {
+    fullscreenImg.src = '/Res/IE Enlarge Image.png';
+    fullscreenImg.alt = 'enter fullscreen';
+  }
+}
+
+document.addEventListener('fullscreenchange', updateFullscreenIcon);
+updateFullscreenIcon();
+
+////////////////////////
+// CRT Effect
+///////////////////////
+const crtOverlay = document.createElement('div');
+crtOverlay.classList.add('crt_overlay');
+document.body.appendChild(crtOverlay);
+
+const crtBtn = document.querySelector('.toggle_crt');
+const crtImg = crtBtn.querySelector('img');
+
+let crtOn = true; // starts on
+
+function updateCrtState() {
+  if (crtOn) {
+    document.body.classList.add('crt-active');
+    crtImg.src = '/Res/Security - Ok.png';
+    crtImg.alt = 'CRT effect on';
+  } else {
+    document.body.classList.remove('crt-active');
+    crtImg.src = '/Res/Security Error.png';
+    crtImg.alt = 'CRT effect off';
+  }
+}
+
+document.body.classList.add('crt-active'); // initial state
+updateCrtState();
+
+////////////////////////
+// Tray Item Listeners
+///////////////////////
 let trayHideTimeout;
 
 trayItems.forEach(({ selector, hoverText, clickContent }) => {
@@ -189,31 +277,73 @@ trayItems.forEach(({ selector, hoverText, clickContent }) => {
 
   btn.addEventListener('mouseenter', () => {
     clearTimeout(trayHideTimeout);
+    trayPopup.classList.remove('has-arrow');
     trayPopup.innerHTML = `<p>${hoverText}</p>`;
     trayPopup.classList.add('open');
-    positionAbove(btn);
+    positionCentered(btn);
   });
 
   btn.addEventListener('mouseleave', () => {
     trayHideTimeout = setTimeout(() => {
       trayPopup.classList.remove('open');
+      trayPopup.classList.remove('has-arrow');
     }, 100);
   });
 
   btn.addEventListener('click', (e) => {
     e.stopPropagation();
+
+    if (selector === '.toggle_fullscreen') {
+      toggleFullscreen();
+      return;
+    }
+
+    if (selector === '.toggle_crt') {
+      crtOn = !crtOn;
+      updateCrtState();
+      return;
+    }
+
+    trayPopup.classList.add('has-arrow');
     trayPopup.innerHTML = clickContent;
     trayPopup.classList.add('open');
-    positionAbove(btn);
+    positionAboveOffset(btn);
   });
 });
 
-document.addEventListener('click', (e) => {
-  if (!trayItems.some(({ selector }) => e.target.closest(selector))) {
+trayPopup.addEventListener('mouseenter', () => {
+  clearTimeout(trayHideTimeout);
+});
+
+trayPopup.addEventListener('mouseleave', () => {
+  trayHideTimeout = setTimeout(() => {
     trayPopup.classList.remove('open');
+    trayPopup.classList.remove('has-arrow');
+  }, 100);
+});
+
+trayPopup.addEventListener('click', (e) => {
+  e.stopPropagation();
+
+  if (e.target.closest('.close_info_box')) {
+    trayPopup.classList.remove('open');
+    trayPopup.classList.remove('has-arrow');
   }
 });
 
+document.addEventListener('click', (e) => {
+  if (
+    !trayItems.some(({ selector }) => e.target.closest(selector)) &&
+    !e.target.closest('.tray_popup')
+  ) {
+    trayPopup.classList.remove('open');
+    trayPopup.classList.remove('has-arrow');
+  }
+});
+
+////////////////////////
+// Clock
+///////////////////////
 function updateTime() {
   const now = new Date();
   document.querySelector('.active_time').textContent = now.toLocaleTimeString([], {
