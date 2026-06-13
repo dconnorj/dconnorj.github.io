@@ -10,7 +10,7 @@ function makeAppImageList(cname, arr, image_map, subheads, bold, use_subheads) {
       return;
     }
     if (use_subheads && subheads.has(app)){
-        item += `<div class="${cname}_item">
+        item += `<div class="${cname}_item" data-app="${app}">
                     <img src="${entry[0]}" alt="${entry[1]}">
                     <div>
                         <h3>${app}</h3>
@@ -19,13 +19,13 @@ function makeAppImageList(cname, arr, image_map, subheads, bold, use_subheads) {
                 </div>`;
     }
     else if(bold){
-        item += `<div class="${cname}_item">
+        item += `<div class="${cname}_item" data-app="${app}">
                     <img src="${entry[0]}" alt="${entry[1]}">
                     <h3>${app}</h3>
                 </div>`;
     }
     else{
-        item += `<div class="${cname}_item">
+        item += `<div class="${cname}_item" data-app="${app}">
                     <img src="${entry[0]}" alt="${entry[1]}">
                     <p>${app}</p>
                 </div>`;
@@ -354,3 +354,193 @@ function updateTime() {
 
 updateTime();
 setInterval(updateTime, 1000);
+
+////////////////////////
+// App Window Registry
+///////////////////////
+// Maps app names (matching image_map keys / data-app values) to their <xp-window> elements.
+// Add an entry here whenever a new window is created in the HTML.
+const appWindows = new Map();
+appWindows.set("About Me", document.getElementById('aboutMeWindow'));
+appWindows.set("Resume", document.getElementById('resumeWindow'));
+appWindows.set("Projects", document.getElementById('projectsWindow'));
+appWindows.set("Contact Info", document.getElementById('contactInfoWindow'));
+// appWindows.set("Notepad", document.getElementById('notepadWindow'));
+// appWindows.set("Media Player", document.getElementById('mediaPlayerWindow'));
+// appWindows.set("Music Player", document.getElementById('musicPlayerWindow'));
+// appWindows.set("Command Prompt", document.getElementById('commandPromptWindow'));
+// appWindows.set("Minesweeper", document.getElementById('minesweeperWindow'));
+// appWindows.set("Paint", document.getElementById('paintWindow'));
+// appWindows.set("Image Viewer", document.getElementById('imageViewerWindow'));
+// appWindows.set("Spider Solitaire", document.getElementById('spiderSolitaireWindow'));
+
+////////////////////////
+// External Link Registry
+///////////////////////
+// Apps that should open an external URL instead of an xp-window.
+const externalLinks = new Map();
+externalLinks.set("Github", "https://github.com/dconnorj");
+externalLinks.set("LinkedIn", "https://www.linkedin.com/in/cjdalley-swe");
+
+////////////////////////
+// App Events (desktop icons)
+///////////////////////
+
+const aboutMeWindow = appWindows.get("About Me");
+const resumeWindow = appWindows.get("Resume");
+const projectsWindow = appWindows.get("Projects");
+const contactInfoWindow = appWindows.get("Contact Info");
+const aboutMeBtn = document.querySelector('.about_me');
+const resumeBtn = document.querySelector('.my_resume');
+const projectsBtn = document.querySelector('.projects');
+const contactInfoBtn = document.querySelector('.contact_info');
+
+aboutMeBtn.addEventListener('click', () => {
+  aboutMeWindow.open();
+});
+resumeBtn.addEventListener('click', () => {
+  resumeWindow.open();
+});
+projectsBtn.addEventListener('click', () => {
+  projectsWindow.open();
+});
+contactInfoBtn.addEventListener('click', () => {
+  contactInfoWindow.open();
+});
+
+////////////////////////
+// Taskbar Manager
+///////////////////////
+const startApps = document.querySelector('.start_apps');
+const taskbarTabs = new Map(); // appType -> tab element
+
+function getWindowTitle(win) {
+  return win.getAttribute('title') || win.appType || 'Window';
+}
+
+function setActiveTab(appType) {
+  taskbarTabs.forEach((tab, type) => {
+    tab.classList.toggle('active', type === appType);
+  });
+}
+
+function clearActiveTabs() {
+  taskbarTabs.forEach(tab => tab.classList.remove('active'));
+}
+
+document.addEventListener('window-opened', (e) => {
+  const win = e.target; // the <xp-window> that fired the event
+  const appType = e.detail.appType;
+  if (!appType) return;
+
+  // already has a tab? just mark active
+  if (taskbarTabs.has(appType)) {
+    setActiveTab(appType);
+    return;
+  }
+
+  const tab = document.createElement('button');
+  tab.classList.add('taskbar_tab', 'active');
+
+  if (win.icon) {
+    const img = document.createElement('img');
+    img.src = win.icon;
+    img.alt = `${appType} icon`;
+    tab.appendChild(img);
+  }
+
+  const label = document.createElement('span');
+  label.textContent = getWindowTitle(win);
+  tab.appendChild(label);
+
+  tab.addEventListener('click', () => {
+    if (win.classList.contains('minimized')) {
+      win.classList.remove('minimized');
+      win.bringToFront();
+      setActiveTab(appType);
+    } else if (tab.classList.contains('active')) {
+      win.minimize();
+    } else {
+      win.bringToFront();
+      setActiveTab(appType);
+    }
+  });
+
+  clearActiveTabs();
+  tab.classList.add('active');
+  taskbarTabs.set(appType, tab);
+  startApps.appendChild(tab);
+});
+
+document.addEventListener('window-closed', (e) => {
+  const appType = e.detail.appType;
+  const tab = taskbarTabs.get(appType);
+  if (tab) {
+    tab.remove();
+    taskbarTabs.delete(appType);
+  }
+});
+
+document.addEventListener('window-minimized', (e) => {
+  const appType = e.detail.appType;
+  const tab = taskbarTabs.get(appType);
+  if (tab) {
+    tab.classList.remove('active');
+  }
+});
+
+const confirmWindow = document.getElementById('confirmWindow');
+const confirmMessage = document.getElementById('confirmMessage');
+const confirmYesBtn = document.getElementById('confirmYes');
+const confirmNoBtn = document.getElementById('confirmNo');
+
+let pendingUrl = null;
+
+confirmYesBtn.addEventListener('click', () => {
+  if (pendingUrl) {
+    window.open(pendingUrl, '_blank');
+    pendingUrl = null;
+  }
+  confirmWindow.close();
+});
+
+confirmNoBtn.addEventListener('click', () => {
+  pendingUrl = null;
+  confirmWindow.close();
+});
+
+function openExternalLinkConfirm(appName, url) {
+  pendingUrl = url;
+  confirmMessage.textContent =
+    `You're about to leave this site and open ${appName} in a new tab. Continue?`;
+  confirmWindow.setAttribute('title', `Open ${appName}`);
+
+  // Set the titlebar icon to match the clicked link (Github/LinkedIn)
+  const entry = image_map.get(appName);
+  if (entry) {
+    confirmWindow.setAttribute('icon', entry[0]);
+  }
+
+  confirmWindow.open();
+}
+
+document.addEventListener('click', (e) => {
+  const item = e.target.closest('[data-app]');
+  if (!item) return;
+
+  const appName = item.dataset.app;
+
+  if (externalLinks.has(appName)) {
+    openExternalLinkConfirm(appName, externalLinks.get(appName));
+  }
+  else if (appWindows.has(appName)) {
+    appWindows.get(appName).open();
+  }
+  else {
+    console.log(`No window or link registered for "${appName}" yet`);
+  }
+
+  startMenu.classList.remove('open');
+  startButton.classList.remove('dimmed');
+  allProgramsPopup.classList.remove('open');
+});

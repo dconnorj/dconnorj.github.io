@@ -24,6 +24,24 @@
                 <p>Contact Info</p>
               </button>
             </div>
+            <xp-window id="aboutMeWindow" title="About Me" app-type="about-me" icon="Res/Tour XP.png">
+            </xp-window>
+            <xp-window id="resumeWindow" title="Resume" app-type="resume" icon="/Res/adobe-pdf-icon-logo-vector-01.png">
+
+            </xp-window>
+            <xp-window id="projectsWindow" title="Projects" app-type="projects" icon="/Res/Appearance.png">
+
+            </xp-window>
+            <xp-window id="contactInfoWindow" title="Contact Info" app-type="contact-info" icon="/Res/OE Send.png"></xp-window>
+            <xp-window id="confirmWindow" title="Open External Link" icon="/Res/Information.png" hide-controls>
+              <div class="confirm-dialog">
+                <p id="confirmMessage">Are you sure you want to leave this site?</p>
+                <div class="confirm-buttons">
+                  <button id="confirmYes">Yes</button>
+                  <button id="confirmNo">No</button>
+                </div>
+              </div>
+            </xp-window>
         </div>
         <div class = "start_bar">
           <button class="start_button">
@@ -47,5 +65,6 @@
         </div>
     </main>
     <script src="app.js"></script>
+    <script type="module" src="xp-window.js"></script>
   </body>
 </html>
