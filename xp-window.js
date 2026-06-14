@@ -17,8 +17,8 @@ class XPWindow extends HTMLElement {
           position: fixed;
           top: 100px;
           left: 100px;
-          width: 400px;
-          height: 300px;
+          width: 50rem;
+          height: 35rem;
           display: none;
           z-index: 100;
           font-family: Tahoma, sans-serif;
@@ -89,10 +89,7 @@ class XPWindow extends HTMLElement {
         }
         .content {
           flex: 1;
-          padding: 10px;
           background: white;
-          margin: 4px;
-          border: 1px solid #7f9db9;
           overflow: auto;
         }
         :host([hide-controls]) .minimize-window,
