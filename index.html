@@ -1,106 +1,234 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<title>Connor Dalley's Portfolio</title>
-<link rel="stylesheet" href="app.css"/>
-<meta charset="UTF-8">
+  <title>Connor Dalley's Portfolio</title>
+  <link rel="stylesheet" href="app.css" />
+  <meta charset="UTF-8" />
   <body>
     <main>
-        <div class="main_section">
-            <div class="icons">
-              <button class="about_me">
-                <img src="/Res/Tour XP.png" alt="about_me">
-                <p>About Me</p>
-              </button>
-              <button class="my_resume">
-                <img src="/Res/adobe-pdf-icon-logo-vector-01.png" alt="my_resume">
-                <p>Resume</p>
-              </button>
-              <button class="projects">
-                <img src="/Res/Appearance.png" alt="my projects">
-                <p>Projects</p>
-              </button>
-              <button class="contact_info">
-                <img src="/Res/OE Send.png" alt="contact info">
-                <p>Contact Info</p>
-              </button>
-            </div>
-            <xp-window id="aboutMeWindow" title="About Me" app-type="about-me" icon="Res/Tour XP.png">
-              <div class="am-content">
-                <div class="am-file-view">
-                  <div class="am-view-file-btns">
-                    <button class="am-file">File</button>
-                    <button class="am-view">View</button>
-                    <button class="am-help">Help</button>
-                  </div>
-                  <img src="/Res/logo_grn.svg" alt="logo">
-                </div>
-                <div class="am-nav">
-                  <div class="am-back-forward-btns">
-                    <button class="am-back-btn">
-                      <img src="Res/Back.png">
-                      <p>Back</p>
-                    </button>
-                    <button class="am-forward-btn">
-                      <img src="Res/Forward.png">
-                      <p>Forward</p>
-                    </button>
-                  </div>
-                  <div class="am-outside-links">
-                    <button class="am-projects-btn">
-                      <img src="Res/Appearance.png">
-                      <p>Projects</p>
-                    </button>
-                    <button class="am-resume-btn">
-                      <img src="Res/adobe-pdf-icon-logo-vector-01.png">
-                      <p>Resume</p>
-                    </button>
-                  </div>
-                  <div class="am-opaque-img">
-                    <img src="Res/Run.png">
-                  </div>
-
-                </div>
-              </div>
-
-              </div>
-            </xp-window>
-            <xp-window id="resumeWindow" title="Resume" app-type="resume" icon="/Res/adobe-pdf-icon-logo-vector-01.png">
-
-            </xp-window>
-            <xp-window id="projectsWindow" title="Projects" app-type="projects" icon="/Res/Appearance.png">
-
-            </xp-window>
-            <xp-window id="contactInfoWindow" title="Contact Info" app-type="contact-info" icon="/Res/OE Send.png"></xp-window>
-            <xp-window id="confirmWindow" title="Open External Link" icon="/Res/Information.png" hide-controls>
-              <div class="confirm-dialog">
-                <p id="confirmMessage">Are you sure you want to leave this site?</p>
-                <div class="confirm-buttons">
-                  <button id="confirmYes">Yes</button>
-                  <button id="confirmNo">No</button>
-                </div>
-              </div>
-            </xp-window>
-        </div>
-        <div class = "start_bar">
-          <button class="start_button">
-            <img src="/Res/code-tech-dev-svgrepo-com(1).svg" alt="start logo">
-            <p>start</p>
+      <div class="main_section">
+        <div class="icons">
+          <button class="about_me">
+            <img src="/Res/Tour XP.png" alt="about_me" />
+            <p>About Me</p>
           </button>
-          <start-menu></start-menu>
-          <div class="start_apps"></div>
-          <div class="system_tray">
-            <button class="tray_info">
-              <img src="/Res/Information.png" alt="info button">
-            </button>
-            <button class="toggle_crt">
-              <img src="/Res/Security - Ok.png" alt="toggle crt">
-            </button>
-            <button class="toggle_fullscreen">
-              <img src="/Res/IE Enlarge Image.png">
-            </button>
-            <p class="active_time">10:32 AM</p>
-          </div>
+          <button class="my_resume">
+            <img src="/Res/adobe-pdf-icon-logo-vector-01.png" alt="my_resume" />
+            <p>Resume</p>
+          </button>
+          <button class="projects">
+            <img src="/Res/Appearance.png" alt="my projects" />
+            <p>Projects</p>
+          </button>
+          <button class="contact_info">
+            <img src="/Res/OE Send.png" alt="contact info" />
+            <p>Contact Info</p>
+          </button>
         </div>
+        <xp-window
+          id="aboutMeWindow"
+          title="About Me"
+          app-type="about-me"
+          icon="Res/Tour XP.png"
+        >
+          <div class="am-content">
+            <div class="am-page-head">
+              <div class="am-file-view">
+                <div class="am-view-file-btns">
+                  <button class="am-file">File</button>
+                  <button class="am-view">View</button>
+                  <button class="am-help">Help</button>
+                </div>
+                <img src="/Res/logo_grn.svg" alt="logo" />
+              </div>
+              <div class="am-nav">
+                <div class="am-back-forward-btns">
+                  <button class="am-back-btn">
+                    <img src="Res/Back.png" />
+                    <p>Back</p>
+                  </button>
+                  <button class="am-forward-btn">
+                    <img src="Res/Forward.png" />
+                    <p>Forward</p>
+                  </button>
+                </div>
+                <div class="am-outside-links">
+                  <button class="am-projects-btn">
+                    <img src="Res/Appearance.png" />
+                    <p>Projects</p>
+                  </button>
+                  <button class="am-resume-btn">
+                    <img src="Res/adobe-pdf-icon-logo-vector-01.png" />
+                    <p>Resume</p>
+                  </button>
+                </div>
+                <div class="am-opaque-img">
+                  <img src="Res/Up.png" />
+                </div>
+              </div>
+              <div class="am-address">
+                <p class="am-address-p">Address</p>
+                <div class="am-address-bar">
+                  <div>
+                    <img src="/Res/Tour XP.png" />
+                    <p>About Me</p>
+                  </div>
+                  <button class="am-address-drop-down">
+                    <img src="/Res/drop-down-arrow.svg" />
+                  </button>
+                </div>
+                <div class="am-go-btn">
+                  <img src="/Res/Go.png" />
+                  <p>Go</p>
+                </div>
+              </div>
+            </div>
+            <div class="am-main-content">
+              <div class="am-main-left">
+                <div class="am-education-box">
+                  <div class="am-education-box-title">
+                    <h3>Education</h3>
+                    <img src="/Res/double-up-arrow.svg" />
+                  </div>
+                  <div class="am-education-box-content">
+                    <div>
+                      <img src="Res/UU Logo-CTR_RGB.svg" />
+                      <div>
+                        <p>Computer Science B.S.</p>
+                        <p>University of Utah | 2026</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="am-skills-box">
+                  <div class="am-skills-box-title">
+                    <h3>Skills</h3>
+                    <img src="/Res/double_up_blue.svg" />
+                  </div>
+                  <div class="am-skills-box-content">
+                    <div>
+                      <img src="Res/Run.png" />
+                      <p>Full-Stack Development</p>
+                    </div>
+                    <div>
+                      <img src="Res/WebDesign.png" />
+                      <p>Web Design</p>
+                    </div>
+                    <div>
+                      <img src="Res/Connection Manager.png" />
+                      <p>Cross-Platform App Design</p>
+                    </div>
+                    <div>
+                      <img src="Res/VPN Connection.png" />
+                      <p>Cloud Development</p>
+                    </div>
+                    <div>
+                      <img src="Res/Local Disk.png" />
+                      <p>Database Managment</p>
+                    </div>
+                    <div>
+                      <img src="Res/python-svgrepo-com.svg" />
+                      <p>Python</p>
+                    </div>
+                    <div>
+                      <img src="Res/500px-ISO_C++_Logo.svg.png" />
+                      <p>C++</p>
+                    </div>
+                    <div>
+                      <img src="Res/javascript-logo-svgrepo-com.svg" />
+                      <p>JavaScript</p>
+                    </div>
+                    <div>
+                      <img src="Res/typescript-svgrepo-com.svg" />
+                      <p>TypeScript</p>
+                    </div>
+                    <div>
+                      <img src="Res/500px-HTML5_logo_and_wordmark.svg.png" />
+                      <p>HTML/CSS</p>
+                    </div>
+                    <div>
+                      <img src="Res/sql-database-generic-svgrepo-com.svg" />
+                      <p>SQL</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="am-socials-box">
+                  <div class="am-socials-box-title">
+                    <h3>Socials</h3>
+                    <img src="/Res/double_up_blue.svg" />
+                  </div>
+                  <div class="am-socials-box-content">
+                    <div>
+                      <img src="Res/linkedin-svgrepo-com.svg" />
+                      <p>LinkedIn</p>
+                    </div>
+                    <div>
+                      <img src="Res/github-svgrepo-com.svg" />
+                      <p>GitHub</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="am-main-right">
+                <h1>About Me</h1>
+              </div>
+            </div>
+          </div>
+        </xp-window>
+        <xp-window
+          id="resumeWindow"
+          title="Resume"
+          app-type="resume"
+          icon="/Res/adobe-pdf-icon-logo-vector-01.png"
+        >
+        </xp-window>
+        <xp-window
+          id="projectsWindow"
+          title="Projects"
+          app-type="projects"
+          icon="/Res/Appearance.png"
+        >
+        </xp-window>
+        <xp-window
+          id="contactInfoWindow"
+          title="Contact Info"
+          app-type="contact-info"
+          icon="/Res/OE Send.png"
+        ></xp-window>
+        <xp-window
+          id="confirmWindow"
+          title="Open External Link"
+          icon="/Res/Information.png"
+          hide-controls
+        >
+          <div class="confirm-dialog">
+            <p id="confirmMessage">Are you sure you want to leave this site?</p>
+            <div class="confirm-buttons">
+              <button id="confirmYes">Yes</button>
+              <button id="confirmNo">No</button>
+            </div>
+          </div>
+        </xp-window>
+      </div>
+      <div class="start_bar">
+        <button class="start_button">
+          <img src="/Res/code-tech-dev-svgrepo-com(1).svg" alt="start logo" />
+          <p>start</p>
+        </button>
+        <start-menu></start-menu>
+        <div class="start_apps"></div>
+        <div class="system_tray">
+          <button class="tray_info">
+            <img src="/Res/Information.png" alt="info button" />
+          </button>
+          <button class="toggle_crt">
+            <img src="/Res/Security - Ok.png" alt="toggle crt" />
+          </button>
+          <button class="toggle_fullscreen">
+            <img src="/Res/IE Enlarge Image.png" />
+          </button>
+          <p class="active_time">10:32 AM</p>
+        </div>
+      </div>
     </main>
     <script src="app.js"></script>
     <script type="module" src="xp-window.js"></script>

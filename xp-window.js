@@ -149,23 +149,22 @@ class XPWindow extends HTMLElement {
     this.shadowRoot.querySelector('.title-text').textContent =
       this.getAttribute('title') || 'Window';
 
-    this._updateIcon();
-    this._setupWindowControls();
-    this._makeDraggable();
+  this._updateIcon();
+  this._setupWindowControls();
+  this._makeDraggable();
+  this._makeResizable(); // <-- add this
+  this.addEventListener('mousedown', () => this.bringToFront());
+}
 
-    // Bring to front on any click within the window
-    this.addEventListener('mousedown', () => this.bringToFront());
-  }
-
-  attributeChangedCallback(name, oldVal, newVal) {
-    if (name === 'title') {
-      const el = this.shadowRoot.querySelector('.title-text');
-      if (el) el.textContent = newVal;
-    }
-    if (name === 'icon') {
-      this._updateIcon();
-    }
-  }
+//   attributeChangedCallback(name, oldVal, newVal) {
+//   if (name === 'title') {
+//     const el = this.shadowRoot.querySelector('.title-text');
+//     if (el) el.textContent = newVal;
+//   }
+//   if (name === 'icon') {
+//     this._updateIcon();
+//   }
+// }
 
   _updateIcon() {
     const iconEl = this.shadowRoot.querySelector('.title-icon');
@@ -312,6 +311,83 @@ class XPWindow extends HTMLElement {
   static get observedAttributes() {
     return ['title', 'open', 'icon', 'hide-controls'];
   }
+
+  _makeResizable() {
+  const minW = 410, minH = 620;
+
+  // Inject resize handle styles into the shadow DOM
+  const style = document.createElement('style');
+  style.textContent = `
+    .resize-handle {
+      position: absolute;
+      z-index: 10;
+    }
+    .resize-handle.se { bottom: 0; right: 0; width: 12px; height: 12px; cursor: nwse-resize; }
+    .resize-handle.sw { bottom: 0; left: 0;  width: 12px; height: 12px; cursor: nesw-resize; }
+    .resize-handle.ne { top: 0;    right: 0; width: 12px; height: 12px; cursor: nesw-resize; }
+    .resize-handle.nw { top: 0;    left: 0;  width: 12px; height: 12px; cursor: nwse-resize; }
+    .resize-handle.n  { top: 0;    left: 12px; right: 12px; height: 5px; cursor: ns-resize; }
+    .resize-handle.s  { bottom: 0; left: 12px; right: 12px; height: 5px; cursor: ns-resize; }
+    .resize-handle.e  { top: 12px; right: 0; bottom: 12px;  width: 5px;  cursor: ew-resize; }
+    .resize-handle.w  { top: 12px; left: 0;  bottom: 12px;  width: 5px;  cursor: ew-resize; }
+  `;
+  this.shadowRoot.appendChild(style);
+
+  // Add handles to the window div
+  const windowEl = this.shadowRoot.querySelector('.window');
+  ['n','s','e','w','ne','nw','se','sw'].forEach(dir => {
+    const handle = document.createElement('div');
+    handle.className = `resize-handle ${dir}`;
+    windowEl.appendChild(handle);
+
+    let startX, startY, startW, startH, startLeft, startTop;
+
+    handle.addEventListener('mousedown', (e) => {
+      if (this.classList.contains('maximized')) return;
+      e.stopPropagation();
+      e.preventDefault();
+      this.bringToFront();
+
+      startX    = e.clientX;
+      startY    = e.clientY;
+      startW    = this.offsetWidth;
+      startH    = this.offsetHeight;
+      startLeft = this.offsetLeft;
+      startTop  = this.offsetTop;
+
+      const onMove = (e) => {
+        const dx = e.clientX - startX;
+        const dy = e.clientY - startY;
+
+        let newW = startW, newH = startH, newLeft = startLeft, newTop = startTop;
+
+        if (dir.includes('e')) newW = Math.max(minW, startW + dx);
+        if (dir.includes('s')) newH = Math.max(minH, startH + dy);
+        if (dir.includes('w')) {
+          newW = Math.max(minW, startW - dx);
+          newLeft = startLeft + (startW - newW);
+        }
+        if (dir.includes('n')) {
+          newH = Math.max(minH, startH - dy);
+          newTop = startTop + (startH - newH);
+        }
+
+        this.style.width  = `${newW}px`;
+        this.style.height = `${newH}px`;
+        this.style.left   = `${newLeft}px`;
+        this.style.top    = `${newTop}px`;
+      };
+
+      const onUp = () => {
+        document.removeEventListener('mousemove', onMove);
+        document.removeEventListener('mouseup', onUp);
+      };
+
+      document.addEventListener('mousemove', onMove);
+      document.addEventListener('mouseup', onUp);
+    });
+  });
+}
 }
 
 customElements.define('xp-window', XPWindow);
