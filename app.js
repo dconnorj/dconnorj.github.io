@@ -3,29 +3,27 @@
 ///////////////////////
 function makeAppImageList(cname, arr, image_map, subheads, bold, use_subheads) {
   let item = `<div class="${cname}">`;
-  arr.forEach(app => {
+  arr.forEach((app) => {
     const entry = image_map.get(app);
     if (!entry) {
       console.error(`No image_map entry found for: "${app}"`);
       return;
     }
-    if (use_subheads && subheads.has(app)){
-        item += `<div class="${cname}_item" data-app="${app}">
+    if (use_subheads && subheads.has(app)) {
+      item += `<div class="${cname}_item" data-app="${app}">
                     <img src="${entry[0]}" alt="${entry[1]}">
                     <div>
                         <h3>${app}</h3>
                         <h4>${subheads.get(app)}</h4>
                     </div>
                 </div>`;
-    }
-    else if(bold){
-        item += `<div class="${cname}_item" data-app="${app}">
+    } else if (bold) {
+      item += `<div class="${cname}_item" data-app="${app}">
                     <img src="${entry[0]}" alt="${entry[1]}">
                     <h3>${app}</h3>
                 </div>`;
-    }
-    else{
-        item += `<div class="${cname}_item" data-app="${app}">
+    } else {
+      item += `<div class="${cname}_item" data-app="${app}">
                     <img src="${entry[0]}" alt="${entry[1]}">
                     <p>${app}</p>
                 </div>`;
@@ -33,30 +31,41 @@ function makeAppImageList(cname, arr, image_map, subheads, bold, use_subheads) {
   });
   return item + `</div>`;
 }
-const image_map = new Map()
-const subheads = new Map()
-image_map.set("About Me", ["/Res/Tour XP.png", "about me app"]);
-image_map.set("Resume", ["/Res/adobe-pdf-icon-logo-vector-01.png", "my resume app"]);
-image_map.set("Projects", ["/Res/Appearance.png", "my projects app"]);
-image_map.set("Contact Info", ["/Res/OE Send.png", "contact info app"]);
-image_map.set("Media Player", ["/Res/dwsd58yvs5pe1.png", "media player app"]);
-image_map.set("Music Player", ["/Res/MP3 player.png", "music player app"]);
-image_map.set("Command Prompt", ["/Res/Command Prompt.png", "command prompt app"]);
-image_map.set("Minesweeper", ["/Res/Minesweeper.png", "minesweeper aoo"]);
-image_map.set("Notepad", ["/Res/Notepad.png", "notepad app"]);
-image_map.set("Paint", ["/Res/Paint.png", "paint app"]);
-image_map.set("Github", ["/Res/github-svgrepo-com.svg", "github link"]);
-image_map.set("LinkedIn", ["/Res/linkedin-svgrepo-com.svg", "linkedin link"]);
-image_map.set("Image Viewer", ["/Res/Windows Picture and Fax Viewer.png", "image viewer app"]);
-image_map.set("Spider Solitaire", ["/Res/Spider Solitaire.png", "spider solitaire app"]);
+const image_map = new Map();
+const subheads = new Map();
+image_map.set('About Me', ['/Res/Tour XP.png', 'about me app']);
+image_map.set('Resume', [
+  '/Res/adobe-pdf-icon-logo-vector-01.png',
+  'my resume app',
+]);
+image_map.set('Projects', ['/Res/Appearance.png', 'my projects app']);
+image_map.set('Contact Info', ['/Res/OE Send.png', 'contact info app']);
+image_map.set('Media Player', ['/Res/dwsd58yvs5pe1.png', 'media player app']);
+image_map.set('Music Player', ['/Res/MP3 player.png', 'music player app']);
+image_map.set('Command Prompt', [
+  '/Res/Command Prompt.png',
+  'command prompt app',
+]);
+image_map.set('Minesweeper', ['/Res/Minesweeper.png', 'minesweeper aoo']);
+image_map.set('Notepad', ['/Res/Notepad.png', 'notepad app']);
+image_map.set('Paint', ['/Res/Paint.png', 'paint app']);
+image_map.set('Github', ['/Res/github-svgrepo-com.svg', 'github link']);
+image_map.set('LinkedIn', ['/Res/linkedin-svgrepo-com.svg', 'linkedin link']);
+image_map.set('Image Viewer', [
+  '/Res/Windows Picture and Fax Viewer.png',
+  'image viewer app',
+]);
+image_map.set('Spider Solitaire', [
+  '/Res/Spider Solitaire.png',
+  'spider solitaire app',
+]);
 
-subheads.set("Projects", "View my work");
-subheads.set("Contact Info", "Get in Touch");
+subheads.set('Projects', 'View my work');
+subheads.set('Contact Info', 'Get in Touch');
 
-
-class StartMenu extends HTMLElement{
-    connectedCallback() {
-        this.innerHTML = `
+class StartMenu extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `
         <div>
             <div class="top_start_menu">
                 <img src="/Res/Chess_Pieces.png" alt="user profile picture">
@@ -64,16 +73,16 @@ class StartMenu extends HTMLElement{
             </div>
             <div class="middle_start_menu">
                 <div class="left_start_menu">
-                    ${makeAppImageList("top_left_start", ["Projects", "Contact Info"], image_map, subheads, false, true)}
-                    ${makeAppImageList("bottom_left_start", ["About Me", "Music Player", "Media Player", "Paint", "Notepad"], image_map, subheads, false, true)}
+                    ${makeAppImageList('top_left_start', ['Projects', 'Contact Info'], image_map, subheads, false, true)}
+                    ${makeAppImageList('bottom_left_start', ['About Me', 'Music Player', 'Media Player', 'Paint', 'Notepad'], image_map, subheads, false, true)}
                     <button class="allprograms">
                         <h3>All Programs</h3>
                         <img src="/Res/all_progs.svg" alt="all programs">
                     </button>
                 </div>
                 <div class="right_start_menu">
-                    ${makeAppImageList("top_right_start", ["Github", "LinkedIn"], image_map, subheads, true, true)}
-                    ${makeAppImageList("bottom_right_start", ["Command Prompt", "Resume", "Minesweeper", "Spider Solitaire", "Image Viewer"], image_map, subheads, false, true)}
+                    ${makeAppImageList('top_right_start', ['Github', 'LinkedIn'], image_map, subheads, true, true)}
+                    ${makeAppImageList('bottom_right_start', ['Command Prompt', 'Resume', 'Minesweeper', 'Spider Solitaire', 'Image Viewer'], image_map, subheads, false, true)}
                 </div>
             </div>
             <div class="bottom_start_menu">
@@ -88,9 +97,9 @@ class StartMenu extends HTMLElement{
             </div>
         </div>
         `;
-    }
+  }
 }
-customElements.define("start-menu", StartMenu);
+customElements.define('start-menu', StartMenu);
 
 const startButton = document.querySelector('.start_button');
 const startMenu = document.querySelector('start-menu');
@@ -112,16 +121,33 @@ document.addEventListener('click', (e) => {
 const allProgramsBtn = startMenu.querySelector('.allprograms');
 
 const allApps = [
-  "About Me", "Resume", "Projects", "Contact Info",
-  "Media Player", "Music Player", "Command Prompt",
-  "Minesweeper", "Notepad", "Paint", "Github",
-  "LinkedIn", "Image Viewer", "Spider Solitaire"
+  'About Me',
+  'Resume',
+  'Projects',
+  'Contact Info',
+  'Media Player',
+  'Music Player',
+  'Command Prompt',
+  'Minesweeper',
+  'Notepad',
+  'Paint',
+  'Github',
+  'LinkedIn',
+  'Image Viewer',
+  'Spider Solitaire',
 ];
 
 // build the popup once
 const allProgramsPopup = document.createElement('div');
 allProgramsPopup.classList.add('all_programs_popup');
-allProgramsPopup.innerHTML = makeAppImageList("all_programs_list", allApps, image_map, subheads, false, false);
+allProgramsPopup.innerHTML = makeAppImageList(
+  'all_programs_list',
+  allApps,
+  image_map,
+  subheads,
+  false,
+  false
+);
 startMenu.appendChild(allProgramsPopup);
 
 let hideTimeout;
@@ -170,18 +196,18 @@ const trayItems = [
         <p>A showcase of my abilities and achivments, created in homage to Windows XP, the greatest OS of all time!</p>
         <p>Get Started: About Me | My Projects</p>
       </div>
-    `
+    `,
   },
   {
     selector: '.toggle_crt',
     hoverText: 'Toggle CRT Effect',
-    clickContent: '<p>CRT mode toggled</p>'
+    clickContent: '<p>CRT mode toggled</p>',
   },
   {
     selector: '.toggle_fullscreen',
     hoverText: 'Toggle Fullscreen',
-    clickContent: '<p>Fullscreen toggled</p>'
-  }
+    clickContent: '<p>Fullscreen toggled</p>',
+  },
 ];
 
 function positionCentered(btn) {
@@ -192,7 +218,7 @@ function positionCentered(btn) {
     const rect = btn.getBoundingClientRect();
     const popupRect = trayPopup.getBoundingClientRect();
 
-    trayPopup.style.left = `${rect.left + (rect.width / 2) - (popupRect.width / 2)}px`;
+    trayPopup.style.left = `${rect.left + rect.width / 2 - popupRect.width / 2}px`;
     trayPopup.style.top = `${rect.top - popupRect.height - 8}px`;
   });
 }
@@ -204,9 +230,9 @@ function positionAboveOffset(btn) {
   requestAnimationFrame(() => {
     const rect = btn.getBoundingClientRect();
     const popupRect = trayPopup.getBoundingClientRect();
-    const buttonCenter = rect.left + (rect.width / 2);
+    const buttonCenter = rect.left + rect.width / 2;
 
-    const left = Math.max(8, buttonCenter - (popupRect.width * 0.9));
+    const left = Math.max(8, buttonCenter - popupRect.width * 0.9);
     trayPopup.style.left = `${left}px`;
     trayPopup.style.top = `${rect.top - popupRect.height - 8}px`;
   });
@@ -346,10 +372,13 @@ document.addEventListener('click', (e) => {
 ///////////////////////
 function updateTime() {
   const now = new Date();
-  document.querySelector('.active_time').textContent = now.toLocaleTimeString([], {
-    hour: '2-digit',
-    minute: '2-digit'
-  });
+  document.querySelector('.active_time').textContent = now.toLocaleTimeString(
+    [],
+    {
+      hour: '2-digit',
+      minute: '2-digit',
+    }
+  );
 }
 
 updateTime();
@@ -361,10 +390,10 @@ setInterval(updateTime, 1000);
 // Maps app names (matching image_map keys / data-app values) to their <xp-window> elements.
 // Add an entry here whenever a new window is created in the HTML.
 const appWindows = new Map();
-appWindows.set("About Me", document.getElementById('aboutMeWindow'));
-appWindows.set("Resume", document.getElementById('resumeWindow'));
-appWindows.set("Projects", document.getElementById('projectsWindow'));
-appWindows.set("Contact Info", document.getElementById('contactInfoWindow'));
+appWindows.set('About Me', document.getElementById('aboutMeWindow'));
+appWindows.set('Resume', document.getElementById('resumeWindow'));
+appWindows.set('Projects', document.getElementById('projectsWindow'));
+appWindows.set('Contact Info', document.getElementById('contactInfoWindow'));
 // appWindows.set("Notepad", document.getElementById('notepadWindow'));
 // appWindows.set("Media Player", document.getElementById('mediaPlayerWindow'));
 // appWindows.set("Music Player", document.getElementById('musicPlayerWindow'));
@@ -379,17 +408,17 @@ appWindows.set("Contact Info", document.getElementById('contactInfoWindow'));
 ///////////////////////
 // Apps that should open an external URL instead of an xp-window.
 const externalLinks = new Map();
-externalLinks.set("Github", "https://github.com/dconnorj");
-externalLinks.set("LinkedIn", "https://www.linkedin.com/in/cjdalley-swe");
+externalLinks.set('Github', 'https://github.com/dconnorj');
+externalLinks.set('LinkedIn', 'https://www.linkedin.com/in/cjdalley-swe');
 
 ////////////////////////
 // App Events (desktop icons)
 ///////////////////////
 
-const aboutMeWindow = appWindows.get("About Me");
-const resumeWindow = appWindows.get("Resume");
-const projectsWindow = appWindows.get("Projects");
-const contactInfoWindow = appWindows.get("Contact Info");
+const aboutMeWindow = appWindows.get('About Me');
+const resumeWindow = appWindows.get('Resume');
+const projectsWindow = appWindows.get('Projects');
+const contactInfoWindow = appWindows.get('Contact Info');
 const aboutMeBtn = document.querySelector('.about_me');
 const resumeBtn = document.querySelector('.my_resume');
 const projectsBtn = document.querySelector('.projects');
@@ -425,7 +454,7 @@ function setActiveTab(appType) {
 }
 
 function clearActiveTabs() {
-  taskbarTabs.forEach(tab => tab.classList.remove('active'));
+  taskbarTabs.forEach((tab) => tab.classList.remove('active'));
 }
 
 document.addEventListener('window-opened', (e) => {
@@ -511,8 +540,7 @@ confirmNoBtn.addEventListener('click', () => {
 
 function openExternalLinkConfirm(appName, url) {
   pendingUrl = url;
-  confirmMessage.textContent =
-    `You're about to leave this site and open ${appName} in a new tab. Continue?`;
+  confirmMessage.textContent = `You're about to leave this site and open ${appName} in a new tab. Continue?`;
   confirmWindow.setAttribute('title', `Open ${appName}`);
 
   // Set the titlebar icon to match the clicked link (Github/LinkedIn)
@@ -532,11 +560,9 @@ document.addEventListener('click', (e) => {
 
   if (externalLinks.has(appName)) {
     openExternalLinkConfirm(appName, externalLinks.get(appName));
-  }
-  else if (appWindows.has(appName)) {
+  } else if (appWindows.has(appName)) {
     appWindows.get(appName).open();
-  }
-  else {
+  } else {
     console.log(`No window or link registered for "${appName}" yet`);
   }
 
@@ -544,3 +570,148 @@ document.addEventListener('click', (e) => {
   startButton.classList.remove('dimmed');
   allProgramsPopup.classList.remove('open');
 });
+
+//////////////////////////////////
+// AM Nav Buttons
+/////////////////////////////////
+document
+  .querySelectorAll(
+    '.am-education-box-title, .am-skills-box-title, .am-socials-box-title'
+  )
+  .forEach((titleEl) => {
+    const arrow = titleEl.querySelector('img');
+    const content = titleEl.nextElementSibling;
+
+    const isEducation = titleEl.classList.contains('am-education-box-title');
+    const upSrc = isEducation
+      ? '/Res/double-up-arrow.svg'
+      : '/Res/double_up_blue.svg';
+
+    arrow.style.cursor = 'pointer';
+
+    arrow.addEventListener('click', () => {
+      const isCollapsed = content.style.display === 'none';
+      content.style.display = isCollapsed ? '' : 'none';
+      arrow.style.transform = isCollapsed ? '' : 'rotate(180deg)';
+      arrow.style.transition = 'transform 0.2s ease';
+      arrow.style.transformOrigin = 'center center';
+    });
+  });
+
+// am-nav buttons
+document.querySelector('.am-projects-btn').addEventListener('click', () => {
+  document.querySelector('#projectsWindow').open();
+});
+
+document.querySelector('.am-resume-btn').addEventListener('click', () => {
+  document.querySelector('#resumeWindow').open();
+});
+
+document.querySelectorAll('.am-socials-box-content div').forEach((div) => {
+  const text = div.querySelector('p')?.textContent.trim();
+  if (!text) return;
+
+  // match exactly how start menu handles Github/LinkedIn
+  if (externalLinks.has(text)) {
+    div.style.cursor = 'pointer';
+    div.addEventListener('click', () => {
+      openExternalLinkConfirm(text, externalLinks.get(text));
+    });
+  }
+});
+
+////////////////////////
+// AM File/View Menus
+///////////////////////
+const fileMenuItems = `
+  <div class="am-file-popup-btns">
+    <p class="am-file-disabled am-file-print-setup">Print</p>
+    <p class="am-file-disabled am-file-print-setup">Print Setup</p>
+    <p class="am-file-exit">Exit</p>
+  </div>
+`;
+
+const viewMenuItems = `
+  <div class="am-view-popup-btns">
+    <p class="am-view-max" id="am-view-max-label">Maximize</p>
+    <p class="am-view-min">Minimize</p>
+  </div>
+`;
+
+const amDropdown = document.createElement('div');
+amDropdown.classList.add('am-dropdown-menu');
+amDropdown.style.display = 'none';
+document.body.appendChild(amDropdown);
+
+let amMenuOpen = false;
+
+function openAmMenu(btn, content) {
+  const rect = btn.getBoundingClientRect();
+  amDropdown.innerHTML = content;
+  amDropdown.style.display = 'block';
+  amDropdown.style.left = `${rect.left}px`;
+  amDropdown.style.top = `${rect.bottom}px`;
+  amMenuOpen = true;
+}
+
+function closeAmMenu() {
+  amDropdown.style.display = 'none';
+  amMenuOpen = false;
+}
+
+document.querySelector('.am-file').addEventListener('click', (e) => {
+  e.stopPropagation();
+  amMenuOpen ? closeAmMenu() : openAmMenu(e.currentTarget, fileMenuItems);
+});
+
+document.querySelector('.am-view').addEventListener('click', (e) => {
+  e.stopPropagation();
+  amMenuOpen ? closeAmMenu() : openAmMenu(e.currentTarget, getViewMenuItems());
+});
+
+document.querySelector('.am-file').addEventListener('mouseenter', () => {
+  if (amMenuOpen) openAmMenu(document.querySelector('.am-file'), fileMenuItems);
+});
+
+document.querySelector('.am-view').addEventListener('mouseenter', () => {
+  if (amMenuOpen)
+    openAmMenu(document.querySelector('.am-view'), getViewMenuItems());
+});
+
+// close on outside click
+document.addEventListener('click', (e) => {
+  if (
+    !e.target.closest('.am-dropdown-menu') &&
+    !e.target.closest('.am-file') &&
+    !e.target.closest('.am-view')
+  ) {
+    closeAmMenu();
+  }
+});
+
+amDropdown.addEventListener('click', (e) => {
+  const target = e.target.closest('p');
+  if (!target) return;
+
+  if (target.classList.contains('am-file-exit')) {
+    aboutMeWindow.close();
+  }
+  if (target.classList.contains('am-view-max')) {
+    aboutMeWindow.toggleMaximize();
+  }
+  if (target.classList.contains('am-view-min')) {
+    aboutMeWindow.minimize();
+  }
+
+  closeAmMenu();
+});
+
+function getViewMenuItems() {
+  const isMaximized = aboutMeWindow.classList.contains('maximized');
+  return `
+    <div class="am-view-popup-btns">
+      <p class="am-view-max">${isMaximized ? 'Restore' : 'Maximize'}</p>
+      <p class="am-view-min">Minimize</p>
+    </div>
+  `;
+}
