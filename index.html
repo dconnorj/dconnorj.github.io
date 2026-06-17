@@ -1,22 +1,24 @@
 <!doctype html>
 <html>
-  <title>Connor Dalley's Portfolio</title>
-  <link rel="stylesheet" href="app.css" />
-  <meta charset="UTF-8" />
+  <head>
+    <title>Connor Dalley's Portfolio</title>
+    <link rel="stylesheet" href="app.css" />
+    <meta charset="UTF-8" />
+  </head>
   <body>
     <main>
       <div class="main_section">
         <div class="icons">
           <button class="about_me">
-            <img src="/Res/Tour XP.png" alt="about_me" />
+            <img src="/Res/Tour XP.png" alt="about me" />
             <p>About Me</p>
           </button>
           <button class="my_resume">
-            <img src="/Res/adobe-pdf-icon-logo-vector-01.png" alt="my_resume" />
+            <img src="/Res/adobe-pdf-icon-logo-vector-01.png" alt="resume" />
             <p>Resume</p>
           </button>
           <button class="projects">
-            <img src="/Res/Appearance.png" alt="my projects" />
+            <img src="/Res/Appearance.png" alt="projects" />
             <p>Projects</p>
           </button>
           <button class="contact_info">
@@ -24,6 +26,8 @@
             <p>Contact Info</p>
           </button>
         </div>
+
+        <!-- App Windows -->
         <xp-window
           id="aboutMeWindow"
           title="About Me"
@@ -61,9 +65,7 @@
                     <p>Resume</p>
                   </button>
                 </div>
-                <div class="am-opaque-img">
-                  <img src="Res/Up.png" />
-                </div>
+                <div class="am-opaque-img"><img src="Res/Up.png" /></div>
               </div>
               <div class="am-address">
                 <p class="am-address-p">Address</p>
@@ -123,7 +125,7 @@
                     </div>
                     <div>
                       <img src="Res/Local Disk.png" />
-                      <p>Database Managment</p>
+                      <p>Database Management</p>
                     </div>
                     <div>
                       <img src="Res/python-svgrepo-com.svg" />
@@ -208,26 +210,29 @@
             </div>
           </div>
         </xp-window>
+
         <xp-window
           id="resumeWindow"
           title="Resume"
           app-type="resume"
           icon="/Res/adobe-pdf-icon-logo-vector-01.png"
-        >
-        </xp-window>
+        ></xp-window>
         <xp-window
           id="projectsWindow"
           title="Projects"
           app-type="projects"
           icon="/Res/Appearance.png"
-        >
-        </xp-window>
+        ></xp-window>
         <xp-window
           id="contactInfoWindow"
           title="Contact Info"
           app-type="contact-info"
           icon="/Res/OE Send.png"
         ></xp-window>
+
+        <!-- Add future windows here, e.g.: -->
+        <!-- <xp-window id="notepadWindow" title="Notepad" app-type="notepad" icon="/Res/Notepad.png"></xp-window> -->
+
         <xp-window
           id="confirmWindow"
           title="Open External Link"
@@ -243,6 +248,7 @@
           </div>
         </xp-window>
       </div>
+
       <div class="start_bar">
         <button class="start_button">
           <img src="/Res/Portfolio_Icon_start.png" alt="start logo" />
@@ -252,19 +258,20 @@
         <div class="start_apps"></div>
         <div class="system_tray">
           <button class="tray_info">
-            <img src="/Res/Information.png" alt="info button" />
+            <img src="/Res/Information.png" alt="info" />
           </button>
           <button class="toggle_crt">
             <img src="/Res/Security - Ok.png" alt="toggle crt" />
           </button>
           <button class="toggle_fullscreen">
-            <img src="/Res/IE Enlarge Image.png" />
+            <img src="/Res/IE Enlarge Image.png" alt="fullscreen" />
           </button>
           <p class="active_time">10:32 AM</p>
         </div>
       </div>
     </main>
-    <script src="app.js"></script>
+
     <script type="module" src="xp-window.js"></script>
+    <script type="module" src="app.js"></script>
   </body>
 </html>
