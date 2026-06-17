@@ -1,296 +1,277 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
-<title>Connor Dalley's Portfolio</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&display=swap">
-<style>
-body,h1,h2,h3,h4,h5,h6 {font-family: "Playfair Display", sans-serif}
-/* Enhance headings for a mystical feel */
-h1, h2, h3 {
-            text-transform: uppercase;
-            font-weight: 700;
-            letter-spacing: 1.5px;
-        }
+  <head>
+    <title>Connor Dalley's Portfolio</title>
+    <link rel="stylesheet" href="app.css" />
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <main>
+      <div class="main_section">
+        <div class="icons">
+          <button class="about_me">
+            <img src="/Res/Tour XP.png" alt="about me" />
+            <p>About Me</p>
+          </button>
+          <button class="my_resume">
+            <img src="/Res/adobe-pdf-icon-logo-vector-01.png" alt="resume" />
+            <p>Resume</p>
+          </button>
+          <button class="projects">
+            <img src="/Res/Appearance.png" alt="projects" />
+            <p>Projects</p>
+          </button>
+          <button class="contact_info">
+            <img src="/Res/OE Send.png" alt="contact info" />
+            <p>Contact Info</p>
+          </button>
+        </div>
 
-        /* Add an elegant, subtle style to paragraphs */
-        p {
-            font-weight: 400;
-            font-style: italic;
-            letter-spacing: 0.5px;
-            line-height: 1.8;
-        }
-
-body, html {
-  height: 100%;
-  line-height: 1.8;
-}
-
-/* Full height image header */
-.bgimg-1 {
-  background-position: center;
-  background-size: cover;
-  background-image: url('Res/Wanderer.jpg');
-  min-height: 100%;
-}
-     /* Navbar Styling */
-     #myNavbar {
-            opacity: 0;
-            transition: opacity 1s ease-in-out;
-            position: fixed;
-            top: 0;
-            width: 100%;
-        }
-
-        #myNavbar.visible {
-            opacity: 1;
-        }
-
-.w3-bar .w3-button {
-  padding: 16px;
-}
-</style>
-</head>
-<body>
-
-<!-- Navbar (sit on top) -->
-<div class="w3-top">
-  <div class="w3-bar w3-white w3-card" id="myNavbar">
-    <a href="#home" class="w3-bar-item w3-button w3-wide">Connor Dalley - Software Engineer</a>
-    <!-- Right-sided navbar links -->
-    <div class="w3-right w3-hide-small">
-      <a href="#about" class="w3-bar-item w3-button">ABOUT ME</a>
-      <a href="#work" class="w3-bar-item w3-button">PROJECTS</a>
-      <a href="#edu" class="w3-bar-item w3-button">EDUCATION</a>
-      <a href="#contact" class="w3-bar-item w3-button">CONTACT</a>
-    </div>
-    <!-- Hide right-floated links on small screens and replace them with a menu icon -->
-
-    <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" onclick="w3_open()">
-      <i class="fa fa-bars"></i>
-    </a>
-  </div>
-</div>
-
-<!-- Sidebar on small screens when clicking the menu icon -->
-<nav class="w3-sidebar w3-bar-block w3-black w3-card w3-animate-left w3-hide-medium w3-hide-large" style="display:none" id="mySidebar">
-  <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-large w3-padding-16">Close ×</a>
-  <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">ABOUT</a>
-  <a href="#edu" onclick="w3_close()" class="w3-bar-item w3-button">TEAM</a>
-  <a href="#work" onclick="w3_close()" class="w3-bar-item w3-button">WORK</a>
-  <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button">CONTACT</a>
-</nav>
-
-<!-- Header with full-height image -->
-<header class="bgimg-1 w3-display-container w3-grayscale-min" id="home">
-  <div class="w3-display-left w3-text-white" style="padding:48px">
-    <span class="w3-jumbo w3-hide-small">Connor Dalley - Software Engineer</span><br>
-    <span class="w3-xxlarge w3-hide-large w3-hide-medium"> Connor Dalley</span><br>
-    <span class="w3-large">"All we have to decide is what to do with the time that is given us.”<br>
-      - J.R.R. Tolkien, The Fellowship of the Ring</span>
-    <p>
-      <a href="#about" class="w3-button w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off">About Me</a>
-      <a href="#work" class="w3-button w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off">Projects</a> 
-      <a href="#edu" class="w3-button w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off">Education</a>
-      <a href="#contact" class="w3-button w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off">Contact Info</a>
-    </p>
-  </div> 
-  <div class="w3-display-bottomleft w3-text-grey w3-large" style="padding:24px 48px">
-    <i class="fa fa-facebook-official w3-hover-opacity"></i>
-    <i class="fa fa-instagram w3-hover-opacity"></i>
-    <i class="fa fa-snapchat w3-hover-opacity"></i>
-    <i class="fa fa-pinterest-p w3-hover-opacity"></i>
-    <i class="fa fa-twitter w3-hover-opacity"></i>
-    <i class="fa fa-linkedin w3-hover-opacity"></i>
-  </div>
-</header>
-
-<!-- About Section -->
-<div class="w3-container" style="padding:128px 16px" id="about">
-  <h3 class="w3-center">ABOUT ME</h3>
-  <p class="w3-center w3-large"></p>
-  <div class="w3-row-padding w3-center" style="margin-top:64px">
-    <div class="w3-quarter">
-      <i class="fa fa-desktop w3-margin-bottom w3-jumbo w3-center"></i>
-      <p class="w3-large">Technical Skills</p>
-      <p>I am proficient in various programming languages, including Python, C#, C++, and SQL, enabling me to develop a wide range of software applications efficiently.</p>
-    </div>
-    <div class="w3-quarter">
-      <i class="fa fa-heart w3-margin-bottom w3-jumbo"></i>
-      <p class="w3-large">Passion</p>
-      <p>I thrive on solving complex problems and enjoy the challenge of finding innovative solutions.</p>
-    </div>
-    <div class="w3-quarter">
-      <i class="fa fa-graduation-cap w3-margin-bottom w3-jumbo"></i>
-      <p class="w3-large">Education</p>
-      <p>I recently graduated from the University of Utah with a Bachelors of Science in Computer Science.</p>
-    </div>
-    <div class="w3-quarter">
-      <i class="fa fa-compass w3-margin-bottom w3-jumbo"></i>
-      <p class="w3-large">Goals</p>
-      <p>I am seeking a full-time Software Engineer position to gain valuable experience and further develop my skills in the industry.</p>
-    </div>
-  </div>
-</div>
-
-<!-- Education Section - "We know design" -->
-<div class="w3-container w3-grey" style="padding:128px 16px; display: flex; flex-direction: column; align-items: center; text-align: center;">
-  <div>
-      <h3>My Educational Journey</h3>
-      <p>During my time at the University of Utah, I have found the experience to be incredibly valuable, both personally and academically. The university's rigorous computer science curriculum has provided me with a strong foundation in core programming principles, data structures, and algorithms, while also exposing me to advanced topics such as artificial intelligence, computer security, and software development methodologies. Beyond the coursework, the collaborative environment has allowed me to work alongside talented peers on challenging projects, fostering teamwork and critical thinking skills that are essential in the tech industry. The mentorship from professors and opportunities for hands-on learning through labs and capstone projects have further reinforced my technical knowledge and problem-solving abilities. Additionally, the diverse campus culture and extracurricular activities have encouraged personal growth, helping me develop leadership, time management, and effective communication skills. This holistic educational experience has prepared me to take on complex challenges and pursue a fulfilling career in software development with confidence.</p>
-  </div>
-  <div style="margin-top: 32px;">
-      <img class="w3-image w3-round-large" src="Res/Old utah.jpg" alt="Buildings" style="max-width: 100%; height: auto;">
-      <p><a href="#edu" class="w3-button w3-black"><i class="fa fa-th"></i> See Coursework</a></p>
-  </div>
-</div>
-
-
-<!-- Team Section -->
-<!-- Team Section -->
-<div class="w3-container w3-light-grey" style="padding:128px 16px" id="work">
-    <h3 class="w3-center">PROJECTS</h3>
-    <p class="w3-center w3-large">View Examples of My Work</p>
-    <div class="w3-row-padding w3-grayscale" style="margin-top:64px; display: flex; flex-wrap: wrap; justify-content: center;">
-      <div class="w3-col l3 m6 w3-margin-bottom">
-        <div class="w3-card project-card">
-          <div class="w3-container">
-            <h3>Agora Senior Capstone</h3>
-            <p class="w3-opacity">Languages: Typescript, Python</p>
-            <p>Agora is a multi-platform application designed to inform average citizens on federal legislation tailored to their personalized interests. Agora was developed as part of my Senior Capstone Project at the University of Utah.</p>
-            <p><button  onclick="window.open('https://www.agoraforthepeople.net/', '_blank')" class="w3-button w3-light-grey w3-block"><i class="fa fa-download"></i> Visit Website</button></p>
+        <!-- App Windows -->
+        <xp-window
+          id="aboutMeWindow"
+          title="About Me"
+          app-type="about-me"
+          icon="Res/Tour XP.png"
+        >
+          <div class="am-content">
+            <div class="am-page-head">
+              <div class="am-file-view">
+                <div class="am-view-file-btns">
+                  <button class="am-file">File</button>
+                  <button class="am-view">View</button>
+                  <button class="am-help">Help</button>
+                </div>
+                <img src="/Res/Portfolio_Icon.png" alt="logo" />
+              </div>
+              <div class="am-nav">
+                <div class="am-back-forward-btns">
+                  <button class="am-back-btn">
+                    <img src="Res/Back.png" />
+                    <p>Back</p>
+                  </button>
+                  <button class="am-forward-btn">
+                    <img src="Res/Forward.png" />
+                    <p>Forward</p>
+                  </button>
+                </div>
+                <div class="am-outside-links">
+                  <button class="am-projects-btn">
+                    <img src="Res/Appearance.png" />
+                    <p>Projects</p>
+                  </button>
+                  <button class="am-resume-btn">
+                    <img src="Res/adobe-pdf-icon-logo-vector-01.png" />
+                    <p>Resume</p>
+                  </button>
+                </div>
+                <div class="am-opaque-img"><img src="Res/Up.png" /></div>
+              </div>
+              <div class="am-address">
+                <p class="am-address-p">Address</p>
+                <div class="am-address-bar">
+                  <div>
+                    <img src="/Res/Tour XP.png" />
+                    <p>About Me</p>
+                  </div>
+                  <button class="am-address-drop-down">
+                    <img src="/Res/drop-down-arrow.svg" />
+                  </button>
+                </div>
+                <div class="am-go-btn">
+                  <img src="/Res/Go.png" />
+                  <p>Go</p>
+                </div>
+              </div>
+            </div>
+            <div class="am-main-content">
+              <div class="am-main-left">
+                <div class="am-education-box">
+                  <div class="am-education-box-title">
+                    <h3>Education</h3>
+                    <img src="/Res/double-up-arrow.svg" />
+                  </div>
+                  <div class="am-education-box-content">
+                    <div>
+                      <img src="Res/UU Logo-CTR_RGB.svg" />
+                      <div>
+                        <p>Computer Science B.S.</p>
+                        <p>University of Utah | 2026</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="am-skills-box">
+                  <div class="am-skills-box-title">
+                    <h3>Skills</h3>
+                    <img src="/Res/double_up_blue.svg" />
+                  </div>
+                  <div class="am-skills-box-content">
+                    <div>
+                      <img src="Res/Run.png" />
+                      <p>Full-Stack Development</p>
+                    </div>
+                    <div>
+                      <img src="Res/WebDesign.png" />
+                      <p>Web Design</p>
+                    </div>
+                    <div>
+                      <img src="Res/Connection Manager.png" />
+                      <p>Cross-Platform App Design</p>
+                    </div>
+                    <div>
+                      <img src="Res/VPN Connection.png" />
+                      <p>Cloud Development</p>
+                    </div>
+                    <div>
+                      <img src="Res/Local Disk.png" />
+                      <p>Database Management</p>
+                    </div>
+                    <div>
+                      <img src="Res/python-svgrepo-com.svg" />
+                      <p>Python</p>
+                    </div>
+                    <div>
+                      <img src="Res/500px-ISO_C++_Logo.svg.png" />
+                      <p>C++</p>
+                    </div>
+                    <div>
+                      <img src="Res/javascript-logo-svgrepo-com.svg" />
+                      <p>JavaScript</p>
+                    </div>
+                    <div>
+                      <img src="Res/typescript-svgrepo-com.svg" />
+                      <p>TypeScript</p>
+                    </div>
+                    <div>
+                      <img src="Res/500px-HTML5_logo_and_wordmark.svg.png" />
+                      <p>HTML/CSS</p>
+                    </div>
+                    <div>
+                      <img src="Res/sql-database-generic-svgrepo-com.svg" />
+                      <p>SQL</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="am-socials-box">
+                  <div class="am-socials-box-title">
+                    <h3>Socials</h3>
+                    <img src="/Res/double_up_blue.svg" />
+                  </div>
+                  <div class="am-socials-box-content">
+                    <div>
+                      <img src="Res/linkedin-svgrepo-com.svg" />
+                      <p>LinkedIn</p>
+                    </div>
+                    <div>
+                      <img src="Res/github-svgrepo-com.svg" />
+                      <p>GitHub</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="am-main-right">
+                <h1>About Me</h1>
+                <div class="am-content-row">
+                  <div class="am-content-row-col">
+                    <img src="Res/Incoming Connections.png" />
+                    <p>
+                      I am proficient in various programming languages,
+                      including Python, C#, C++, JavaScript, TypeScript, HTML,
+                      CSS, and SQL.
+                    </p>
+                  </div>
+                  <div class="am-content-row-col">
+                    <img src="Res/Certificate.png" />
+                    <p>
+                      I recently graduated from the University of Utah with a
+                      Bachelors of Science in Computer Science.
+                    </p>
+                  </div>
+                </div>
+                <div class="am-content-row">
+                  <div class="am-content-row-col">
+                    <img src="Res/Security Settings.png" />
+                    <p>
+                      I thrive on solving complex problems and enjoy the
+                      challenge of finding innovative solutions.
+                    </p>
+                  </div>
+                  <div class="am-content-row-col">
+                    <img src="Res/Success.png" />
+                    <p>
+                      I am seeking a full-time Software Engineer position to
+                      gain valuable experience and further develop my skills in
+                      the industry.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
+        </xp-window>
+
+        <xp-window
+          id="resumeWindow"
+          title="Resume"
+          app-type="resume"
+          icon="/Res/adobe-pdf-icon-logo-vector-01.png"
+        ></xp-window>
+        <xp-window
+          id="projectsWindow"
+          title="Projects"
+          app-type="projects"
+          icon="/Res/Appearance.png"
+        ></xp-window>
+        <xp-window
+          id="contactInfoWindow"
+          title="Contact Info"
+          app-type="contact-info"
+          icon="/Res/OE Send.png"
+        ></xp-window>
+
+        <!-- Add future windows here, e.g.: -->
+        <!-- <xp-window id="notepadWindow" title="Notepad" app-type="notepad" icon="/Res/Notepad.png"></xp-window> -->
+
+        <xp-window
+          id="confirmWindow"
+          title="Open External Link"
+          icon="/Res/Information.png"
+          hide-controls
+        >
+          <div class="confirm-dialog">
+            <p id="confirmMessage">Are you sure you want to leave this site?</p>
+            <div class="confirm-buttons">
+              <button id="confirmYes">Yes</button>
+              <button id="confirmNo">No</button>
+            </div>
+          </div>
+        </xp-window>
+      </div>
+
+      <div class="start_bar">
+        <button class="start_button">
+          <img src="/Res/Portfolio_Icon_start.png" alt="start logo" />
+          <p>start</p>
+        </button>
+        <start-menu></start-menu>
+        <div class="start_apps"></div>
+        <div class="system_tray">
+          <button class="tray_info">
+            <img src="/Res/Information.png" alt="info" />
+          </button>
+          <button class="toggle_crt">
+            <img src="/Res/Security - Ok.png" alt="toggle crt" />
+          </button>
+          <button class="toggle_fullscreen">
+            <img src="/Res/IE Enlarge Image.png" alt="fullscreen" />
+          </button>
+          <p class="active_time">10:32 AM</p>
         </div>
       </div>
-      <div class="w3-col l3 m6 w3-margin-bottom">
-        <div class="w3-card project-card">
-          <div class="w3-container">
-            <h3>Agar.io Game</h3>
-            <p class="w3-opacity">Language: C#</p>
-            <p>I recreated Agar.io, a game where players control a cell that grows by consuming smaller cells and avoiding larger ones in a dynamic environment.</p>
-            <p><button onclick="window.open('https://drive.google.com/drive/folders/1yO5GeAAFJVAavRu7RwOQI-3vQXsxlwjU?usp=sharing', '_blank')" class="w3-button w3-light-grey w3-block"><i class="fa fa-download"></i> Download Repo</button></p>
-          </div>
-        </div>
-      </div>
-      <div class="w3-col l3 m6 w3-margin-bottom">
-        <div class="w3-card project-card">
-          <div class="w3-container">
-            <h3>Word Ninja</h3>
-            <p class="w3-opacity">Language: Swift</p>
-            <p>A Wordle game clone with a user friendly interface to play wordle with no limits and no ads.</p>
-            <p><button onclick="window.open('https://github.com/dconnorj/WordNinja', '_blank')" class="w3-button w3-light-grey w3-block"><i class="fa fa-download"></i> Github Repo</button></p>
-          </div>
-        </div>
-      </div>
-      <div class="w3-col l3 m6 w3-margin-bottom">
-        <div class="w3-card project-card">
-          <div class="w3-container">
-            <h3>Custom HTTP Proxy</h3>
-            <p class="w3-opacity">Language: Python</p>
-            <p>I developed an HTTP proxy that efficiently routes and filters web traffic between clients and servers, enhancing security and performance.</p>
-            <p><button onclick="window.open('https://drive.google.com/drive/folders/1DkfUH9iXXzK758EcFp7q-DL9BO-VeeVo?usp=sharing', '_blank')" class="w3-button w3-light-grey w3-block"><i class="fa fa-download"></i> Download Repo</button></p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  <style>
-  .project-card {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
-  }
-  </style>
+    </main>
 
-<!-- Pricing Section -->
-<div class="w3-container w3-center w3-dark-grey" style="padding:128px 16px" id="edu">
-  <h3>EDUCATION</h3>
-  <p class="w3-large">Courses That Shaped My Skills.</p>
-  <div class="w3-row-padding" style="margin-top:64px">
-    <div class="w3-third w3-section">
-      <ul class="w3-ul w3-white w3-hover-shadow">
-        <li class="w3-black w3-xlarge w3-padding-32">Core</li>
-        <li class="w3-padding-16"><b>CS 2420 Data Structures and Algorithms</b></li>
-        <li class="w3-padding-16"><b>CS 3810 Computer Organization</b></li>
-        <li class="w3-padding-16"><b>CS 4150 Algorithms</b></li>
-        <li class="w3-padding-16"><b>CS 3130 Eng Prob Stats</b></li>
-      </ul>
-    </div>
-    <div class="w3-third">
-        <ul class="w3-ul w3-white w3-hover-shadow">
-            <li class="w3-black w3-xlarge w3-padding-32">Software</li>
-            <li class="w3-padding-16"><b>CS 3500 Software Practice</b></li>
-            <li class="w3-padding-16"><b>CS 3505 Software Practice II</b></li>
-            <li class="w3-padding-16"><b>CS 4530 Mobile App Programming</b></li>
-            <li class="w3-padding-16"><b>CS 4000 Senior Capstone Design</b></li>
-          </ul>
-    </div>
-    <div class="w3-third w3-section">
-      <ul class="w3-ul w3-white w3-hover-shadow">
-        <li class="w3-black w3-xlarge w3-padding-32">Electives</li>
-        <li class="w3-padding-16"><b>CS 4480 Computer Networks</b></li>
-        <li class="w3-padding-16"><b>CS 3390 Ethics in Data Science</b></li>
-        <li class="w3-padding-16"><b>CS 4300 Artificial Intelligence</b></li>
-        <li class="w3-padding-16"><b>CS 4440 Computer Security</b></li>
-      </ul>
-    </div>
-  </div>
-  <p><button onclick="window.open('https://catalog.utah.edu/courses?subjectCode=CS&page=1&cq=', '_blank')" class="w3-button w3-light-black"><i class="fa fa-archive"></i> Course Info</button></p>
-</div>
-
-<!-- Contact Section -->
-<!-- Contact Section -->
-<div class="w3-container w3-light-grey" style="padding:80px 32px;" id="contact">
-  <h3 class="w3-center" style="margin-bottom: 24px;">CONTACT</h3>
-  <p class="w3-center w3-large">Drop Me a Line:</p>
-
-  <div style="margin-top:48px; display: flex; flex-direction: column; align-items: center; gap: 32px;">
-
-      <!-- Phone Section -->
-      <p style="display: flex; align-items: center; gap: 16px; font-size: 1.2rem;">
-          <i class="fa fa-phone fa-fw w3-xxlarge"></i> 
-          <span>Phone: (801)-309-8729</span>
-      </p>
-
-      <!-- Email Section -->
-      <p style="display: flex; align-items: center; gap: 16px; font-size: 1.2rem;">
-          <i class="fa fa-envelope fa-fw w3-xxlarge"></i> 
-          <span>Email: connor_dalley@protonmail.com</span>
-      </p>
-  </div>
-</div>
-
-<!-- Footer -->
-<footer class="w3-center w3-black w3-padding-64">
-  <a href="#home" class="w3-button w3-light-grey"><i class="fa fa-arrow-up w3-margin-right"></i>To the top</a>
-</footer>
-<!-- JavaScript for Navbar Effect and Sidebar -->
-<script>
-  // Navbar gradual appearance on scroll
-  window.addEventListener("scroll", function () {
-      var navbar = document.getElementById("myNavbar");
-      if (window.scrollY > 100) {
-          navbar.classList.add("visible");
-      } else {
-          navbar.classList.remove("visible");
-      }
-  });
-
-  // Sidebar open/close functions
-  function w3_open() {
-      document.getElementById("mySidebar").style.display = "block";
-  }
-
-  function w3_close() {
-      document.getElementById("mySidebar").style.display = "none";
-  }
-</script>
-
-</body>
+    <script type="module" src="xp-window.js"></script>
+    <script type="module" src="app.js"></script>
+  </body>
 </html>
