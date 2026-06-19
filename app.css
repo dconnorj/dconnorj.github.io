@@ -71,6 +71,13 @@ main {
     align-items: start;
     justify-content: start;
 }
+.main_section.is-loading {
+  background-image: none;
+  background-color: #EDEDED;
+}
+.main_section.is-loading .icons {
+  visibility: hidden;
+}
 .icons{
   display: flex;
   flex-direction: column;
@@ -532,7 +539,8 @@ body.crt-active .crt_overlay {
 .confirm-buttons button:hover {
   background: linear-gradient(to bottom, #ffffff, #e0e0e0);
 }
-.am-content{
+.am-content,
+.res-content{
   display: flex;
   flex-direction: column;
   max-width: 100%;
@@ -547,31 +555,37 @@ body.crt-active .crt_overlay {
   z-index: 10;
   flex-shrink: 0; 
 }
-.am-file-view{
+.am-file-view,
+.res-file-view{
   display: flex;
   justify-content: space-between;
   align-items: center;
   border-bottom: 0.07rem solid #D3D1C5;
   max-height: 1.5rem;
 }
-.am-file-view img{
+.am-file-view img,
+.res-file-view img{
   height: 1.25rem;
   background-color: white;
 }
-.am-help{
+.am-help,
+.res-help{
   opacity: 50%;
 }
-.am-view-file-btns{
+.am-view-file-btns,
+.res-view-file-btns{
   display: flex;
 }
-.am-file-view button{
+.am-file-view button,
+.res-file-view button{
   color: black;
   text-shadow: none;
   font-size: 0.65rem;
   width: 2.5rem;
   height: 1.5rem;
 }
-.am-file-view button:not(.am-help):hover {
+.am-file-view button:not(.am-help):hover,
+.res-file-view button:not(.res-help):hover {
   background: #1857BF;
   color: white;
   text-shadow: 1px 1px 1px black;
@@ -619,6 +633,7 @@ body.crt-active .crt_overlay {
 }
 .am-outside-links button{
   min-width: 5rem;
+  align-self: stretch;
 }
 
 .am-outside-links button:hover{
@@ -654,6 +669,22 @@ body.crt-active .crt_overlay {
   align-items: center;
   width: 87%;
   border: 0.07rem solid #D3D1C5;
+  position: relative;
+  overflow: hidden;
+}
+.am-address-bar.is-loading::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0%;
+  background: #7FB1F0;
+  animation: am-address-grow var(--am-load-duration, 0.6s) ease-out forwards;
+}
+@keyframes am-address-grow {
+  from { width: 0%; }
+  to   { width: 100%; }
 }
 .am-address-bar div{
   display: flex;
@@ -681,6 +712,11 @@ body.crt-active .crt_overlay {
   flex: 1;               /* fill remaining height below the header */
   overflow: hidden;      /* contain children */
   align-items: stretch;
+  opacity: 1;
+  transition: opacity 0.4s ease;
+}
+.am-main-content.is-loading {
+  opacity: 0;
 }
 .am-main-left{
   display: flex;
@@ -831,7 +867,8 @@ body.crt-active .crt_overlay {
   padding-top: 2rem;
   padding-left: 4rem;
 }
-.am-dropdown-menu {
+.am-dropdown-menu,
+.res-dropdown-menu {
   position: fixed;
   background: #E1E4E2;
   border: 1px solid #A9A9A9;
@@ -842,24 +879,35 @@ body.crt-active .crt_overlay {
   min-width: 8rem;
 }
 .am-file-popup-btns p,
-.am-view-popup-btns p {
+.am-view-popup-btns p,
+.res-file-popup-btns p,
+.res-view-popup-btns p {
   color: black;
   padding: 0.2rem 1rem 0.2rem 0.5rem;
   cursor: default;
 }
 
 .am-file-popup-btns p:hover,
-.am-view-popup-btns p:hover {
+.am-view-popup-btns p:hover,
+.res-file-popup-btns p:hover,
+.res-view-popup-btns p:hover {
   background: #1857BF;
   color: white;
 }
-.am-file-disabled {
+.am-file-disabled,
+.res-file-disabled {
   opacity: 50%;
   pointer-events: none;
 }
 
-.am-file-exit {
+.am-file-exit,
+.res-file-exit {
   border-top: 1px solid #A9A9A9;
+}
+.am-footer{
+  background: #E1E4E2;
+  font-size: 0.6rem;
+  padding: 0.1rem;
 }
 
 @container (max-width: 500px) {

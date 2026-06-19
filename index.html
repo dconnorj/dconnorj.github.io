@@ -7,7 +7,7 @@
   </head>
   <body>
     <main>
-      <div class="main_section">
+      <div class="main_section is-loading">
         <div class="icons">
           <button class="about_me">
             <img src="/Res/Tour XP.png" alt="about me" />
@@ -208,6 +208,9 @@
                 </div>
               </div>
             </div>
+            <div class="am-footer">
+              <p>Learn more about Connor</p>
+            </div>
           </div>
         </xp-window>
 
@@ -216,7 +219,20 @@
           title="Resume"
           app-type="resume"
           icon="/Res/adobe-pdf-icon-logo-vector-01.png"
-        ></xp-window>
+        >
+          <div class="res-content">
+            <div class="res-head">
+              <div class="res-file-view">
+                <div class="res-view-file-btns">
+                  <button class="res-file">File</button>
+                  <button class="res-view">View</button>
+                  <button class="res-help">Help</button>
+                </div>
+                <img src="/Res/Portfolio_Icon.png" alt="logo" />
+              </div>
+            </div>
+          </div>
+        </xp-window>
         <xp-window
           id="projectsWindow"
           title="Projects"

@@ -6,6 +6,29 @@ import {
 
 const aboutMeWindow = appWindows.get('About Me');
 
+// XP-style fake loading: gray desktop flash + growing address bar
+const mainSection = document.querySelector('.main_section');
+const amAddressBar = document.querySelector('.am-address-bar');
+const amMainContent = document.querySelector('.am-main-content');
+
+function playAddressBarLoading(barDuration = 200) {
+  amAddressBar.style.setProperty('--am-load-duration', `${barDuration}ms`);
+  amAddressBar.classList.add('is-loading');
+  amMainContent.classList.add('is-loading');
+  // reveal the content mid-bar so it fades in while the bar finishes growing
+  setTimeout(
+    () => amMainContent.classList.remove('is-loading'),
+    barDuration / 2
+  );
+  setTimeout(() => amAddressBar.classList.remove('is-loading'), barDuration);
+}
+
+window.addEventListener('load', () => {
+  mainSection.classList.remove('is-loading');
+  playAddressBarLoading();
+});
+aboutMeWindow.addEventListener('window-opened', () => playAddressBarLoading());
+
 // Collapsible sidebar boxes
 document
   .querySelectorAll(
