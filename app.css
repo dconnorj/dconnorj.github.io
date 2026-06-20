@@ -539,13 +539,17 @@ body.crt-active .crt_overlay {
 .confirm-buttons button:hover {
   background: linear-gradient(to bottom, #ffffff, #e0e0e0);
 }
+#resumeWindow{
+  width: 35rem;
+  height: 48rem;
+}
 .am-content,
 .res-content{
   display: flex;
   flex-direction: column;
   max-width: 100%;
   height: 100%;          /* fill the window */
-  overflow: hidden; 
+  overflow: hidden;
   background-color: #EDEDED;
 }
 .am-page-head{
@@ -595,8 +599,7 @@ body.crt-active .crt_overlay {
   display: flex;
   background-color: #EDEDED;
   border-bottom: 0.07rem solid #D3D1C5;
-  height: 3.5rem;
-  padding: 0.8rem 0rem 0.8rem 0rem;
+  padding: 0.25rem 0rem;
 }
 .am-nav img{
   height: 1.25rem;
@@ -622,7 +625,7 @@ body.crt-active .crt_overlay {
   text-shadow: none;
   color: black;
   gap: 0.25rem;
-  min-height: 2rem;
+  padding: 0.5rem 0rem;
 }
 
 .am-back-forward-btns button{
@@ -634,11 +637,12 @@ body.crt-active .crt_overlay {
 .am-outside-links button{
   min-width: 5rem;
   align-self: stretch;
+  border: 0.15rem solid transparent;
+  border-radius: 10%;
 }
 
 .am-outside-links button:hover{
-  border: 0.15rem solid #A9A9A9;
-  border-radius: 10%;
+  border-color: #A9A9A9;
 }
 .am-opaque-img{
   display: flex;
@@ -650,6 +654,58 @@ body.crt-active .crt_overlay {
   height: 2rem;
   padding-left: 0.75rem;
 }
+.res-nav{
+  display: flex;
+  background-color: #EDEDED;
+  border-bottom: 0.07rem solid #D3D1C5;
+  padding: 0.25rem 0rem;
+}
+.res-nav img{
+  height: 1.25rem;
+}
+.res-zoom-save-btns{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 0.07rem solid #D3D1C5;
+}
+.res-print-btns{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 0.07rem solid #D3D1C5;
+  opacity: 50%;
+}
+.res-contact-btns{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.res-zoom-save-btns button, .res-print-btns button, .res-contact-btns button{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  text-shadow: none;
+  color: black;
+  gap: 0.25rem;
+  padding: 0.5rem 0rem;
+  min-width: 5rem;
+  align-self: stretch;
+  border: 0.15rem solid transparent;
+  border-radius: 10%;
+}
+.res-zoom-save-btns button:hover, .res-contact-btns button:hover{
+  border-color: #A9A9A9;
+}
+.res-zoom-btn.active{
+  border-color: #A9A9A9;
+  background-color: #C5C5C5;
+}
+.res-print-btn{
+  cursor: default;
+}
+
 .am-address{
   display: flex;
   padding: 0.5rem 0.75rem 0.5rem 0.75rem;
@@ -904,10 +960,38 @@ body.crt-active .crt_overlay {
 .res-file-exit {
   border-top: 1px solid #A9A9A9;
 }
-.am-footer{
+.am-footer,
+.res-footer{
   background: #E1E4E2;
   font-size: 0.6rem;
   padding: 0.1rem;
+}
+.res-main-content{
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+  background-color: #999790;
+  padding: 0.5rem 0rem;
+}
+.res-main-content img{
+  height: 100%;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  background-color: white;
+  cursor: zoom-in;
+}
+.res-main-content.zoomed{
+  align-items: flex-start;
+  overflow-y: auto;
+}
+.res-main-content.zoomed img{
+  height: auto;
+  width: 100%;
+  max-width: 60rem;
+  cursor: zoom-out;
 }
 
 @container (max-width: 500px) {

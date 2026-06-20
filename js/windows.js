@@ -2,7 +2,7 @@ export const image_map = new Map([
   ['About Me', ['/Res/Tour XP.png', 'about me app']],
   ['Resume', ['/Res/adobe-pdf-icon-logo-vector-01.png', 'my resume app']],
   ['Projects', ['/Res/Appearance.png', 'my projects app']],
-  ['Contact Info', ['/Res/OE Send.png', 'contact info app']],
+  ['Contact Me', ['/Res/Outlook Express.png', 'contact me app']],
   ['Media Player', ['/Res/dwsd58yvs5pe1.png', 'media player app']],
   ['Music Player', ['/Res/MP3 player.png', 'music player app']],
   ['Command Prompt', ['/Res/Command Prompt.png', 'command prompt app']],
@@ -28,7 +28,7 @@ export const appWindows = new Map([
   ['About Me', document.getElementById('aboutMeWindow')],
   ['Resume', document.getElementById('resumeWindow')],
   ['Projects', document.getElementById('projectsWindow')],
-  ['Contact Info', document.getElementById('contactInfoWindow')],
+  ['Contact Me', document.getElementById('contactMeWindow')],
   // Add new windows here as you build them:
   // ['Notepad', document.getElementById('notepadWindow')],
   // ['Minesweeper', document.getElementById('minesweeperWindow')],
@@ -65,7 +65,7 @@ const iconMap = {
   '.about_me': 'About Me',
   '.my_resume': 'Resume',
   '.projects': 'Projects',
-  '.contact_info': 'Contact Info',
+  '.contact_me': 'Contact Me',
 };
 Object.entries(iconMap).forEach(([selector, appName]) => {
   document.querySelector(selector).addEventListener('click', () => {

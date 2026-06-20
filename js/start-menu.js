@@ -2,7 +2,7 @@ import { image_map } from './windows.js';
 
 export const subheads = new Map([
   ['Projects', 'View my work'],
-  ['Contact Info', 'Get in Touch'],
+  ['Contact Me', 'Get in Touch'],
 ]);
 
 export function makeAppImageList(cname, arr, subheads, bold, use_subheads) {
@@ -35,7 +35,7 @@ const allApps = [
   'About Me',
   'Resume',
   'Projects',
-  'Contact Info',
+  'Contact Me',
   'Media Player',
   'Music Player',
   'Command Prompt',
@@ -58,7 +58,7 @@ class StartMenu extends HTMLElement {
         </div>
         <div class="middle_start_menu">
           <div class="left_start_menu">
-            ${makeAppImageList('top_left_start', ['Projects', 'Contact Info'], subheads, false, true)}
+            ${makeAppImageList('top_left_start', ['Projects', 'Contact Me'], subheads, false, true)}
             ${makeAppImageList('bottom_left_start', ['About Me', 'Music Player', 'Media Player', 'Paint', 'Notepad'], subheads, false, true)}
             <button class="allprograms">
               <h3>All Programs</h3>
