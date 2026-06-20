@@ -70,7 +70,7 @@ document.querySelectorAll('.am-socials-box-content div').forEach((div) => {
 const fileMenuItems = `
   <div class="am-file-popup-btns">
     <p class="am-file-disabled">Print</p>
-    <p class="am-file-disabled am-file-exit">Print Setup</p>
+    <p class="am-file-disabled">Print Setup</p>
     <p class="am-file-exit">Exit</p>
   </div>`;
 

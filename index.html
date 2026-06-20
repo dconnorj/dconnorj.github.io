@@ -278,7 +278,123 @@
           title="Contact Me"
           app-type="contact-me"
           icon="/Res/Outlook Express.png"
-        ></xp-window>
+          style="width: 36rem; height: 28rem"
+        >
+          <div class="cm-content">
+            <div class="cm-page-head">
+              <div class="cm-file-view">
+                <div class="cm-view-file-btns">
+                  <button class="cm-file">File</button>
+                  <button class="cm-edit">Edit</button>
+                  <button class="cm-view">View</button>
+                  <button class="cm-tools">Tools</button>
+                  <button class="cm-help">Help</button>
+                </div>
+                <img src="/Res/Portfolio_Icon.png" alt="logo" />
+              </div>
+              <div class="cm-nav">
+                <div class="cm-message-btns">
+                  <button
+                    class="cm-send-btn"
+                    type="submit"
+                    form="cmForm"
+                    disabled
+                  >
+                    <img src="Res/OE Send.png" />
+                    <p>Send Message</p>
+                  </button>
+                  <button
+                    class="cm-new-btn"
+                    type="reset"
+                    form="cmForm"
+                    disabled
+                  >
+                    <img src="Res/OE Create Mail.png" />
+                    <p>New Message</p>
+                  </button>
+                </div>
+                <div class="cm-edit-btns">
+                  <button class="cm-cut-btn" disabled>
+                    <img src="Res/Cut.png" />
+                  </button>
+                  <button class="cm-copy-btn" disabled>
+                    <img src="Res/Copy.png" />
+                  </button>
+                  <button class="cm-paste-btn" disabled>
+                    <img src="Res/Paste.png" />
+                  </button>
+                </div>
+                <div class="cm-linkedin-btns">
+                  <button class="cm-linkedin-btn">
+                    <img src="Res/linkedin-svgrepo-com.svg" />
+                    <p>LinkedIn</p>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- TODO: sign up at https://formspree.io, create a form, and replace YOUR_FORM_ID below -->
+            <form
+              class="cm-form"
+              id="cmForm"
+              action="https://formspree.io/f/mrewzebw"
+              method="POST"
+            >
+              <div class="cm-to">
+                <div class="cm-to-txt">
+                  <p>To:</p>
+                </div>
+                <input
+                  type="text"
+                  class="cm-to-input"
+                  value="Connor Dalley <cjd_swe@pm.me>"
+                  readonly
+                />
+              </div>
+              <div class="cm-from">
+                <div class="cm-from-txt">
+                  <p>From:</p>
+                </div>
+                <input
+                  type="email"
+                  name="email"
+                  class="cm-from-input"
+                  placeholder="Your email address"
+                  required
+                />
+              </div>
+              <div class="cm-subject">
+                <div class="cm-subject-txt">
+                  <p>Subject:</p>
+                </div>
+                <input
+                  type="text"
+                  name="_subject"
+                  class="cm-subject-input"
+                  placeholder="Subject of your message"
+                  required
+                />
+              </div>
+              <div
+                class="cm-message"
+                contenteditable="true"
+                role="textbox"
+                aria-multiline="true"
+                data-placeholder="Write your message here"
+              ></div>
+              <input type="hidden" name="message" id="cmMessageHidden" />
+              <input
+                type="text"
+                name="_gotcha"
+                style="display: none"
+                tabindex="-1"
+                autocomplete="off"
+              />
+            </form>
+            <div class="cm-footer">
+              <p>Compose a message to Connor</p>
+            </div>
+          </div>
+        </xp-window>
 
         <!-- Add future windows here, e.g.: -->
         <!-- <xp-window id="notepadWindow" title="Notepad" app-type="notepad" icon="/Res/Notepad.png"></xp-window> -->
