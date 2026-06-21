@@ -5,4 +5,5 @@ import './js/windows.js';
 import './js/am-window.js';
 import './js/resume-window.js';
 import './js/contact-window.js';
+import './js/projects-window.js';
 import './js/xp-window.js';

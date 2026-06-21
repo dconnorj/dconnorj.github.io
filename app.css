@@ -16,6 +16,102 @@
   font-weight: 700;
   font-style: normal;
 }
+@font-face {
+  font-family: 'Helvetica Neue';
+  src: url('/fonts/HelveticaNeueUltraLight.otf') format('opentype');
+  font-weight: 100;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Helvetica Neue';
+  src: url('/fonts/HelveticaNeueUltraLightItalic.otf') format('opentype');
+  font-weight: 100;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Helvetica Neue';
+  src: url('/fonts/HelveticaNeueThin.otf') format('opentype');
+  font-weight: 200;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Helvetica Neue';
+  src: url('/fonts/HelveticaNeueThinItalic.otf') format('opentype');
+  font-weight: 200;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Helvetica Neue';
+  src: url('/fonts/HelveticaNeueLight.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Helvetica Neue';
+  src: url('/fonts/HelveticaNeueLightItalic.otf') format('opentype');
+  font-weight: 300;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Helvetica Neue';
+  src: url('/fonts/HelveticaNeueRoman.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Helvetica Neue';
+  src: url('/fonts/HelveticaNeueItalic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Helvetica Neue';
+  src: url('/fonts/HelveticaNeueMedium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Helvetica Neue';
+  src: url('/fonts/HelveticaNeueMediumItalic.otf') format('opentype');
+  font-weight: 500;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Helvetica Neue';
+  src: url('/fonts/HelveticaNeueBold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Helvetica Neue';
+  src: url('/fonts/HelveticaNeueBoldItalic.otf') format('opentype');
+  font-weight: 700;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Helvetica Neue';
+  src: url('/fonts/HelveticaNeueHeavy.otf') format('opentype');
+  font-weight: 800;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Helvetica Neue';
+  src: url('/fonts/HelveticaNeueHeavyItalic.otf') format('opentype');
+  font-weight: 800;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Helvetica Neue';
+  src: url('/fonts/HelveticaNeueBlack.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Helvetica Neue';
+  src: url('/fonts/HelveticaNeueBlackItalic.otf') format('opentype');
+  font-weight: 900;
+  font-style: italic;
+}
 * {
     margin: 0;
     padding: 0;
@@ -49,12 +145,15 @@ html, body {
 
 h1 {
   font-size: large;
+  font-weight: inherit;
 }
 h2 {
   font-size: medium;
+  font-weight: inherit;
 }
 h3{
   font-size: small;
+  font-weight: inherit;
 }
 h4 {
   font-size: x-small;
@@ -570,7 +669,8 @@ body.crt-active .crt_overlay {
 }
 .am-content,
 .res-content,
-.cm-content{
+.cm-content,
+.proj-content{
   display: flex;
   flex-direction: column;
   max-width: 100%;
@@ -580,7 +680,8 @@ body.crt-active .crt_overlay {
   background-color: #EDEDED;
 }
 .am-page-head,
-.cm-page-head{
+.cm-page-head,
+.proj-page-head{
   position: sticky;      /* sticks to top of .am-content, not the viewport */
   top: 0;
   width: 100%;
@@ -589,7 +690,8 @@ body.crt-active .crt_overlay {
 }
 .am-file-view,
 .res-file-view,
-.cm-file-view{
+.cm-file-view,
+.proj-file-view{
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -598,7 +700,8 @@ body.crt-active .crt_overlay {
 }
 .am-file-view img,
 .res-file-view img,
-.cm-file-view img{
+.cm-file-view img,
+.proj-file-view img{
   height: 1.25rem;
   background-color: white;
 }
@@ -606,17 +709,21 @@ body.crt-active .crt_overlay {
 .res-help,
 .cm-edit,
 .cm-tools,
-.cm-help{
+.cm-help,
+.proj-tools,
+.proj-help{
   opacity: 50%;
 }
 .am-view-file-btns,
 .res-view-file-btns,
-.cm-view-file-btns{
+.cm-view-file-btns,
+.proj-view-file-btns{
   display: flex;
 }
 .am-file-view button,
 .res-file-view button,
-.cm-file-view button{
+.cm-file-view button,
+.proj-file-view button{
   color: black;
   text-shadow: none;
   font-size: 0.65rem;
@@ -625,7 +732,8 @@ body.crt-active .crt_overlay {
 }
 .am-file-view button:not(.am-help):hover,
 .res-file-view button:not(.res-help):hover,
-.cm-file-view button:not(.cm-edit):not(.cm-tools):not(.cm-help):hover {
+.cm-file-view button:not(.cm-edit):not(.cm-tools):not(.cm-help):hover,
+.proj-file-view button:not(.proj-tools):not(.proj-help):hover {
   background: #1857BF;
   color: white;
   text-shadow: 1px 1px 1px black;
@@ -690,6 +798,54 @@ body.crt-active .crt_overlay {
   opacity: 50%;
   height: 2rem;
   padding-left: 0.75rem;
+}
+.proj-nav{
+  display: flex;
+  background-color: #EDEDED;
+  border-bottom: 0.07rem solid #D3D1C5;
+  padding: 0.25rem 0rem;
+}
+.proj-nav img{
+  height: 1.25rem;
+}
+.proj-home-btns{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 0.07rem solid #D3D1C5;
+  opacity: 50%;
+  padding-left: 0.25rem;
+}
+.proj-back-forward-btns{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 50%;
+}
+.proj-favorites-btns{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 50%;
+}
+.proj-home-btns button,
+.proj-back-forward-btns button,
+.proj-favorites-btns button{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  text-shadow: none;
+  color: black;
+  gap: 0.25rem;
+  padding: 0.5rem 0rem;
+  min-width: 4rem;
+}
+.proj-forward-btn{
+  width: 5rem;
+}
+.proj-favorites-btn{
+  min-width: 5rem;
 }
 .res-nav{
   display: flex;
@@ -894,7 +1050,8 @@ body.crt-active .crt_overlay {
   font-style: italic;
 }
 
-.am-address{
+.am-address,
+.proj-address{
   display: flex;
   padding: 0.5rem 0.75rem 0.5rem 0.75rem;
   background-color: #EDEDED;
@@ -903,10 +1060,12 @@ body.crt-active .crt_overlay {
   align-items: center;
   justify-content: space-between;
 }
-.am-address img{
+.am-address img,
+.proj-address img{
   height: 1rem;
 }
-.am-address-bar{
+.am-address-bar,
+.proj-address-bar{
   display: flex;
   background-color: white;
   justify-content: space-between;
@@ -930,25 +1089,30 @@ body.crt-active .crt_overlay {
   from { width: 0%; }
   to   { width: 100%; }
 }
-.am-address-bar div{
+.am-address-bar div,
+.proj-address-bar div{
   display: flex;
   align-items: center;
   gap: 0.3rem;
 }
-.am-address-drop-down{
+.am-address-drop-down,
+.proj-address-drop-down{
   background-color: #EDEDED;
 }
-.am-go-btn{
+.am-go-btn,
+.proj-go-btn{
   display: flex;
   align-items: center;
   gap: 0.25rem;
   opacity: 50%;
 }
-.am-go-btn img{
+.am-go-btn img,
+.proj-go-btn img{
   height: 1.25rem;
   filter:grayscale(100%)
 }
-.am-address-p{
+.am-address-p,
+.proj-address-p{
   opacity: 50%;
 }
 .am-main-content{
@@ -1113,7 +1277,8 @@ body.crt-active .crt_overlay {
 }
 .am-dropdown-menu,
 .res-dropdown-menu,
-.cm-dropdown-menu {
+.cm-dropdown-menu,
+.proj-dropdown-menu {
   position: fixed;
   background: #E1E4E2;
   border: 1px solid #A9A9A9;
@@ -1128,7 +1293,9 @@ body.crt-active .crt_overlay {
 .res-file-popup-btns p,
 .res-view-popup-btns p,
 .cm-file-popup-btns p,
-.cm-view-popup-btns p {
+.cm-view-popup-btns p,
+.proj-file-popup-btns p,
+.proj-view-popup-btns p {
   color: black;
   padding: 0.2rem 1rem 0.2rem 0.5rem;
   cursor: default;
@@ -1139,13 +1306,16 @@ body.crt-active .crt_overlay {
 .res-file-popup-btns p:hover,
 .res-view-popup-btns p:hover,
 .cm-file-popup-btns p:not(.cm-file-disabled):hover,
-.cm-view-popup-btns p:hover {
+.cm-view-popup-btns p:hover,
+.proj-file-popup-btns p:not(.proj-file-disabled):hover,
+.proj-view-popup-btns p:hover {
   background: #1857BF;
   color: white;
 }
 .am-file-disabled,
 .res-file-disabled,
-.cm-file-disabled {
+.cm-file-disabled,
+.proj-file-disabled {
   opacity: 50%;
   pointer-events: none;
 }
@@ -1154,11 +1324,13 @@ body.crt-active .crt_overlay {
 .res-file-exit {
   border-top: 1px solid #A9A9A9;
 }
-.cm-file-border {
+.cm-file-border,
+.proj-file-border {
   border-bottom: 1px solid #A9A9A9;
 }
 .am-footer,
-.res-footer{
+.res-footer,
+.proj-footer{
   background: #E1E4E2;
   font-family: 'Pixelated MS Sans Serif', Tahoma, sans-serif;
   font-size: 0.6rem;
@@ -1260,4 +1432,53 @@ body.crt-active .crt_overlay {
 .cm-toast-body img {
   height: 1.5rem;
   flex-shrink: 0;
+}
+
+.proj-main{
+  display: flex;
+  flex-direction: column;
+  background-color: black;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 500;
+  align-items: center;
+}
+.proj-main-head{
+  display: flex;
+  color:white;
+  padding: 1rem;
+  align-items: center;
+  gap: 5rem;
+}
+.proj-main-head .logo{
+  max-height: 6.5rem;
+  border: 0.1rem solid #7BBEF1;
+}
+.non-ad{
+  display: flex;
+}
+.ad-btns{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  min-height: 100%;
+  padding: 1rem 0rem 0.25rem 0rem;
+  
+}
+.ad-btns h1{
+  transform: rotate(-0.25turn);
+  background: #A23B81;
+  border-radius: 20%;
+  color: black;
+  font-weight: 900;
+  font-size: 0.75rem;
+  padding: 0.25rem;
+}
+.proj-main-content{
+  display: flex;
+}
+.proj-page-nav{
+  display: flex;
+  flex-direction: column;
+  max-width: 15%;
 }
