@@ -320,7 +320,7 @@ class XPWindow extends HTMLElement {
   }
 
   _makeResizable() {
-    const minW = 500,
+    const minW = this.getAttribute('app-type') === 'projects' ? 880 : 500,
       minH = 300;
     const windowEl = this.shadowRoot.querySelector('.window');
 
