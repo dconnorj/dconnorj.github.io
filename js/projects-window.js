@@ -124,32 +124,56 @@ class Stack {
 let currentPage = 'home';
 const backStack = new Stack();
 const forwardStack = new Stack();
+const fullbtn = document.querySelector('.proj-full-stack-btn');
+const webbtn = document.querySelector('.proj-web-btn');
+const mobilebtn = document.querySelector('.proj-mobile-btn');
+const backendbtn = document.querySelector('.proj-back-end-btn');
+const homebtn = document.querySelector('.proj-content-nav .proj-home-btn');
 
-switch (currentPage) {
-  case 'full-stack':
-    break;
-
-  case 'web':
-    break;
-
-  case 'mobile':
-    break;
-
-  case 'back-end':
-    break;
-
-  default:
-    let selectedNav = document.querySelector(
-      '.proj-content-nav .proj-home-btn'
-    );
-    var iNav = document.createElement('div');
-    iNav.className = 'inner-website-nav';
-    iNav.innerHTML = `
-      <div>
-        <p>placeholder1</p>
-        <p>placeholder2</p>
-        <p>placeholder3</p>
-      </div>
-    `;
-    selectedNav.appendChild(iNav);
+function createInnerNav() {
+  const iNav = document.createElement('div');
+  iNav.className = 'inner-website-nav';
+  iNav.innerHTML = `
+    <div>
+      <p>short</p>
+    </div>
+    <div>
+      <p>longerthan</p>
+    </div>
+    <div>
+      <p>wow this is a lot</p>
+    </div>
+  `;
+  return iNav;
 }
+
+const navBtns = [fullbtn, webbtn, mobilebtn, homebtn, backendbtn];
+navBtns.forEach((btn) => btn.appendChild(createInnerNav()));
+
+const pageByNavBtn = new Map([
+  [fullbtn, 'full-stack'],
+  [webbtn, 'web'],
+  [mobilebtn, 'mobile'],
+  [homebtn, 'home'],
+  [backendbtn, 'back-end'],
+]);
+
+function setActiveNavBtn(activeBtn) {
+  navBtns.forEach((btn) => {
+    const isActive = btn === activeBtn;
+    btn.classList.toggle('active', isActive);
+    btn.classList.toggle('inactive', !isActive);
+    btn.querySelector('.inner-website-nav').style.display = isActive
+      ? 'flex'
+      : 'none';
+  });
+}
+
+navBtns.forEach((btn) => {
+  btn.addEventListener('click', () => {
+    currentPage = pageByNavBtn.get(btn);
+    setActiveNavBtn(btn);
+  });
+});
+
+setActiveNavBtn(homebtn);

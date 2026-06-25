@@ -679,6 +679,7 @@ body.crt-active .crt_overlay {
   flex-shrink: 0;
   background-color: #EDEDED;
 }
+
 .am-page-head,
 .cm-page-head,
 .proj-page-head{
@@ -1447,8 +1448,8 @@ body.crt-active .crt_overlay {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 500;
   justify-content: center;
-  gap: 0.25rem;
   padding: 1rem 0 1rem 0;
+  overflow:auto;
 }
 
 .info-btns{
@@ -1474,11 +1475,11 @@ body.crt-active .crt_overlay {
   flex-direction: column;
   align-items: center;
   justify-content: start;
-  width: 290px;
-  gap:0.5rem;
+  width: 200px;
+  gap:0.25rem;
 }
 .proj-content-nav img{
-  max-width: 290px
+  max-width: 200px
 
 }
 .proj-logo{
@@ -1508,7 +1509,7 @@ body.crt-active .crt_overlay {
   display: flex;
   justify-content: start;
   align-items: center;
-  padding-top: 3rem;
+  padding-top: 1rem;
   gap:2rem;
 }
 .proj-nav-img-l{
@@ -1520,20 +1521,27 @@ body.crt-active .crt_overlay {
   width: 99.2%;
   flex-direction: column;
   color: white;
-  border-right: 0.62rem solid #CC329A;
+  border-right: 0.42rem solid #CC329A;
   border-bottom: 0.15rem solid #CC329A;
   justify-content: center;
-  align-items: end;
+  align-items: center;
   padding-right: 1rem;
 }
 .inner-website-nav div{
-  width: 45%;
-  padding-bottom: 0.25rem;
-  align-items: start;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  width: 100%;
+  padding-right: 0.5rem;
+  border-right: 0.25rem solid transparent;
 }
-.inner-website-nav div p:hover{
-  border-right: 0.25rem solid #E68AB8;
+.inner-website-nav div:hover{
+  border-right-color: #E68AB8;
 }
+.proj-full-stack-btn,
+.proj-web-btn,
+.proj-mobile-btn,
+.proj-back-end-btn,
 .proj-home-btn{
   display: flex;
   flex-direction: column;
@@ -1541,6 +1549,49 @@ body.crt-active .crt_overlay {
 }
 
 .proj-full-stack-btn.inactive img{
-  content: url("Res/Projects Website Nav/full-stack-hover.png");
+  content: url("Res/Projects Website Nav/full-stack.png");
+}
+.proj-web-btn.inactive img{
+  content: url("Res/Projects Website Nav/nav-web.png");
+}
+.proj-mobile-btn.inactive img{
+  content: url("Res/Projects Website Nav/mobile-app.png");
+}
+.proj-back-end-btn.inactive img{
+  content: url("Res/Projects Website Nav/back-end.png");
+}
+.proj-home-btn.inactive img{
+  content: url("Res/Projects Website Nav/nav-home.png");
 }
 
+.proj-full-stack-btn.inactive img:hover{
+  content: url("Res/Projects Website Nav/full-stack-hover.png");
+}
+.proj-web-btn.inactive img:hover{
+  content: url("Res/Projects Website Nav/nav-web-hover.png");
+}
+.proj-mobile-btn.inactive img:hover{
+  content: url("Res/Projects Website Nav/Star Trek Website Nav-6.png");
+}
+.proj-back-end-btn.inactive img:hover{
+  content: url("Res/Projects Website Nav/back-end-hover.png");
+}
+.proj-home-btn.inactive img:hover{
+  content: url("Res/Projects Website Nav/nav-home-hover.png");
+}
+
+.proj-full-stack-btn.active img{
+  content: url("Res/Projects Website Nav/full-stack-selected.png");
+}
+.proj-web-btn.active img{
+  content: url("Res/Projects Website Nav/nav-web-selected.png");
+}
+.proj-mobile-btn.active img{
+  content: url("Res/Projects Website Nav/mobile-app-selected.png");
+}
+.proj-back-end-btn.active img{
+  content: url("Res/Projects Website Nav/back-end-selected.png");
+}
+.proj-home-btn.active img{
+  content: url("Res/Projects Website Nav/home-page-selected.png");
+}
