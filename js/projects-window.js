@@ -51,7 +51,9 @@ projFileBtn.addEventListener('click', (e) => {
 });
 projViewBtn.addEventListener('click', (e) => {
   e.stopPropagation();
-  projMenuOpen ? closeProjMenu() : openProjMenu(projViewBtn, getViewMenuItems());
+  projMenuOpen
+    ? closeProjMenu()
+    : openProjMenu(projViewBtn, getViewMenuItems());
 });
 projFileBtn.addEventListener('mouseenter', () => {
   if (projMenuOpen) openProjMenu(projFileBtn, fileMenuItems);
@@ -74,7 +76,80 @@ projDropdown.addEventListener('click', (e) => {
   const target = e.target.closest('p');
   if (!target) return;
   if (target.classList.contains('proj-file-exit')) projectsWindow.close();
-  if (target.classList.contains('proj-view-max')) projectsWindow.toggleMaximize();
+  if (target.classList.contains('proj-view-max'))
+    projectsWindow.toggleMaximize();
   if (target.classList.contains('proj-view-min')) projectsWindow.minimize();
   closeProjMenu();
 });
+
+////////////////////////////////////
+/// Page Nav Logic
+////////////////////////////////////
+class Stack {
+  constructor() {
+    this.items = [];
+  }
+
+  push(element) {
+    this.items.push(element);
+  }
+
+  pop() {
+    if (this.isEmpty()) {
+      return null;
+    }
+    return this.items.pop();
+  }
+
+  peek() {
+    if (this.isEmpty()) {
+      return null;
+    }
+    return this.items[this.items.length - 1];
+  }
+
+  isEmpty() {
+    return this.items.length === 0;
+  }
+
+  size() {
+    return this.items.length;
+  }
+
+  print() {
+    console.log(this.items);
+  }
+}
+
+let currentPage = 'home';
+const backStack = new Stack();
+const forwardStack = new Stack();
+
+switch (currentPage) {
+  case 'full-stack':
+    break;
+
+  case 'web':
+    break;
+
+  case 'mobile':
+    break;
+
+  case 'back-end':
+    break;
+
+  default:
+    let selectedNav = document.querySelector(
+      '.proj-content-nav .proj-home-btn'
+    );
+    var iNav = document.createElement('div');
+    iNav.className = 'inner-website-nav';
+    iNav.innerHTML = `
+      <div>
+        <p>placeholder1</p>
+        <p>placeholder2</p>
+        <p>placeholder3</p>
+      </div>
+    `;
+    selectedNav.appendChild(iNav);
+}

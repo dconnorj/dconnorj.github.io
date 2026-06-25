@@ -828,6 +828,13 @@ body.crt-active .crt_overlay {
   justify-content: center;
   opacity: 50%;
 }
+
+.proj-back-btn.active, .proj-forward-btn.active{
+  opacity: 100%;
+}
+.proj-back-btn.active:hover, .proj-forward-btn.active:hover{
+  border-color: #A9A9A9;
+}
 .proj-home-btns button,
 .proj-back-forward-btns button,
 .proj-favorites-btns button{
@@ -1506,5 +1513,34 @@ body.crt-active .crt_overlay {
 }
 .proj-nav-img-l{
   max-width: 5%;
+}
+
+.inner-website-nav{
+  display: flex;
+  width: 99.2%;
+  flex-direction: column;
+  color: white;
+  border-right: 0.62rem solid #CC329A;
+  border-bottom: 0.15rem solid #CC329A;
+  justify-content: center;
+  align-items: end;
+  padding-right: 1rem;
+}
+.inner-website-nav div{
+  width: 45%;
+  padding-bottom: 0.25rem;
+  align-items: start;
+}
+.inner-website-nav div p:hover{
+  border-right: 0.25rem solid #E68AB8;
+}
+.proj-home-btn{
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.proj-full-stack-btn.inactive img{
+  content: url("Res/Projects Website Nav/full-stack-hover.png");
 }
 
