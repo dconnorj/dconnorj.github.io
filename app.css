@@ -1450,6 +1450,7 @@ body.crt-active .crt_overlay {
   justify-content: center;
   padding: 1rem 0 1rem 0;
   overflow:auto;
+  gap: 0.25rem;
 }
 
 .info-btns{
@@ -1482,6 +1483,9 @@ body.crt-active .crt_overlay {
   max-width: 200px
 
 }
+.proj-content-nav img:not(.proj-logo){
+  image-rendering: pixelated;
+}
 .proj-logo{
   border: 0.15rem solid #6A8AA3;
 }
@@ -1503,6 +1507,13 @@ body.crt-active .crt_overlay {
   flex-direction: column;
   justify-content: start;
   align-items: start;
+  max-width: 550px;
+  min-width: 0;
+
+}
+.proj-content-main img{
+  max-width: 100%;
+  height: auto;
 }
 
 .proj-page-info{
@@ -1526,6 +1537,9 @@ body.crt-active .crt_overlay {
   justify-content: center;
   align-items: center;
   padding-right: 1rem;
+}
+.inner-website-nav canvas{
+  image-rendering: pixelated;
 }
 .inner-website-nav div{
   display: flex;
@@ -1594,4 +1608,83 @@ body.crt-active .crt_overlay {
 }
 .proj-home-btn.active img{
   content: url("Res/Projects Website Nav/home-page-selected.png");
+}
+
+.proj-curr-page-info{
+  display: flex;
+  max-height: calc(10rem + 1rem);
+  color: white;
+  padding-left: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+.proj-curr-page-info .info_text{
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  flex: 1;
+  min-width: 0;
+}
+.proj-curr-page-info .info-imgs{
+  display: flex;
+  justify-content: end;
+  flex-shrink: 0;
+  gap: 0.15rem;
+}
+.proj-curr-page-info .info-imgs img{
+  height: 10rem;
+  width: auto;
+  box-sizing: border-box;
+}
+.info-img{
+  border: 0.15rem solid white;
+}
+.main-content-bottom-border{
+  display: flex;
+  gap: 0.25rem;
+  height: 0.5rem;
+  width: 100%;
+  padding-top: 0.25rem;
+  justify-content: center;
+}
+.mcdiv1{
+  border-bottom: 0.15rem solid #7949a8;
+  width: 18.5rem;
+}
+.mcdiv2{
+  border-bottom: 0.15rem solid #aa7fd6;
+  width: 180px;
+}
+.mcdiv3{
+  border-bottom: 0.15rem solid #7949a8;
+  width: 22px;
+}
+
+.proj-item{
+  display: flex;
+  color: white;
+  padding-top: 1.5rem;
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+  align-items: center;
+  gap:0.25rem;
+}
+.proj-item-desc{
+  padding-left: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.proj-item img{
+  max-height: 4rem;
+  border: 0.15rem solid white;
+}
+.proj-item-right{
+  display: flex;
+  gap:0.25rem;
+}
+.proj-item-decor{
+  width: 18px;
+  height: auto;
+  background-color: #F79800;
 }

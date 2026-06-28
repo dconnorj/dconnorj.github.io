@@ -2,6 +2,11 @@ import { appWindows } from './windows.js';
 
 const projectsWindow = appWindows.get('Projects');
 
+// Inner-website-nav pixelation tuning: lower PIXEL_FONT_SIZE = blockier/less
+// readable text; PIXEL_SCALE = how much bigger the blocky text is displayed.
+const PIXEL_FONT_SIZE = 10;
+const PIXEL_SCALE = 1.5;
+
 // File/View dropdown menus
 const fileMenuItems = `
   <div class="proj-file-popup-btns">
@@ -130,20 +135,38 @@ const mobilebtn = document.querySelector('.proj-mobile-btn');
 const backendbtn = document.querySelector('.proj-back-end-btn');
 const homebtn = document.querySelector('.proj-content-nav .proj-home-btn');
 
+function pixelatedTextCanvas(text) {
+  const font = `${PIXEL_FONT_SIZE}px "Helvetica Neue", Helvetica, Arial, sans-serif`;
+
+  const measurer = document.createElement('canvas').getContext('2d');
+  measurer.font = font;
+  const w = Math.ceil(measurer.measureText(text).width) + 2;
+  const h = Math.ceil(PIXEL_FONT_SIZE * 1.5);
+
+  const canvas = document.createElement('canvas');
+  canvas.width = w;
+  canvas.height = h;
+  canvas.style.width = `${w * PIXEL_SCALE}px`;
+  canvas.style.height = `${h * PIXEL_SCALE}px`;
+  canvas.style.imageRendering = 'pixelated';
+
+  const ctx = canvas.getContext('2d');
+  ctx.font = font;
+  ctx.fillStyle = '#ffffff';
+  ctx.textBaseline = 'middle';
+  ctx.fillText(text, 1, h / 2);
+
+  return canvas;
+}
+
 function createInnerNav() {
   const iNav = document.createElement('div');
   iNav.className = 'inner-website-nav';
-  iNav.innerHTML = `
-    <div>
-      <p>short</p>
-    </div>
-    <div>
-      <p>longerthan</p>
-    </div>
-    <div>
-      <p>wow this is a lot</p>
-    </div>
-  `;
+  ['SHORT', 'LONGER THAN', 'WOW THIS IS A LOT'].forEach((label) => {
+    const row = document.createElement('div');
+    row.appendChild(pixelatedTextCanvas(label));
+    iNav.appendChild(row);
+  });
   return iNav;
 }
 
@@ -177,3 +200,7 @@ navBtns.forEach((btn) => {
 });
 
 setActiveNavBtn(homebtn);
+
+const advert = document.querySelector('.proj-page-info img');
+const adCount = 9;
+advert.src = `Res/ads/ad${Math.floor(Math.random() * adCount) + 1}.gif`;
