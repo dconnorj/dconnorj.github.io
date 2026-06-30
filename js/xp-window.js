@@ -54,7 +54,6 @@ class XPWindow extends HTMLElement {
         }
         .window-options img {
           height: 1rem;
-          transition: filter 0.2s ease;
           cursor: pointer;
         }
         .window-options img:hover {

@@ -238,7 +238,7 @@ main {
     font-size: 1rem;
     transform: skewX(-8deg);
     background: linear-gradient(to bottom, #54C93A 0%, #3C9A2A 50%, #2A7A1A 100%);
-    transition: background 0.1s ease;
+
     color: #FFFFFF;
     text-shadow: 1px 1px 1px black;
 
@@ -435,7 +435,6 @@ start-menu img{
 }
 .bottom_start_menu img{
   height: 1.5rem;
-  transition: filter 0.2s ease;
 }
 .bottom_start_menu img:hover{
   filter: brightness(1.3);
@@ -478,18 +477,13 @@ start-menu img{
   padding: 0.4rem;
   font-size: 0.65rem;
   max-width:16.5rem;
-  opacity: 0;
-  visibility: hidden;
+  display: none;
   pointer-events: none;
-  transform: translateY(4px);
-  transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
 }
 
 .tray_popup.open {
-  opacity: 1;
-  visibility: visible;
+  display: block;
   pointer-events: auto;
-  transform: translateY(0);
 }
 
 .tray_popup.has-arrow::after {
@@ -534,7 +528,6 @@ start-menu img{
 }
 .close_info_box img{
   filter: grayscale(100%);
-  transition: filter 0.2s ease;
 }
 .close_info_box img:hover{
   filter: grayscale(0%);
@@ -1128,12 +1121,8 @@ body.crt-active .crt_overlay {
   flex: 1;               /* fill remaining height below the header */
   overflow: hidden;      /* contain children */
   align-items: stretch;
-  opacity: 1;
-  transition: opacity 0.4s ease;
 }
-.am-main-content.is-loading {
-  opacity: 0;
-}
+
 .am-main-left{
   display: flex;
   flex-direction: column;
@@ -1394,14 +1383,11 @@ body.crt-active .crt_overlay {
   border: 1px solid #6B6B6B;
   box-shadow: 2px 2px 6px rgba(0,0,0,0.4);
   z-index: 20000;
-  opacity: 0;
-  transform: translateY(0.5rem);
+  display: none;
   pointer-events: none;
-  transition: opacity 0.25s ease, transform 0.25s ease;
 }
 .cm-toast.show {
-  opacity: 1;
-  transform: translateY(0);
+  display: block;
   pointer-events: auto;
 }
 .cm-toast-header {
@@ -1522,6 +1508,13 @@ body.crt-active .crt_overlay {
   align-items: center;
   padding-top: 1rem;
   gap:2rem;
+  width: 100%;
+  padding-bottom: 1rem;
+}
+.proj-ad-wrap{
+  display: flex;
+  flex: 1;
+  justify-content: center;
 }
 .proj-nav-img-l{
   max-width: 5%;
@@ -1687,4 +1680,74 @@ body.crt-active .crt_overlay {
   width: 18px;
   height: auto;
   background-color: #F79800;
+}
+
+.proj-main-socials{
+  display: flex;
+  border-left: 0.45rem solid #9667D0;
+  border-bottom: 0.25rem solid #64349B ;
+  padding-left: 0.5rem;
+  padding-bottom: 0.25rem;
+}
+.proj-main-socials div{
+  display: flex;
+  color: white;
+  gap: 0.25rem;
+  font-size: 0.75rem;
+}
+.proj-main-socials a{
+  color: #EF9300;
+}
+.proj-main-socials div img{
+  height: 2.5rem;
+  background-color: white;
+}
+.proj-trivia-section{
+  display: flex;
+  flex-direction: column;
+  color: white;
+  padding: 1rem;
+  gap:0.25rem;
+}
+.proj-trivia-section img{
+  height: 2.5rem;
+}
+.klingon-link {
+  color: #EF9300;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.proj-trivia-section div{
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.proj-trivia-section h1{
+  color: #824FB8;
+  font-size: 2.2rem;
+  font-weight: 900;
+}
+.proj-trivia-section p{
+  font-size: .85rem;
+}
+#trivia-answer-text{
+  filter: blur(5px);
+  user-select: none;
+}
+#trivia-answer-text.revealed{
+  filter: none;
+  user-select: text;
+}
+#trivia-reveal-btn{
+  background: #824FB8;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 0.15rem 0.5rem;
+  font-size: 0.75rem;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+#trivia-reveal-btn:hover{
+  background: #9b65d4;
 }

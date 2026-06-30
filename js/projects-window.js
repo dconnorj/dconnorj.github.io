@@ -1,11 +1,15 @@
-import { appWindows } from './windows.js';
+import {
+  appWindows,
+  externalLinks,
+  openExternalLinkConfirm,
+} from './windows.js';
 
 const projectsWindow = appWindows.get('Projects');
 
 // Inner-website-nav pixelation tuning: lower PIXEL_FONT_SIZE = blockier/less
 // readable text; PIXEL_SCALE = how much bigger the blocky text is displayed.
-const PIXEL_FONT_SIZE = 10;
-const PIXEL_SCALE = 1.5;
+const PIXEL_FONT_SIZE = 12;
+const PIXEL_SCALE = 1.25;
 
 // File/View dropdown menus
 const fileMenuItems = `
@@ -201,6 +205,114 @@ navBtns.forEach((btn) => {
 
 setActiveNavBtn(homebtn);
 
+// Socials links
+document.querySelectorAll('.proj-main-socials a').forEach((link) => {
+  const text = link.textContent.trim();
+  if (externalLinks.has(text)) {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      openExternalLinkConfirm(text, externalLinks.get(text));
+    });
+  }
+});
+
 const advert = document.querySelector('.proj-page-info img');
 const adCount = 9;
 advert.src = `Res/ads/ad${Math.floor(Math.random() * adCount) + 1}.gif`;
+
+////////////////////////////////////
+/// Daily Trivia & Klingon Word
+////////////////////////////////////
+
+function todayDateKey() {
+  const d = new Date();
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${y}${m}${day}`;
+}
+
+function decodeHtmlEntities(str) {
+  const txt = document.createElement('textarea');
+  txt.innerHTML = str;
+  return txt.value;
+}
+
+async function loadKlingonWord(dateInt) {
+  const res = await fetch('Res/klingon_words.json');
+  const data = await res.json();
+  const filtered = data.words.filter(
+    (w) =>
+      w.part_of_speech !== 'sentence' &&
+      !w.definition.toLowerCase().includes(w.word.toLowerCase())
+  );
+  const word = filtered[dateInt % filtered.length];
+  const el = document.getElementById('klingon-word-text');
+  const url = `https://klingon.wiki/Word/${encodeURIComponent(word.word)}`;
+
+  const link = document.createElement('a');
+  link.textContent = word.word;
+  link.href = '#';
+  link.className = 'klingon-link';
+  link.addEventListener('click', (e) => {
+    e.preventDefault();
+    openExternalLinkConfirm('Klingon Wiki', url);
+  });
+
+  el.replaceChildren(
+    document.createTextNode(
+      "Klingon Language Lesson - Today's Klingon word is "
+    ),
+    link,
+    document.createTextNode(` (${word.definition})`)
+  );
+}
+
+async function loadTrivia(dateKey) {
+  const cacheKey = `trivia-${dateKey}`;
+  let cached = null;
+  try {
+    cached = JSON.parse(localStorage.getItem(cacheKey));
+  } catch (_) {}
+
+  let question, answer;
+  if (cached) {
+    ({ question, answer } = cached);
+  } else {
+    const res = await fetch('https://opentdb.com/api.php?amount=1&category=9');
+    const data = await res.json();
+    const result = data.results[0];
+    question = decodeHtmlEntities(result.question);
+    answer = decodeHtmlEntities(result.correct_answer);
+    localStorage.setItem(cacheKey, JSON.stringify({ question, answer }));
+  }
+
+  document.getElementById('trivia-question-text').textContent =
+    `Today's Trivia Question: ${question}`;
+  document.getElementById('trivia-answer-text').textContent = `${answer}`;
+}
+
+const backToTopBtn = document.querySelector('.proj-back-to-top-btn');
+const projMain = document.querySelector('.proj-main');
+backToTopBtn.addEventListener('mouseenter', () => {
+  backToTopBtn.src = 'Res/main-content-res/back-to-top-hover.png';
+});
+backToTopBtn.addEventListener('mouseleave', () => {
+  backToTopBtn.src = 'Res/main-content-res/back-to-top.png';
+});
+backToTopBtn.addEventListener('click', () => {
+  projMain.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+const dateKey = todayDateKey();
+const dateInt = parseInt(dateKey, 10);
+loadKlingonWord(dateInt).catch(() => {
+  document.getElementById('klingon-word-text').textContent =
+    "Klingon Language Lesson - Could not load today's word.";
+});
+loadTrivia(dateKey).catch(() => {
+  document.getElementById('trivia-question-text').textContent =
+    "Today's Trivia Question: Could not load.";
+  document.getElementById('trivia-answer-text').textContent =
+    "Today's Trivia Answer: Could not load.";
+});

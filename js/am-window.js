@@ -41,7 +41,6 @@ document
     arrow.addEventListener('click', () => {
       const isCollapsed = content.style.display === 'none';
       content.style.display = isCollapsed ? '' : 'none';
-      arrow.style.transition = 'transform 0.2s ease';
       arrow.style.transformOrigin = 'center center';
       arrow.style.transform = isCollapsed ? '' : 'rotate(180deg)';
     });

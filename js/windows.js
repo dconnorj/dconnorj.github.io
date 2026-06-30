@@ -16,6 +16,7 @@ export const image_map = new Map([
     ['/Res/Windows Picture and Fax Viewer.png', 'image viewer app'],
   ],
   ['Spider Solitaire', ['/Res/Spider Solitaire.png', 'spider solitaire app']],
+  ['Klingon Wiki', ['/Res/main-content-res/960px-Nuvola_Kingon_flag.png', 'klingon wiki']],
 ]);
 
 export const externalLinks = new Map([

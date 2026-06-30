@@ -356,7 +356,9 @@
                     <h1>INFO</h1>
                     <h1>AD</h1>
                   </div>
-                  <img src="Res/ads/ad1.gif" alt="ad" />
+                  <div class="proj-ad-wrap">
+                    <img src="Res/ads/ad1.gif" alt="ad" />
+                  </div>
                 </div>
                 <img
                   src="/Res/main-content-res/low-quality-welcome-banner(1).jpg"
@@ -431,11 +433,67 @@
                     <div class="proj-item-decor"></div>
                   </div>
                 </div>
-                <div class="main-content-bottom-border">
-                  <div class="mcdiv1"></div>
-                  <div class="mcdiv2"></div>
-                  <div class="mcdiv3"></div>
+                <img src="Res/main-content-res/main-socials.png" />
+                <div class="proj-main-socials">
+                  <div>
+                    <img src="Res/linkedin-svgrepo-com.svg" />
+                    <p>
+                      Check out my
+                      <a href="https://www.linkedin.com/in/cjdalley-swe"
+                        >LinkedIn</a
+                      >
+                      Profile
+                    </p>
+                  </div>
+                  <div>
+                    <img src="Res/github-svgrepo-com.svg" />
+                    <p>
+                      See More of my Projects and Source Code on my
+                      <a href="https://github.com/dconnorj">Github</a>
+                      Profile
+                    </p>
+                  </div>
                 </div>
+                <div class="proj-trivia-section">
+                  <div class="trivia-question">
+                    <h1>Q:</h1>
+                    <p id="trivia-question-text">
+                      Today's Trivia Question: Loading...
+                    </p>
+                  </div>
+                  <div class="klingon-word-of-the-day">
+                    <img
+                      src="Res/main-content-res/960px-Nuvola_Kingon_flag.png"
+                    />
+                    <p id="klingon-word-text">
+                      Klingon Language Lesson - Loading...
+                    </p>
+                  </div>
+                  <div class="trivia-answer">
+                    <h1>A:</h1>
+                    <button
+                      id="trivia-reveal-btn"
+                      onclick="
+                        (function () {
+                          var p = document.getElementById('trivia-answer-text'),
+                            b = document.getElementById('trivia-reveal-btn');
+                          if (p.classList.toggle('revealed')) {
+                            b.textContent = 'Hide';
+                          } else {
+                            b.textContent = 'Reveal';
+                          }
+                        })()
+                      "
+                    >
+                      Reveal
+                    </button>
+                    <p id="trivia-answer-text">Loading...</p>
+                  </div>
+                </div>
+                <img
+                  class="proj-back-to-top-btn"
+                  src="Res/main-content-res/back-to-top.png"
+                />
               </div>
             </div>
             <div class="proj-footer">
