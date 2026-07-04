@@ -1,3 +1,11 @@
+/* xp-window's hide/show/position rules live in its shadow DOM, which only
+   exists once js/xp-window.js runs and upgrades the element. Until then it's
+   an unstyled unknown element, so all window content renders inline and
+   fully expanded — this hides it for that brief window instead. */
+xp-window:not(:defined){
+  display: none;
+}
+
 @font-face {
   font-family: 'Tahoma';
   src: url('/fonts/tahoma.ttf') format('truetype');
