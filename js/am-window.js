@@ -6,6 +6,29 @@ import {
 
 const aboutMeWindow = appWindows.get('About Me');
 
+// XP-style fake loading: gray desktop flash + growing address bar
+const mainSection = document.querySelector('.main_section');
+const amAddressBar = document.querySelector('.am-address-bar');
+const amMainContent = document.querySelector('.am-main-content');
+
+function playAddressBarLoading(barDuration = 200) {
+  amAddressBar.style.setProperty('--am-load-duration', `${barDuration}ms`);
+  amAddressBar.classList.add('is-loading');
+  amMainContent.classList.add('is-loading');
+  // reveal the content mid-bar so it fades in while the bar finishes growing
+  setTimeout(
+    () => amMainContent.classList.remove('is-loading'),
+    barDuration / 2
+  );
+  setTimeout(() => amAddressBar.classList.remove('is-loading'), barDuration);
+}
+
+window.addEventListener('load', () => {
+  mainSection.classList.remove('is-loading');
+  playAddressBarLoading();
+});
+aboutMeWindow.addEventListener('window-opened', () => playAddressBarLoading());
+
 // Collapsible sidebar boxes
 document
   .querySelectorAll(
@@ -18,7 +41,6 @@ document
     arrow.addEventListener('click', () => {
       const isCollapsed = content.style.display === 'none';
       content.style.display = isCollapsed ? '' : 'none';
-      arrow.style.transition = 'transform 0.2s ease';
       arrow.style.transformOrigin = 'center center';
       arrow.style.transform = isCollapsed ? '' : 'rotate(180deg)';
     });
@@ -47,7 +69,7 @@ document.querySelectorAll('.am-socials-box-content div').forEach((div) => {
 const fileMenuItems = `
   <div class="am-file-popup-btns">
     <p class="am-file-disabled">Print</p>
-    <p class="am-file-disabled am-file-exit">Print Setup</p>
+    <p class="am-file-disabled">Print Setup</p>
     <p class="am-file-exit">Exit</p>
   </div>`;
 

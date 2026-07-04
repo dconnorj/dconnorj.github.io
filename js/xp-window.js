@@ -19,6 +19,9 @@ class XPWindow extends HTMLElement {
           left: 100px;
           width: 50rem;
           height: 35rem;
+          max-width: 100vw;
+          max-height: 97.5vh;
+          overflow: hidden;
           display: none;
           z-index: 100;
           font-family: Tahoma, sans-serif;
@@ -33,7 +36,7 @@ class XPWindow extends HTMLElement {
           top: 0 !important;
           left: 0 !important;
           width: 100vw !important;
-          height: 97% !important;
+          height: 97.5vh !important;
         }
         .window {
           display: flex;
@@ -51,7 +54,6 @@ class XPWindow extends HTMLElement {
         }
         .window-options img {
           height: 1rem;
-          transition: filter 0.2s ease;
           cursor: pointer;
         }
         .window-options img:hover {
@@ -201,15 +203,17 @@ class XPWindow extends HTMLElement {
   }
 
   open() {
+    this.setAttribute('open', '');
     if (!this._positioned) {
       const offset = (cascadeStep % 8) * 30;
       const taskbarHeight = window.innerHeight * 0.025;
-      this.style.top = `${Math.min(100 + offset, window.innerHeight - taskbarHeight - 400)}px`;
-      this.style.left = `${Math.min(100 + offset, window.innerWidth - 600)}px`;
+      const maxTop = window.innerHeight - taskbarHeight - this.offsetHeight;
+      const maxLeft = window.innerWidth - this.offsetWidth;
+      this.style.top = `${Math.max(0, Math.min(100 + offset, maxTop))}px`;
+      this.style.left = `${Math.max(0, Math.min(100 + offset, maxLeft))}px`;
       cascadeStep++;
       this._positioned = true;
     }
-    this.setAttribute('open', '');
     this.classList.remove('minimized');
     this.bringToFront();
     this.dispatchEvent(
@@ -315,7 +319,7 @@ class XPWindow extends HTMLElement {
   }
 
   _makeResizable() {
-    const minW = 410,
+    const minW = this.getAttribute('app-type') === 'projects' ? 880 : 500,
       minH = 300;
     const windowEl = this.shadowRoot.querySelector('.window');
 
@@ -355,6 +359,14 @@ class XPWindow extends HTMLElement {
             newH = Math.max(minH, startH - dy);
             newTop = startTop + (startH - newH);
           }
+
+          // keep the window from extending past the taskbar or off-screen
+          const taskbarHeight = window.innerHeight * 0.025;
+          newH = Math.max(
+            minH,
+            Math.min(newH, window.innerHeight - taskbarHeight - newTop)
+          );
+          newW = Math.max(minW, Math.min(newW, window.innerWidth - newLeft));
 
           this.style.width = `${newW}px`;
           this.style.height = `${newH}px`;

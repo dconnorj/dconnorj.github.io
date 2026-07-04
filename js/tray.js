@@ -1,3 +1,5 @@
+import { appWindows } from './windows.js';
+
 // Clock
 function updateTime() {
   document.querySelector('.active_time').textContent =
@@ -72,7 +74,7 @@ const trayItems = [
         <div class="close_info_box"><img src="Res/Exit.png"></div>
       </div>
       <p>A showcase of my abilities and achievements, created in homage to Windows XP!</p>
-      <p>Get Started: About Me | My Projects</p>
+      <p>Get Started: <span class="tray_link" data-tray-app="About Me">About Me</span> | <span class="tray_link" data-tray-app="Projects">My Projects</span></p>
     </div>`,
   },
   { selector: '.toggle_crt', hoverText: 'Toggle CRT Effect' },
@@ -121,8 +123,26 @@ trayPopup.addEventListener('mouseenter', () => clearTimeout(trayHideTimeout));
 trayPopup.addEventListener('mouseleave', hideTray);
 trayPopup.addEventListener('click', (e) => {
   e.stopPropagation();
-  if (e.target.closest('.close_info_box'))
+  if (e.target.closest('.close_info_box')) {
     trayPopup.classList.remove('open', 'has-arrow');
+    return;
+  }
+  const link = e.target.closest('.tray_link');
+  if (link) {
+    appWindows.get(link.dataset.trayApp)?.open();
+    trayPopup.classList.remove('open', 'has-arrow');
+  }
+});
+
+// Show the system info popup on first visit
+window.addEventListener('load', () => {
+  const infoBtn = document.querySelector('.tray_info');
+  const infoItem = trayItems.find((item) => item.selector === '.tray_info');
+  if (!infoBtn || !infoItem) return;
+  trayPopup.classList.add('has-arrow');
+  trayPopup.innerHTML = infoItem.clickContent;
+  trayPopup.classList.add('open');
+  positionAboveOffset(infoBtn);
 });
 
 document.addEventListener('click', (e) => {
