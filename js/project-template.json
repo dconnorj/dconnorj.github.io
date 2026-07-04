@@ -1,0 +1,14 @@
+[
+  {
+    "slug": "kebab-case-unique-id",
+    "title": "Project Title",
+    "tags": ["full-stack", "web", "mobile", "back-end"],
+    "summary": "One or two sentences for the project card/list view.",
+    "description": "The full write-up shown on the project's detail page: what it does, the problem it solves, and what you built.",
+    "techStack": ["Tech", "Tech", "Tech"],
+    "repoStatus": "public",
+    "github": "https://github.com/dconnorj/repo-name",
+    "image": "Res/project-page/your-image.png",
+    "video": null
+  }
+]

@@ -814,7 +814,6 @@ body.crt-active .crt_overlay {
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: 50%;
 }
 .proj-favorites-btns{
   display: flex;
@@ -823,6 +822,9 @@ body.crt-active .crt_overlay {
   opacity: 50%;
 }
 
+.proj-back-btn, .proj-forward-btn{
+  opacity: 50%;
+}
 .proj-back-btn.active, .proj-forward-btn.active{
   opacity: 100%;
 }
@@ -841,6 +843,9 @@ body.crt-active .crt_overlay {
   gap: 0.25rem;
   padding: 0.5rem 0rem;
   min-width: 4rem;
+  align-self: stretch;
+  border: 0.1rem solid transparent;
+  border-radius: 10%;
 }
 .proj-forward-btn{
   width: 5rem;
@@ -1430,6 +1435,8 @@ body.crt-active .crt_overlay {
 
 .proj-main{
   display: flex;
+  flex: 1;
+  min-height: 0;
   background-color: black;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 500;
@@ -1437,6 +1444,7 @@ body.crt-active .crt_overlay {
   padding: 1rem 0 1rem 0;
   overflow:auto;
   gap: 0.25rem;
+  transition: background-color 0.4s ease;
 }
 
 .info-btns{
@@ -1495,11 +1503,63 @@ body.crt-active .crt_overlay {
   align-items: start;
   max-width: 550px;
   min-width: 0;
-
 }
 .proj-content-main img{
   max-width: 100%;
   height: auto;
+}
+
+/* Retro "slow connection" page-load effect: the whole background flashes
+   white, settles back to black, and only then does text, then images, then
+   the ad banner arrive on their own delay. Driven by playPageLoadAnimation()
+   in projects-window.js. */
+.proj-main.proj-page-loading{
+  background-color: #ffffff;
+}
+.proj-page-info,
+.proj-page-body{
+  transition: opacity 0.35s ease;
+}
+.proj-content-main.proj-content-hidden .proj-page-info,
+.proj-content-main.proj-content-hidden .proj-page-body{
+  opacity: 0;
+}
+.proj-content-nav img,
+.proj-content-nav video,
+.proj-content-nav canvas,
+.proj-page-body img,
+.proj-page-body video,
+.proj-ad-wrap img{
+  transition: opacity 0.08s linear;
+}
+.proj-content-nav img.proj-media-pending,
+.proj-content-nav video.proj-media-pending,
+.proj-content-nav canvas.proj-media-pending,
+.proj-page-body img.proj-media-pending,
+.proj-page-body video.proj-media-pending,
+.proj-ad-wrap img.proj-media-pending{
+  opacity: 0;
+}
+.proj-address-bar.is-loading::after{
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0%;
+  background: #7FB1F0;
+  animation: proj-address-grow-choppy var(--proj-load-duration, 2.5s) steps(7, jump-end) forwards;
+}
+@keyframes proj-address-grow-choppy{
+  from { width: 0%; }
+  to   { width: 100%; }
+}
+/* Used to snap straight to the hidden/loading state with no fade-out, since
+   these elements persist (and are already visible) across page switches —
+   only the reveal should animate, not the hide. */
+.proj-instant,
+.proj-instant *{
+  transition: none !important;
 }
 
 .proj-page-info{
@@ -1523,6 +1583,7 @@ body.crt-active .crt_overlay {
 .inner-website-nav{
   display: flex;
   width: 99.2%;
+  min-width: 0;
   flex-direction: column;
   color: white;
   border-right: 0.42rem solid #CC329A;
@@ -1533,14 +1594,18 @@ body.crt-active .crt_overlay {
 }
 .inner-website-nav canvas{
   image-rendering: pixelated;
+  max-width: 100%;
+  height: auto;
 }
 .inner-website-nav div{
   display: flex;
   align-items: center;
   justify-content: end;
   width: 100%;
+  min-width: 0;
   padding-right: 0.5rem;
   border-right: 0.25rem solid transparent;
+  cursor: pointer;
 }
 .inner-website-nav div:hover{
   border-right-color: #E68AB8;
@@ -1549,10 +1614,12 @@ body.crt-active .crt_overlay {
 .proj-web-btn,
 .proj-mobile-btn,
 .proj-back-end-btn,
-.proj-home-btn{
+.proj-content-nav .proj-home-btn{
   display: flex;
   flex-direction: column;
   gap: 0;
+  width: 200px;
+  min-width: 0;
 }
 
 .proj-full-stack-btn.inactive img{
@@ -1653,6 +1720,11 @@ body.crt-active .crt_overlay {
   width: 22px;
 }
 
+.proj-item-list{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
 .proj-item{
   display: flex;
   color: white;
@@ -1680,6 +1752,109 @@ body.crt-active .crt_overlay {
   width: 18px;
   height: auto;
   background-color: #F79800;
+}
+.proj-item-title{
+  cursor: pointer;
+}
+.proj-item-title:hover{
+  text-decoration: underline;
+  color: #FACB00;
+}
+
+.proj-detail{
+  display: flex;
+  flex-direction: column;
+  color: white;
+  width: 100%;
+  padding: 1rem 0.75rem;
+  gap: 1.25rem;
+}
+.proj-detail-header h1{
+  color: #FACB00;
+}
+.proj-detail-tags{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 0.5rem;
+}
+.proj-detail-tag{
+  background-color: #7949a8;
+  color: white;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  padding: 0.2rem 0.6rem;
+}
+.proj-detail-hero{
+  display: block;
+  max-width: 100%;
+  max-height: 20rem;
+  width: auto;
+  height: auto;
+  margin: 0 auto;
+  object-fit: contain;
+  border: 0.15rem solid white;
+}
+.proj-detail-section{
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+.proj-detail-section h2{
+  color: #EF9300;
+  font-size: 0.8rem;
+}
+.proj-detail-tech-list{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  list-style: none;
+}
+.proj-detail-tech-list li{
+  background-color: #1a1a1a;
+  border: 0.07rem solid #7949a8;
+  padding: 0.2rem 0.6rem;
+  font-size: 0.75rem;
+}
+.proj-detail-video{
+  display: block;
+  max-width: 100%;
+  max-height: 20rem;
+  width: auto;
+  height: auto;
+  margin: 0 auto;
+  border: 0.15rem solid white;
+}
+.proj-detail-github-btn{
+  align-self: flex-start;
+  background-color: #F79800;
+  color: black;
+  font-weight: bold;
+  text-shadow: none;
+  padding: 0.5rem 1.1rem;
+  border: 0.1rem solid white;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+.proj-detail-github-btn:hover{
+  background-color: #EF9300;
+}
+.proj-detail-repo-note{
+  color: #D3D1C5;
+  font-size: 0.8rem;
+  font-style: italic;
+  border-left: 0.2rem solid #7949a8;
+  padding-left: 0.6rem;
+}
+.proj-detail-back-btn{
+  align-self: flex-start;
+  color: #FACB00;
+  font-size: 0.8rem;
+  text-shadow: none;
+  cursor: pointer;
+  text-decoration: underline;
 }
 
 .proj-main-socials{

@@ -313,7 +313,7 @@
                 <div class="proj-address-bar">
                   <div>
                     <img src="/Res/Appearance.png" />
-                    <p>http://www.projects.net</p>
+                    <p class="proj-address-url">http://www.projects.net</p>
                   </div>
                   <button class="proj-address-drop-down">
                     <img src="/Res/drop-down-arrow.svg" />
@@ -363,133 +363,144 @@
                 <img
                   src="/Res/main-content-res/low-quality-welcome-banner(1).jpg"
                 />
-                <div class="proj-curr-page-info">
-                  <div class="info_text">
-                    <h1>CONNOR'S PROJECTS:</h1>
-                    <p>
-                      This is a list of all my projects, look through the list
-                      or click on a page tab to filter by project type.
-                    </p>
+                <!-- Per-tab content is cloned into here by js/projects-window.js
+                     from the <template id="tpl-page-*"> tags below. -->
+                <div class="proj-page-body"></div>
+
+                <template id="tpl-page-home">
+                  <div class="proj-curr-page-info">
+                    <div class="info_text">
+                      <h1>CONNOR'S PROJECTS:</h1>
+                      <p>
+                        This is a list of all my projects, look through the
+                        list or click on a page tab to filter by project
+                        type.
+                      </p>
+                    </div>
+                    <div class="info-imgs">
+                      <img
+                        class="info-img"
+                        src="Res/main-content-res/low-quality-5134455469_e6f4f19d92_o.jpg"
+                      />
+                      <img src="Res/main-content-res/homepage-info-box.png" />
+                    </div>
                   </div>
-                  <div class="info-imgs">
-                    <img
-                      class="info-img"
-                      src="Res/main-content-res/low-quality-5134455469_e6f4f19d92_o.jpg"
-                    />
-                    <img src="Res/main-content-res/homepage-info-box.png" />
+                  <!-- Populated by js/projects-window.js from js/projects-data.js -->
+                  <div class="proj-item-list"></div>
+                  <img src="Res/main-content-res/main-socials.png" />
+                  <div class="proj-main-socials">
+                    <div>
+                      <img src="Res/linkedin-svgrepo-com.svg" />
+                      <p>
+                        Check out my
+                        <a href="https://www.linkedin.com/in/cjdalley-swe"
+                          >LinkedIn</a
+                        >
+                        Profile
+                      </p>
+                    </div>
+                    <div>
+                      <img src="Res/github-svgrepo-com.svg" />
+                      <p>
+                        See More of my Projects and Source Code on my
+                        <a href="https://github.com/dconnorj">Github</a>
+                        Profile
+                      </p>
+                    </div>
                   </div>
-                </div>
-                <div class="main-content-bottom-border">
-                  <div class="mcdiv1"></div>
-                  <div class="mcdiv2"></div>
-                  <div class="mcdiv3"></div>
-                </div>
-                <div class="proj-item">
-                  <div class="proj-item-desc">
-                    <h1>Project Placeholder:</h1>
-                    <p>
-                      This is where I will have a little summary of a project
-                      that I did with a little link somewhere around here
-                    </p>
-                  </div>
-                  <div class="proj-item-right">
-                    <img class="proj-item-img" src="Res/Wanderer.jpg" />
-                    <div class="proj-item-decor"></div>
-                  </div>
-                </div>
-                <div class="main-content-bottom-border">
-                  <div class="mcdiv1"></div>
-                  <div class="mcdiv2"></div>
-                  <div class="mcdiv3"></div>
-                </div>
-                <div class="proj-item">
-                  <div class="proj-item-desc">
-                    <h1>Project Placeholder:</h1>
-                    <p>
-                      This is where I will have a little summary of a project
-                      that I did with a little link somewhere around here
-                    </p>
-                  </div>
-                  <div class="proj-item-right">
-                    <img class="proj-item-img" src="Res/Wanderer.jpg" />
-                    <div class="proj-item-decor"></div>
-                  </div>
-                </div>
-                <div class="main-content-bottom-border">
-                  <div class="mcdiv1"></div>
-                  <div class="mcdiv2"></div>
-                  <div class="mcdiv3"></div>
-                </div>
-                <div class="proj-item">
-                  <div class="proj-item-desc">
-                    <h1>Project Placeholder:</h1>
-                    <p>
-                      This is where I will have a little summary of a project
-                      that I did with a little link somewhere around here
-                    </p>
-                  </div>
-                  <div class="proj-item-right">
-                    <img class="proj-item-img" src="Res/Wanderer.jpg" />
-                    <div class="proj-item-decor"></div>
-                  </div>
-                </div>
-                <img src="Res/main-content-res/main-socials.png" />
-                <div class="proj-main-socials">
-                  <div>
-                    <img src="Res/linkedin-svgrepo-com.svg" />
-                    <p>
-                      Check out my
-                      <a href="https://www.linkedin.com/in/cjdalley-swe"
-                        >LinkedIn</a
+                  <div class="proj-trivia-section">
+                    <div class="trivia-question">
+                      <h1>Q:</h1>
+                      <p id="trivia-question-text">
+                        Today's Trivia Question: Loading...
+                      </p>
+                    </div>
+                    <div class="klingon-word-of-the-day">
+                      <img
+                        src="Res/main-content-res/960px-Nuvola_Kingon_flag.png"
+                      />
+                      <p id="klingon-word-text">
+                        Klingon Language Lesson - Loading...
+                      </p>
+                    </div>
+                    <div class="trivia-answer">
+                      <h1>A:</h1>
+                      <button
+                        id="trivia-reveal-btn"
+                        onclick="
+                          (function () {
+                            var p = document.getElementById('trivia-answer-text'),
+                              b = document.getElementById('trivia-reveal-btn');
+                            if (p.classList.toggle('revealed')) {
+                              b.textContent = 'Hide';
+                            } else {
+                              b.textContent = 'Reveal';
+                            }
+                          })()
+                        "
                       >
-                      Profile
-                    </p>
+                        Reveal
+                      </button>
+                      <p id="trivia-answer-text">Loading...</p>
+                    </div>
                   </div>
-                  <div>
-                    <img src="Res/github-svgrepo-com.svg" />
-                    <p>
-                      See More of my Projects and Source Code on my
-                      <a href="https://github.com/dconnorj">Github</a>
-                      Profile
-                    </p>
+                </template>
+
+                <template id="tpl-page-full-stack">
+                  <div class="proj-curr-page-info">
+                    <div class="info_text">
+                      <h1>FULL-STACK PROJECTS:</h1>
+                      <p>
+                        Projects where I built out both the front-end and
+                        back-end.
+                      </p>
+                    </div>
+                    <div class="info-imgs">
+                      <img class="info-img" src="Res/full_stack_img.jpg" />
+                    </div>
                   </div>
-                </div>
-                <div class="proj-trivia-section">
-                  <div class="trivia-question">
-                    <h1>Q:</h1>
-                    <p id="trivia-question-text">
-                      Today's Trivia Question: Loading...
-                    </p>
+                  <div class="proj-item-list"></div>
+                </template>
+
+                <template id="tpl-page-web">
+                  <div class="proj-curr-page-info">
+                    <div class="info_text">
+                      <h1>WEB PROJECTS:</h1>
+                      <p>Front-end and web design focused projects.</p>
+                    </div>
+                    <div class="info-imgs">
+                      <img class="info-img" src="Res/web_img.jpg" />
+                    </div>
                   </div>
-                  <div class="klingon-word-of-the-day">
-                    <img
-                      src="Res/main-content-res/960px-Nuvola_Kingon_flag.png"
-                    />
-                    <p id="klingon-word-text">
-                      Klingon Language Lesson - Loading...
-                    </p>
+                  <div class="proj-item-list"></div>
+                </template>
+
+                <template id="tpl-page-mobile">
+                  <div class="proj-curr-page-info">
+                    <div class="info_text">
+                      <h1>MOBILE PROJECTS:</h1>
+                      <p>Cross-platform and native mobile apps.</p>
+                    </div>
+                    <div class="info-imgs">
+                      <img class="info-img" src="Res/mobile_img.jpg" />
+                    </div>
                   </div>
-                  <div class="trivia-answer">
-                    <h1>A:</h1>
-                    <button
-                      id="trivia-reveal-btn"
-                      onclick="
-                        (function () {
-                          var p = document.getElementById('trivia-answer-text'),
-                            b = document.getElementById('trivia-reveal-btn');
-                          if (p.classList.toggle('revealed')) {
-                            b.textContent = 'Hide';
-                          } else {
-                            b.textContent = 'Reveal';
-                          }
-                        })()
-                      "
-                    >
-                      Reveal
-                    </button>
-                    <p id="trivia-answer-text">Loading...</p>
+                  <div class="proj-item-list"></div>
+                </template>
+
+                <template id="tpl-page-back-end">
+                  <div class="proj-curr-page-info">
+                    <div class="info_text">
+                      <h1>BACK-END PROJECTS:</h1>
+                      <p>APIs, services, and server-side work.</p>
+                    </div>
+                    <div class="info-imgs">
+                      <img class="info-img" src="Res/back-end_img.jpg" />
+                    </div>
                   </div>
-                </div>
+                  <div class="proj-item-list"></div>
+                </template>
+
                 <img
                   class="proj-back-to-top-btn"
                   src="Res/main-content-res/back-to-top.png"
