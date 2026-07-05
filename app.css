@@ -1934,3 +1934,25 @@ body.crt-active .crt_overlay {
 #trivia-reveal-btn:hover{
   background: #9b65d4;
 }
+
+.mp-player{
+  display: flex;
+  flex-direction: column;
+}
+.mp-top{
+  display: flex;
+}
+.mp-top div{
+  position: relative;
+  top:0;
+  left: 0;
+}
+.mp-top-right{
+  position: relative;
+  top: 0;
+  left: 0;
+}
+.mp-close-btn{
+  position: absolute;
+}
+

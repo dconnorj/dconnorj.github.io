@@ -1,0 +1,56 @@
+<style>
+  .mp-player {
+    display: flex;
+    flex-direction: column;
+  }
+  .mp-top {
+    display: flex;
+  }
+  .mp-top div {
+    position: relative;
+    top: 0;
+    left: 0;
+  }
+  .mp-top-right {
+    position: relative;
+    top: 0;
+    left: 0;
+    height: 100%;
+  }
+  .mp-close-btn {
+    position: absolute;
+    top: 8px;
+    left: 27px;
+  }
+  .mp-bottom {
+    position: relative;
+    top: 0;
+    left: 0;
+  }
+  .mp-bottom-back {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 387px;
+  }
+</style>
+<div class="mp-player">
+  <div class="mp-top">
+    <img src="Res/9SeriesDefault/player_top_left.png" />
+    <div>
+      <img class="mp-top-right" src="Res/9SeriesDefault/player_top_right.png" />
+      <img
+        class="mp-close-btn"
+        src="Res/9SeriesDefault/playlist_closebutton_disabled.png"
+      />
+    </div>
+  </div>
+  <div class="mp-bottom">
+    <img
+      class="mp-bottom-back"
+      src="Res/9SeriesDefault/minimize_transports.png"
+    />
+    <img class="mp-bot-play" />
+  </div>
+  <audio class="mp-audio" preload="metadata"></audio>
+</div>

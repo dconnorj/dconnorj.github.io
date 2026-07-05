@@ -4,7 +4,6 @@ export const image_map = new Map([
   ['Projects', ['/Res/Appearance.png', 'my projects app']],
   ['Contact Me', ['/Res/Outlook Express.png', 'contact me app']],
   ['Media Player', ['/Res/dwsd58yvs5pe1.png', 'media player app']],
-  ['Music Player', ['/Res/MP3 player.png', 'music player app']],
   ['Command Prompt', ['/Res/Command Prompt.png', 'command prompt app']],
   ['Minesweeper', ['/Res/Minesweeper.png', 'minesweeper app']],
   ['Notepad', ['/Res/Notepad.png', 'notepad app']],
@@ -30,6 +29,7 @@ export const appWindows = new Map([
   ['Resume', document.getElementById('resumeWindow')],
   ['Projects', document.getElementById('projectsWindow')],
   ['Contact Me', document.getElementById('contactMeWindow')],
+  ['Media Player', document.getElementById('mediaPlayerWindow')],
   // Add new windows here as you build them:
   // ['Notepad', document.getElementById('notepadWindow')],
   // ['Minesweeper', document.getElementById('minesweeperWindow')],

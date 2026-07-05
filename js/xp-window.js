@@ -319,8 +319,9 @@ class XPWindow extends HTMLElement {
   }
 
   _makeResizable() {
-    const minW = this.getAttribute('app-type') === 'projects' ? 880 : 500,
-      minH = 300;
+    const appType = this.getAttribute('app-type');
+    const minW = appType === 'projects' ? 880 : 500,
+      minH = appType === 'media-player' ? 380 : 300;
     const windowEl = this.shadowRoot.querySelector('.window');
 
     ['n', 's', 'e', 'w', 'ne', 'nw', 'se', 'sw'].forEach((dir) => {
