@@ -28,6 +28,10 @@
   .mp-top-min-close-btns img {
     cursor: pointer;
   }
+  .mp-min-btn:hover,
+  .mp-close-btn:hover {
+    outline: 1px solid grey;
+  }
   .mp-bottom {
     position: relative;
     top: 0;
@@ -113,13 +117,50 @@
   }
   .mp-track-info {
     display: flex;
-    color: green;
+    color: lime;
     padding-left: 1.5rem;
     padding-top: 0.05rem;
     font-size: 0.72rem;
     width: 21rem;
+    overflow: hidden;
+  }
+  .track-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .track-marquee-viewport {
+    display: none;
+    overflow: hidden;
+    flex: 1;
+    min-width: 0;
+  }
+  .track-marquee {
+    display: inline-flex;
+    white-space: nowrap;
+  }
+  .mp-track-info.is-playing .track-title {
+    display: none;
+  }
+  .mp-track-info.is-playing .track-marquee-viewport {
+    display: block;
+  }
+  .mp-track-info.is-playing .track-marquee {
+    animation: track-marquee 12s linear infinite;
+  }
+  .track-marquee-text {
+    padding-right: 3rem;
+  }
+  @keyframes track-marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
   }
   .mp-track-bar {
+    position: relative;
     display: flex;
     align-items: center;
     padding-left: 1.2rem;
@@ -129,8 +170,69 @@
     height: 0.75rem;
     width: auto;
   }
+  .track-bar-slider {
+    position: relative;
+  }
+  .seek-fill {
+    position: absolute;
+    top: 50%;
+    height: 0.5rem;
+    width: 0;
+    transform: translateY(-50%);
+    background: #5dab46;
+    border-radius: 999px;
+    pointer-events: none;
+  }
   .seek-btn-right {
     padding-left: 14.4rem;
+  }
+  .audio-controls {
+    display: flex;
+    padding-left: 1.3rem;
+    padding-top: 0.4rem;
+  }
+  .play-pause-btn {
+    height: 2rem;
+    width: auto;
+  }
+  .last-track-btn {
+    height: 1.7rem;
+    width: auto;
+    padding-left: 1.75rem;
+    padding-top: 0.245rem;
+  }
+  .next-track-btn {
+    height: 1.7rem;
+    width: auto;
+    padding-top: 0.24rem;
+    padding-left: 0.1rem;
+  }
+  .mute-btn {
+    height: 1.7rem;
+    width: auto;
+    padding-left: 0.35rem;
+    padding-top: 0.25rem;
+  }
+  .volume-control {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding-top: 0.35rem;
+    padding-left: 0.4rem;
+    cursor: pointer;
+  }
+  .volume-bar {
+    display: block;
+    height: 1.4rem;
+    width: auto;
+    padding-bottom: 0.3rem;
+  }
+  .volume-slider {
+    position: absolute;
+    top: 50%;
+    height: 1.2rem;
+    width: auto;
+    transform: translateY(-50%);
   }
 </style>
 <div class="mp-player">
@@ -161,13 +263,22 @@
       <img src="Res/9SeriesDefault/minimize_transports.png" />
     </div>
     <div class="mp-bot-btns">
-      <p class="mp-track-info">This is a song</p>
+      <p class="mp-track-info">
+        <span class="track-title"></span>
+        <span class="track-marquee-viewport">
+          <span class="track-marquee">
+            <span class="track-marquee-text"></span>
+            <span class="track-marquee-text" aria-hidden="true"></span>
+          </span>
+        </span>
+      </p>
       <div class="mp-track-bar">
         <img
           class="seek-btn-left"
           src="Res/9SeriesDefault/seekbutton_left.png"
           alt="seek button"
         />
+        <div class="seek-fill"></div>
         <img
           class="track-bar-slider"
           src="Res/9SeriesDefault/track_bar_slider.png"
@@ -176,6 +287,28 @@
           class="seek-btn-right"
           src="Res/9SeriesDefault/seekbutton_right.png"
         />
+      </div>
+      <div class="audio-controls">
+        <img class="play-pause-btn" src="Res/9SeriesDefault/mp-play.png" />
+        <img
+          class="last-track-btn"
+          src="Res/9SeriesDefault/equalizer_preset_button_left.png"
+        />
+        <img
+          class="next-track-btn"
+          src="Res/9SeriesDefault/equalizer_preset_button_right.png"
+        />
+        <img class="mute-btn" src="Res/9SeriesDefault/mp-mute.png" />
+        <div class="volume-control">
+          <img
+            class="volume-bar"
+            src="Res/9SeriesDefault/volume_bar_filled.png"
+          />
+          <img
+            class="volume-slider"
+            src="Res/9SeriesDefault/volume_slider.png"
+          />
+        </div>
       </div>
     </div>
   </div>
