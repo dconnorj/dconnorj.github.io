@@ -4,6 +4,7 @@ const windowFiles = [
   { id: 'projectsWindow', file: 'windows/projects.html' },
   { id: 'contactMeWindow', file: 'windows/contact-me.html' },
   { id: 'mediaPlayerWindow', file: 'windows/media-player.html' },
+  { id: 'commandPromptWindow', file: 'windows/command-prompt.html' },
   { id: 'confirmWindow', file: 'windows/confirm.html' },
 ];
 

@@ -15,4 +15,5 @@ await Promise.all([
   import('./js/contact-window.js'),
   import('./js/projects-window.js'),
   import('./js/media-player.js'),
+  import('./js/command-prompt.js'),
 ]);

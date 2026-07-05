@@ -1,0 +1,48 @@
+<style>
+  .cmd-content {
+    height: 100%;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0.6rem 0.7rem;
+    background: #000;
+    color: #ffffff;
+    font-family: 'Cascadia Code', Consolas, Menlo, Monaco, 'Lucida Console', 'Courier New', monospace;
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-y: auto;
+    overflow-x: hidden;
+    cursor: text;
+  }
+  .cmd-line {
+    white-space: pre-wrap;
+    word-break: break-word;
+    min-height: 1.5em;
+  }
+  .cmd-current-line {
+    display: flex;
+    white-space: pre;
+  }
+  .cmd-prompt {
+    white-space: pre;
+  }
+  .cmd-input {
+    flex: 1;
+    min-width: 1ch;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: inherit;
+    font: inherit;
+    padding: 0;
+    margin: 0;
+    caret-color: #f2f2f2;
+    caret-shape: block;
+  }
+</style>
+<div class="cmd-content" data-cmd-screen>
+  <div class="cmd-lines"></div>
+</div>

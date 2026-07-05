@@ -30,6 +30,7 @@ export const appWindows = new Map([
   ['Projects', document.getElementById('projectsWindow')],
   ['Contact Me', document.getElementById('contactMeWindow')],
   ['Media Player', document.getElementById('mediaPlayerWindow')],
+  ['Command Prompt', document.getElementById('commandPromptWindow')],
   // Add new windows here as you build them:
   // ['Notepad', document.getElementById('notepadWindow')],
   // ['Minesweeper', document.getElementById('minesweeperWindow')],
