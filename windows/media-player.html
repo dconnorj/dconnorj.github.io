@@ -5,8 +5,9 @@
   }
   .mp-top {
     display: flex;
+    z-index: 3;
   }
-  .mp-top div {
+  .mp-top > div {
     position: relative;
     top: 0;
     left: 0;
@@ -17,40 +18,166 @@
     left: 0;
     height: 100%;
   }
-  .mp-close-btn {
+  .mp-top-min-close-btns {
     position: absolute;
+    display: flex;
     top: 8px;
-    left: 27px;
+    left: 15px;
+    z-index: 3;
+  }
+  .mp-top-min-close-btns img {
+    cursor: pointer;
   }
   .mp-bottom {
     position: relative;
     top: 0;
     left: 0;
   }
-  .mp-bottom-back {
+  .mp-bot-back {
     position: relative;
     top: 0;
     left: 0;
     width: 387px;
   }
+  .mp-bot-back img {
+    display: block;
+    width: 100%;
+  }
+  .mp-bot-btns {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .mp-middle {
+    display: flex;
+    position: relative;
+    top: 0;
+    left: 0;
+    height: 350px;
+    width: 387px;
+  }
+  .mp-left-border0 {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 0.81rem;
+    background: #abc0e4;
+    background: linear-gradient(
+      90deg,
+      rgba(171, 192, 228, 1) 5%,
+      rgba(117, 137, 197, 1) 78%,
+      rgba(76, 92, 163, 1) 100%
+    );
+  }
+  .mp-left-border1 {
+    width: 0.35rem;
+    z-index: 3;
+    position: relative;
+    top: 0;
+    left: 0;
+    background: #cedff2;
+    background: linear-gradient(
+      90deg,
+      rgba(206, 223, 242, 1) 0%,
+      rgba(168, 188, 217, 1) 91%,
+      rgba(70, 72, 102, 1) 100%
+    );
+    border-right: 0.05rem solid #080963;
+  }
+  .mp-right-border {
+    width: 0.4rem;
+    position: relative;
+    z-index: 3;
+    top: 0;
+    left: 0;
+    margin-left: auto;
+    background: #cedff2;
+    background: linear-gradient(
+      90deg,
+      rgba(206, 223, 242, 1) 0%,
+      rgba(168, 188, 217, 1) 91%,
+      rgba(70, 72, 102, 1) 100%
+    );
+    border-left: 0.05rem solid #080963;
+    border-right: 0.1rem solid rgba(8, 9, 99, 0.25);
+  }
+  .music-cover-art {
+    position: absolute;
+    top: -10px;
+    left: 20px;
+    width: 360px;
+    height: 360px;
+    z-index: 2;
+  }
+  .mp-track-info {
+    display: flex;
+    color: green;
+    padding-left: 1.5rem;
+    padding-top: 0.05rem;
+    font-size: 0.72rem;
+    width: 21rem;
+  }
+  .mp-track-bar {
+    display: flex;
+    align-items: center;
+    padding-left: 1.2rem;
+    padding-top: 0.25rem;
+  }
+  .mp-track-bar img {
+    height: 0.75rem;
+    width: auto;
+  }
+  .seek-btn-right {
+    padding-left: 14.4rem;
+  }
 </style>
 <div class="mp-player">
-  <div class="mp-top">
+  <div class="mp-top" data-window-drag>
     <img src="Res/9SeriesDefault/player_top_left.png" />
     <div>
       <img class="mp-top-right" src="Res/9SeriesDefault/player_top_right.png" />
-      <img
-        class="mp-close-btn"
-        src="Res/9SeriesDefault/playlist_closebutton_disabled.png"
-      />
+      <div class="mp-top-min-close-btns">
+        <img class="mp-min-btn" src="Res/9SeriesDefault/min-btn.png" />
+        <img
+          class="mp-close-btn"
+          src="Res/9SeriesDefault/playlist_closebutton.png"
+        />
+      </div>
     </div>
   </div>
-  <div class="mp-bottom">
+  <div class="mp-middle">
+    <div class="mp-left-border0"></div>
+    <div class="mp-left-border1"></div>
     <img
-      class="mp-bottom-back"
-      src="Res/9SeriesDefault/minimize_transports.png"
+      class="music-cover-art"
+      src="Res/music/Classicals.de - Cosi Fan Tutte, Come Scoglio - Mozart, Wolfgang Amadeus (MIT Symphony Orchestra)/Così fan tutte_cover_art.png"
     />
-    <img class="mp-bot-play" />
+    <div class="mp-right-border"></div>
+  </div>
+  <div class="mp-bottom">
+    <div class="mp-bot-back">
+      <img src="Res/9SeriesDefault/minimize_transports.png" />
+    </div>
+    <div class="mp-bot-btns">
+      <p class="mp-track-info">This is a song</p>
+      <div class="mp-track-bar">
+        <img
+          class="seek-btn-left"
+          src="Res/9SeriesDefault/seekbutton_left.png"
+          alt="seek button"
+        />
+        <img
+          class="track-bar-slider"
+          src="Res/9SeriesDefault/track_bar_slider.png"
+        />
+        <img
+          class="seek-btn-right"
+          src="Res/9SeriesDefault/seekbutton_right.png"
+        />
+      </div>
+    </div>
   </div>
   <audio class="mp-audio" preload="metadata"></audio>
 </div>

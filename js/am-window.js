@@ -23,10 +23,17 @@ function playAddressBarLoading(barDuration = 200) {
   setTimeout(() => amAddressBar.classList.remove('is-loading'), barDuration);
 }
 
-window.addEventListener('load', () => {
+function revealDesktop() {
   mainSection.classList.remove('is-loading');
   playAddressBarLoading();
-});
+}
+// window's 'load' event can fire (e.g. cached images) before this module
+// finishes importing, in which case it never fires again - check first.
+if (document.readyState === 'complete') {
+  revealDesktop();
+} else {
+  window.addEventListener('load', revealDesktop);
+}
 aboutMeWindow.addEventListener('window-opened', () => playAddressBarLoading());
 
 // Collapsible sidebar boxes
