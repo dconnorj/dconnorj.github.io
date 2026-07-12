@@ -134,8 +134,9 @@ trayPopup.addEventListener('click', (e) => {
   }
 });
 
-// Show the system info popup on first visit
-window.addEventListener('load', () => {
+// Show the system info popup once the boot sequence finishes (balloon sound
+// plays alongside it, driven by boot.js)
+document.addEventListener('xp-show-welcome', () => {
   const infoBtn = document.querySelector('.tray_info');
   const infoItem = trayItems.find((item) => item.selector === '.tray_info');
   if (!infoBtn || !infoItem) return;

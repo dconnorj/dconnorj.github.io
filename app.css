@@ -541,6 +541,52 @@ start-menu img{
   filter: grayscale(0%);
 }
 
+.boot_screen {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999999; /* above everything, including the CRT overlay */
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+.boot_screen.boot-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+.boot_gif {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.boot_prompt {
+  position: absolute;
+  bottom: 12%;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #FFFFFF;
+  font-family: 'Pixelated MS Sans Serif', Tahoma, sans-serif;
+  font-size: 1rem;
+  text-shadow: 2px 2px 3px black;
+  padding: 0.6rem 1.2rem;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  animation: boot-prompt-blink 1.4s ease-in-out infinite;
+  transition: opacity 0.3s ease;
+}
+.boot_prompt.boot-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+@keyframes boot-prompt-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
 .crt_overlay {
   position: fixed;
   top: 0;

@@ -6,8 +6,7 @@ import {
 
 const aboutMeWindow = appWindows.get('About Me');
 
-// XP-style fake loading: gray desktop flash + growing address bar
-const mainSection = document.querySelector('.main_section');
+// XP-style fake loading: growing address bar
 const amAddressBar = document.querySelector('.am-address-bar');
 const amMainContent = document.querySelector('.am-main-content');
 
@@ -23,17 +22,9 @@ function playAddressBarLoading(barDuration = 200) {
   setTimeout(() => amAddressBar.classList.remove('is-loading'), barDuration);
 }
 
-function revealDesktop() {
-  mainSection.classList.remove('is-loading');
-  playAddressBarLoading();
-}
-// window's 'load' event can fire (e.g. cached images) before this module
-// finishes importing, in which case it never fires again - check first.
-if (document.readyState === 'complete') {
-  revealDesktop();
-} else {
-  window.addEventListener('load', revealDesktop);
-}
+// Desktop reveal itself is driven by the boot sequence (boot.js); once it
+// finishes, run the same address-bar loading flourish here.
+document.addEventListener('xp-boot-complete', () => playAddressBarLoading());
 aboutMeWindow.addEventListener('window-opened', () => playAddressBarLoading());
 
 // Collapsible sidebar boxes

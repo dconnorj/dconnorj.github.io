@@ -1,3 +1,4 @@
+import './js/boot.js';
 import './js/xp-window.js';
 import { loadWindows } from './js/loader.js';
 
