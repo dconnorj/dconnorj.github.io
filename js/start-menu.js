@@ -37,7 +37,6 @@ const allApps = [
   'Projects',
   'Contact Me',
   'Media Player',
-  'Music Player',
   'Command Prompt',
   'Minesweeper',
   'Notepad',
@@ -59,7 +58,7 @@ class StartMenu extends HTMLElement {
         <div class="middle_start_menu">
           <div class="left_start_menu">
             ${makeAppImageList('top_left_start', ['Projects', 'Contact Me'], subheads, false, true)}
-            ${makeAppImageList('bottom_left_start', ['About Me', 'Music Player', 'Media Player', 'Paint', 'Notepad'], subheads, false, true)}
+            ${makeAppImageList('bottom_left_start', ['About Me', 'Image Viewer', 'Media Player', 'Paint', 'Notepad'], subheads, false, true)}
             <button class="allprograms">
               <h3>All Programs</h3>
               <img src="/Res/all_progs.svg" alt="all programs">
@@ -67,7 +66,7 @@ class StartMenu extends HTMLElement {
           </div>
           <div class="right_start_menu">
             ${makeAppImageList('top_right_start', ['Github', 'LinkedIn'], subheads, true, true)}
-            ${makeAppImageList('bottom_right_start', ['Command Prompt', 'Resume', 'Minesweeper', 'Spider Solitaire', 'Image Viewer'], subheads, false, true)}
+            ${makeAppImageList('bottom_right_start', ['Command Prompt', 'Resume', 'Minesweeper', 'Spider Solitaire'], subheads, false, true)}
           </div>
         </div>
         <div class="bottom_start_menu">

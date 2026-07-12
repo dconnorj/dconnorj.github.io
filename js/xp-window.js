@@ -97,6 +97,23 @@ class XPWindow extends HTMLElement {
         :host([hide-controls]) .maximize-window {
           display: none;
         }
+        :host([chromeless]) .window {
+          border: none;
+          border-radius: 0;
+          box-shadow: none;
+          background: transparent;
+          min-width: 0;
+        }
+        :host([chromeless]) .titlebar {
+          display: none;
+        }
+        :host([chromeless]) .content {
+          background: transparent;
+          overflow: hidden;
+        }
+        :host([chromeless]) .resize-handle {
+          display: none;
+        }
         .resize-handle {
           position: absolute;
           z-index: 10;
@@ -293,18 +310,30 @@ class XPWindow extends HTMLElement {
   }
 
   _makeDraggable() {
-    const titlebar = this.shadowRoot.querySelector('.titlebar');
     let offsetX,
       offsetY,
       dragging = false;
 
-    titlebar.addEventListener('mousedown', (e) => {
+    const startDrag = (e) => {
       if (this.classList.contains('maximized')) return;
+      e.preventDefault();
       dragging = true;
       offsetX = e.clientX - this.offsetLeft;
       offsetY = e.clientY - this.offsetTop;
       this.bringToFront();
-    });
+    };
+
+    if (this.hasAttribute('chromeless')) {
+      // Content is loaded asynchronously after connectedCallback runs, so
+      // the drag handle is looked up lazily (by light-DOM delegation)
+      // rather than bound once up front.
+      this.addEventListener('mousedown', (e) => {
+        const dragHandle = this.querySelector('[data-window-drag]');
+        if (dragHandle && dragHandle.contains(e.target)) startDrag(e);
+      });
+    } else {
+      this.shadowRoot.querySelector('.titlebar').addEventListener('mousedown', startDrag);
+    }
 
     document.addEventListener('mousemove', (e) => {
       if (!dragging) return;
@@ -319,8 +348,10 @@ class XPWindow extends HTMLElement {
   }
 
   _makeResizable() {
-    const minW = this.getAttribute('app-type') === 'projects' ? 880 : 500,
-      minH = 300;
+    if (this.hasAttribute('chromeless')) return;
+    const appType = this.getAttribute('app-type');
+    const minW = appType === 'projects' ? 880 : 500,
+      minH = appType === 'media-player' ? 380 : 300;
     const windowEl = this.shadowRoot.querySelector('.window');
 
     ['n', 's', 'e', 'w', 'ne', 'nw', 'se', 'sw'].forEach((dir) => {

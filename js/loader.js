@@ -2,7 +2,10 @@ const windowFiles = [
   { id: 'aboutMeWindow', file: 'windows/about-me.html' },
   { id: 'resumeWindow', file: 'windows/resume.html' },
   { id: 'projectsWindow', file: 'windows/projects.html' },
-  { id: 'contactInfoWindow', file: 'windows/contact-info.html' },
+  { id: 'contactMeWindow', file: 'windows/contact-me.html' },
+  { id: 'mediaPlayerWindow', file: 'windows/media-player.html' },
+  { id: 'commandPromptWindow', file: 'windows/command-prompt.html' },
+  { id: 'confirmWindow', file: 'windows/confirm.html' },
 ];
 
 export async function loadWindows() {
@@ -13,10 +16,7 @@ export async function loadWindows() {
       try {
         const res = await fetch(file);
         if (!res.ok) throw new Error(`Failed to load ${file}`);
-        const html = await res.text();
-        const container = document.createElement('div');
-        container.innerHTML = html;
-        win.appendChild(container);
+        win.innerHTML = await res.text();
       } catch (err) {
         console.error(err);
       }
