@@ -601,24 +601,24 @@ start-menu img{
 body.crt-active .crt_overlay {
   opacity: 1;
 
-  /* scanlines */
-  background-image: repeating-linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.15) 0px,
-    rgba(0, 0, 0, 0.15) 1px,
-    transparent 1px,
-    transparent 3px
-  );
-  background-image: repeating-linear-gradient(
-    to right,
-    rgba(0, 0, 0, 0.10) 0px,
-    rgba(0, 0, 0, 0.10) 1px,
-    transparent 1px,
-    transparent 3px
-  );
+  /* scanlines: horizontal + vertical, feathered so 1px lines don't alias
+     harshly on standard-DPI displays (they blend naturally on Retina) */
+  background-image:
+    repeating-linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.07) 0px,
+      transparent 1.5px,
+      transparent 3px
+    ),
+    repeating-linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.035) 0px,
+      transparent 1.5px,
+      transparent 3px
+    );
 
   /* vignette */
-  box-shadow: inset 0 0 10rem rgba(0, 0, 0, 0.5);
+  box-shadow: inset 0 0 10rem rgba(0, 0, 0, 0.3);
 
   animation: crt-flicker 0.5s ease-in-out infinite;
 }
@@ -650,8 +650,8 @@ body.crt-active .crt_overlay {
   font-size: 0.7rem;
   text-shadow: 1px 1px 1px black;
   padding: 0.2rem 0.6rem;
-  max-width: 9rem;
-  min-width: 4rem;
+  width: 7rem;
+  flex-shrink: 0;
   cursor: pointer;
   white-space: nowrap;
   overflow: hidden;

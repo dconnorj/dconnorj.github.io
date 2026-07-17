@@ -63,6 +63,9 @@ class XPWindow extends HTMLElement {
           opacity: 0.5;
           pointer-events: none;
         }
+        :host(:not(.active-window)) .content {
+          opacity: 0.5;
+        }
         .titlebar {
           background: linear-gradient(to bottom, #3B73E8 0%, #245EDC 40%, #1A4FC4 100%);
           color: white;
