@@ -717,7 +717,11 @@ body.crt-active .crt_overlay {
 .am-content,
 .res-content,
 .cm-content,
-.proj-content{
+.proj-content,
+.pt-content,
+.np-content,
+.ms-content,
+.sol-content{
   display: flex;
   flex-direction: column;
   max-width: 100%;
@@ -729,7 +733,11 @@ body.crt-active .crt_overlay {
 
 .am-page-head,
 .cm-page-head,
-.proj-page-head{
+.proj-page-head,
+.pt-page-head,
+.np-page-head,
+.ms-page-head,
+.sol-page-head{
   position: sticky;      /* sticks to top of .am-content, not the viewport */
   top: 0;
   width: 100%;
@@ -739,7 +747,11 @@ body.crt-active .crt_overlay {
 .am-file-view,
 .res-file-view,
 .cm-file-view,
-.proj-file-view{
+.proj-file-view,
+.pt-file-view,
+.np-file-view,
+.ms-file-view,
+.sol-file-view{
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -749,7 +761,11 @@ body.crt-active .crt_overlay {
 .am-file-view img,
 .res-file-view img,
 .cm-file-view img,
-.proj-file-view img{
+.proj-file-view img,
+.pt-file-view img,
+.np-file-view img,
+.ms-file-view img,
+.sol-file-view img{
   height: 1.25rem;
   background-color: white;
 }
@@ -759,19 +775,35 @@ body.crt-active .crt_overlay {
 .cm-tools,
 .cm-help,
 .proj-tools,
-.proj-help{
+.proj-help,
+.pt-edit,
+.pt-tools,
+.pt-help,
+.np-edit,
+.np-search,
+.np-help,
+.ms-help,
+.sol-help{
   opacity: 50%;
 }
 .am-view-file-btns,
 .res-view-file-btns,
 .cm-view-file-btns,
-.proj-view-file-btns{
+.proj-view-file-btns,
+.pt-view-file-btns,
+.np-view-file-btns,
+.ms-view-file-btns,
+.sol-view-file-btns{
   display: flex;
 }
 .am-file-view button,
 .res-file-view button,
 .cm-file-view button,
-.proj-file-view button{
+.proj-file-view button,
+.pt-file-view button,
+.np-file-view button,
+.ms-file-view button,
+.sol-file-view button{
   color: black;
   text-shadow: none;
   font-size: 0.65rem;
@@ -781,7 +813,11 @@ body.crt-active .crt_overlay {
 .am-file-view button:not(.am-help):hover,
 .res-file-view button:not(.res-help):hover,
 .cm-file-view button:not(.cm-edit):not(.cm-tools):not(.cm-help):hover,
-.proj-file-view button:not(.proj-tools):not(.proj-help):hover {
+.proj-file-view button:not(.proj-tools):not(.proj-help):hover,
+.pt-file-view button:not(.pt-edit):not(.pt-tools):not(.pt-help):hover,
+.np-file-view button:not(.np-edit):not(.np-search):not(.np-help):hover,
+.ms-file-view button:not(.ms-help):hover,
+.sol-file-view button:not(.sol-help):hover {
   background: #1857BF;
   color: white;
   text-shadow: 1px 1px 1px black;
@@ -1334,7 +1370,11 @@ body.crt-active .crt_overlay {
 .am-dropdown-menu,
 .res-dropdown-menu,
 .cm-dropdown-menu,
-.proj-dropdown-menu {
+.proj-dropdown-menu,
+.pt-dropdown-menu,
+.np-dropdown-menu,
+.ms-dropdown-menu,
+.sol-dropdown-menu {
   position: fixed;
   background: #E1E4E2;
   border: 1px solid #A9A9A9;
@@ -1351,7 +1391,15 @@ body.crt-active .crt_overlay {
 .cm-file-popup-btns p,
 .cm-view-popup-btns p,
 .proj-file-popup-btns p,
-.proj-view-popup-btns p {
+.proj-view-popup-btns p,
+.pt-file-popup-btns p,
+.pt-view-popup-btns p,
+.np-file-popup-btns p,
+.np-view-popup-btns p,
+.ms-file-popup-btns p,
+.ms-view-popup-btns p,
+.sol-file-popup-btns p,
+.sol-view-popup-btns p {
   color: black;
   padding: 0.2rem 1rem 0.2rem 0.5rem;
   cursor: default;
@@ -1364,20 +1412,36 @@ body.crt-active .crt_overlay {
 .cm-file-popup-btns p:not(.cm-file-disabled):hover,
 .cm-view-popup-btns p:hover,
 .proj-file-popup-btns p:not(.proj-file-disabled):hover,
-.proj-view-popup-btns p:hover {
+.proj-view-popup-btns p:hover,
+.pt-file-popup-btns p:not(.pt-file-disabled):hover,
+.pt-view-popup-btns p:hover,
+.np-file-popup-btns p:not(.np-file-disabled):hover,
+.np-view-popup-btns p:hover,
+.ms-file-popup-btns p:not(.ms-file-disabled):hover,
+.ms-view-popup-btns p:hover,
+.sol-file-popup-btns p:not(.sol-file-disabled):hover,
+.sol-view-popup-btns p:hover {
   background: #1857BF;
   color: white;
 }
 .am-file-disabled,
 .res-file-disabled,
 .cm-file-disabled,
-.proj-file-disabled {
+.proj-file-disabled,
+.pt-file-disabled,
+.np-file-disabled,
+.ms-file-disabled,
+.sol-file-disabled {
   opacity: 50%;
   pointer-events: none;
 }
 
 .am-file-exit,
-.res-file-exit {
+.res-file-exit,
+.pt-file-exit,
+.np-file-exit,
+.ms-file-exit,
+.sol-file-exit {
   border-top: 1px solid #A9A9A9;
 }
 .cm-file-border,
@@ -1431,6 +1495,227 @@ body.crt-active .crt_overlay {
   .am-content-row-col img {
     display: none;
   }
+}
+
+.iv-content{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  background-color: #ECE9D8;
+}
+.iv-image-area{
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+  background-color: #999790;
+  padding: 0.5rem;
+}
+.iv-image-area img{
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+  background-color: white;
+}
+.iv-image-area.zoomed{
+  overflow: auto;
+  align-items: center;
+  justify-content: center;
+}
+.iv-image-area.zoomed img{
+  max-height: none;
+  max-width: none;
+}
+.iv-nav-bar{
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  padding: 0.4rem 0;
+  background-color: white;
+  border-top: 0.07rem solid #ACA899;
+  flex-shrink: 0;
+}
+.iv-back-next-btns,
+.iv-print-zoom-btns{
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0 1rem;
+  border-right: 0.07rem solid #D3D1C5;
+}
+.iv-save-btn{
+  margin-left: 1rem;
+}
+.iv-nav-bar button{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  font-size: 0.65rem;
+  color: black;
+  text-shadow: none;
+  border: 0.1rem solid transparent;
+  border-radius: 15%;
+  padding: 0.3rem 0.5rem;
+}
+.iv-nav-bar img{
+  height: 1.5rem;
+  width: auto;
+}
+.iv-nav-bar button:not(:disabled):hover{
+  border-color: #A9A9A9;
+  background-color: #C5C5C5;
+}
+.iv-print-btn, .iv-save-btn{
+  opacity: 50%;
+  cursor: default;
+}
+.iv-zoom-btn.active{
+  border-color: #A9A9A9;
+  background-color: #C5C5C5;
+}
+.iv-footer{
+  background: #E1E4E2;
+  font-family: 'Pixelated MS Sans Serif', Tahoma, sans-serif;
+  font-size: 0.6rem;
+  padding: 0.1rem;
+  border-top: 0.15rem solid #B8B8B8;
+  flex-shrink: 0;
+}
+
+.pt-canvas-wrap{
+  flex: 1;
+  overflow: hidden;
+}
+.pt-content.loading,
+.pt-content.loading *{
+  cursor: wait;
+}
+.pt-content.loading .pt-canvas-wrap{
+  visibility: hidden;
+}
+.pt-canvas-area{
+  display: block;
+  width: 100%;
+  /* jspaint's own menu bar (20px) and status bar (23px) are fixed-height;
+     shift the iframe up to crop the menu bar under the wrap's overflow,
+     and grow it to push the status bar past the bottom edge the same way,
+     leaving only our pt-file-view/pt-footer as the surrounding chrome. */
+  height: calc(100% + 43px);
+  margin-top: -20px;
+  border: none;
+  background-color: white;
+}
+.pt-footer{
+  background: #E1E4E2;
+  font-family: 'Pixelated MS Sans Serif', Tahoma, sans-serif;
+  font-size: 0.6rem;
+  padding: 0.1rem 0.3rem;
+  flex-shrink: 0;
+}
+.pt-footer a{
+  color: #1857BF;
+}
+
+.np-canvas-wrap{
+  flex: 1;
+  overflow: hidden;
+}
+.np-content.loading,
+.np-content.loading *{
+  cursor: wait;
+}
+.np-content.loading .np-canvas-wrap{
+  visibility: hidden;
+}
+.np-canvas-area{
+  display: block;
+  width: 100%;
+  /* 98.js's own Notepad menu bar is a fixed 20px with no status bar below
+     it, so only the top needs cropping to leave our np-file-view as the
+     sole menu bar. */
+  height: calc(100% + 20px);
+  margin-top: -20px;
+  border: none;
+  background-color: white;
+}
+.np-footer{
+  background: #E1E4E2;
+  font-family: 'Pixelated MS Sans Serif', Tahoma, sans-serif;
+  font-size: 0.6rem;
+  padding: 0.1rem 0.3rem;
+  flex-shrink: 0;
+}
+.np-footer a{
+  color: #1857BF;
+}
+
+.ms-canvas-wrap{
+  flex: 1;
+  overflow: hidden;
+}
+.ms-content.loading,
+.ms-content.loading *{
+  cursor: wait;
+}
+.ms-content.loading .ms-canvas-wrap{
+  visibility: hidden;
+}
+.ms-canvas-area{
+  display: block;
+  width: 100%;
+  /* This clone's own "Minesweeper" title heading is a fixed 80px; its
+     difficulty buttons (Beginner/Intermediate/Expert) stay visible below
+     it since they're real game controls we can't otherwise reach — no
+     cross-origin API exists to trigger them from our own menu. */
+  height: calc(100% + 80px);
+  margin-top: -80px;
+  border: none;
+  background-color: #C0C0C0;
+}
+.ms-footer{
+  background: #E1E4E2;
+  font-family: 'Pixelated MS Sans Serif', Tahoma, sans-serif;
+  font-size: 0.6rem;
+  padding: 0.1rem 0.3rem;
+  flex-shrink: 0;
+}
+.ms-footer a{
+  color: #1857BF;
+}
+
+.sol-canvas-wrap{
+  flex: 1;
+  overflow: auto;
+}
+.sol-content.loading,
+.sol-content.loading *{
+  cursor: wait;
+}
+.sol-content.loading .sol-canvas-wrap{
+  visibility: hidden;
+}
+.sol-canvas-area{
+  /* Self-hosted (same-origin), so its fake title bar and Game/Deal! menu
+     are hidden directly in Res/spider-solitaire/index.html instead of
+     via an iframe crop hack. */
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: none;
+  background-color: #ECE7D6;
+}
+.sol-footer{
+  background: #E1E4E2;
+  font-family: 'Pixelated MS Sans Serif', Tahoma, sans-serif;
+  font-size: 0.6rem;
+  padding: 0.1rem 0.3rem;
+  flex-shrink: 0;
+}
+.sol-footer a{
+  color: #1857BF;
 }
 
 .cm-toast {

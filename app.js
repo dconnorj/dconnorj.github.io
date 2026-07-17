@@ -17,4 +17,9 @@ await Promise.all([
   import('./js/projects-window.js'),
   import('./js/media-player.js'),
   import('./js/command-prompt.js'),
+  import('./js/image-viewer.js'),
+  import('./js/paint-window.js'),
+  import('./js/notepad-window.js'),
+  import('./js/minesweeper-window.js'),
+  import('./js/solitaire-window.js'),
 ]);
