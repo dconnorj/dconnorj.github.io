@@ -3,9 +3,7 @@ import { appWindows } from './windows.js';
 const solitaireWindow = appWindows.get('Spider Solitaire');
 
 const SOLITAIRE_SRC = '/Res/spider-solitaire/index.html';
-const LOAD_DELAY_MS = 1500;
 
-const solContent = document.querySelector('.sol-content');
 const solCanvasFrame = document.querySelector('.sol-canvas-area');
 
 function resetSolitaire() {
@@ -23,8 +21,6 @@ function resetSolitaire() {
 let needsReset = true;
 
 solitaireWindow.addEventListener('window-opened', () => {
-  solContent.classList.add('loading');
-  setTimeout(() => solContent.classList.remove('loading'), LOAD_DELAY_MS);
   if (needsReset) {
     requestAnimationFrame(resetSolitaire);
     needsReset = false;

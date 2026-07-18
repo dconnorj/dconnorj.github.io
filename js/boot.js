@@ -1,24 +1,20 @@
-// Boot sequence: black screen -> "press any key to start" (boot gif loops
-// behind it) -> the instant the user presses/clicks, the desktop reveals
-// (+ startup sound) -> welcome popup (+ balloon sound) ~5s after that press.
+// Boot sequence: boot video plays once -> select-profile screen -> user
+// clicks their name -> welcome screen -> desktop reveals with the startup
+// sound, followed by the balloon popup a few seconds later.
 //
-// The gif is the "waiting for input" animation, not a timed intro, so there's
-// no artificial delay after the gesture - we only wait on whenPageFullyLoaded(),
-// which is normally already resolved by the time the user presses anything.
-// That still guards against the "elements popping in" glitch on a slow load,
-// without adding perceptible lag on a fast one.
-//
-// Browsers block audio.play() until the page has had a user gesture, so the
-// sequence waits for a click/tap/keypress before it starts. Once that
-// gesture has happened anywhere on the page, browsers treat the whole
-// session as "activated" and allow later play() calls (the startup sound
-// right after, the balloon sound 5s after that) without needing each call
-// to be synchronously inside a gesture handler itself.
-const POPUP_DELAY_FROM_CLICK_MS = 5000; // welcome popup appears ~5s after the press
-const MIN_POPUP_GAP_MS = 500; // floor so the popup never lands right on top of the reveal
+// Browsers block audio.play() until the page has had a user gesture. The
+// profile click is that gesture, so it both advances the sequence and
+// unlocks the startup/balloon sounds that play after it.
+const VIDEO_FALLBACK_MS = 3500; // safety net in case autoplay is blocked and 'ended' never fires
+const WELCOME_SCREEN_MS = 2200; // how long the "welcome" screen stays up before the desktop reveals
+const POPUP_DELAY_FROM_CLICK_MS = 7000; // balloon popup appears ~7s after the profile click
+const MIN_POPUP_GAP_MS = 2000; // floor so the popup waits at least 2s after the desktop reveals
 
 const bootScreen = document.getElementById('bootScreen');
-const bootPrompt = document.getElementById('bootPrompt');
+const bootVideo = document.querySelector('.boot_gif');
+const selectScreen = document.getElementById('selectScreen');
+const selectProfileBtn = document.getElementById('selectProfileBtn');
+const welcomeScreen = document.getElementById('welcomeScreen');
 const mainSection = document.querySelector('.main_section');
 
 const startupSound = new Audio('/Res/xp-sounds/windows-xp-startup.mp3');
@@ -30,6 +26,10 @@ function playSound(audio) {
   audio.play().catch(() => {});
 }
 
+function wait(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 function whenPageFullyLoaded() {
   return new Promise((resolve) => {
     if (document.readyState === 'complete') resolve();
@@ -37,28 +37,33 @@ function whenPageFullyLoaded() {
   });
 }
 
-function whenUserGesture() {
+function whenVideoEnds() {
   return new Promise((resolve) => {
-    const events = ['pointerdown', 'keydown'];
-    const onGesture = () => {
-      events.forEach((evt) => document.removeEventListener(evt, onGesture));
-      resolve();
-    };
-    events.forEach((evt) =>
-      document.addEventListener(evt, onGesture, { once: true })
-    );
+    bootVideo.addEventListener('ended', () => resolve(), { once: true });
+    setTimeout(resolve, VIDEO_FALLBACK_MS);
+  });
+}
+
+function whenProfileClicked() {
+  return new Promise((resolve) => {
+    selectProfileBtn.addEventListener('click', () => resolve(), { once: true });
   });
 }
 
 async function runBootSequence() {
-  await whenUserGesture();
-  const clickTime = Date.now();
-  bootPrompt.classList.add('boot-hidden');
-
-  await whenPageFullyLoaded();
-
-  mainSection.classList.remove('is-loading');
+  await Promise.all([whenPageFullyLoaded(), whenVideoEnds()]);
   bootScreen.classList.add('boot-hidden');
+  selectScreen.classList.add('screen-active');
+
+  await whenProfileClicked();
+  const clickTime = Date.now();
+  selectScreen.classList.remove('screen-active');
+  welcomeScreen.classList.add('screen-active');
+
+  await wait(WELCOME_SCREEN_MS);
+
+  welcomeScreen.classList.remove('screen-active');
+  mainSection.classList.remove('is-loading');
   playSound(startupSound);
   document.dispatchEvent(new Event('xp-boot-complete'));
 

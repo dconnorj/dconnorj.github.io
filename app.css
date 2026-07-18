@@ -183,12 +183,13 @@ main {
 .main_section {
     display: flex;
     height: 97.5%;
-    background-image: url('/Res/background.png');
+    background-image: url('/Res/background.jpg');
     background-size: cover;      /* fills the area, crops if needed */
     background-position: center; /* keeps the focal point centered */
     background-repeat: no-repeat;
     align-items: start;
     justify-content: start;
+    position: relative;
 }
 .main_section.is-loading {
   background-image: none;
@@ -224,8 +225,17 @@ main {
   width: 3.5rem;
 }
 
-.icons button:hover {
-  background: rgba(0,0,0,0.1);
+.icons button:hover,
+.icons button.selected {
+  background: rgba(37, 99, 220, 0.45);
+}
+
+.desktop_selection_box {
+  position: absolute;
+  border: 1px solid rgba(35, 90, 195, 0.9);
+  background: rgba(90, 150, 255, 0.45);
+  pointer-events: none;
+  z-index: 5;
 }
 .start_button {
     display: flex;
@@ -563,29 +573,191 @@ start-menu img{
   height: 100%;
   object-fit: contain;
 }
-.boot_prompt {
-  position: absolute;
-  bottom: 12%;
-  left: 50%;
-  transform: translateX(-50%);
-  color: #FFFFFF;
-  font-family: 'Pixelated MS Sans Serif', Tahoma, sans-serif;
-  font-size: 1rem;
-  text-shadow: 2px 2px 3px black;
-  padding: 0.6rem 1.2rem;
-  background: rgba(0, 0, 0, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  cursor: pointer;
-  animation: boot-prompt-blink 1.4s ease-in-out infinite;
-  transition: opacity 0.3s ease;
-}
-.boot_prompt.boot-hidden {
+
+/* Shared behavior for the two full-screen overlays that sit between the
+   boot video and the desktop: hidden by default, faded in via .screen-active. */
+.select_screen,
+.welcome_screen {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 999999;
   opacity: 0;
   pointer-events: none;
+  transition: opacity 0.6s ease;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Helvetica Neue', Tahoma, sans-serif;
 }
-@keyframes boot-prompt-blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.4; }
+.select_screen.screen-active,
+.welcome_screen.screen-active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.select_screen {
+  background: #5A7EDC;
+}
+.select_top_bar {
+  height: 5.5rem;
+  flex-shrink: 0;
+  background: #3333AB;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+}
+.select_bottom_bar {
+  height: 2.75rem;
+  flex-shrink: 0;
+  background: #3333AB;
+  border-top: 1px solid #ff9d3d;
+}
+.select_body {
+  flex: 1;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  background: #5A7EDC;
+}
+.select_left,
+.select_right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.5rem;
+  min-width: 0;
+}
+.select_left {
+  align-items: flex-end;
+  padding-right: 3rem;
+  text-align: right;
+}
+.select_right {
+  align-items: flex-start;
+  padding-left: 3rem;
+}
+.select_divider {
+  width: 1px;
+  margin: 3rem 0;
+  background: rgba(255, 255, 255, 0.35);
+}
+.select_brand_mark {
+  width: 22rem;
+  max-width: 80%;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(1px 1px 3px rgba(0, 0, 0, 0.35));
+}
+.select_instructions {
+  color: #ffffff;
+  font-size: 0.95rem;
+  margin: 0;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+.select_profile_btn {
+  position: relative;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  background: transparent;
+  border: none;
+  padding: 1rem 1.5rem;
+  border-radius: 0.9rem;
+  cursor: pointer;
+}
+.select_profile_btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  right: -70%;
+  border-radius: 0.9rem;
+  background: linear-gradient(to right, rgba(10, 35, 90, 0.55) 0%, rgba(10, 35, 90, 0.4) 45%, transparent 90%);
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  z-index: -1;
+  pointer-events: none;
+}
+.select_profile_btn:hover::before,
+.select_profile_btn:focus-visible::before {
+  opacity: 1;
+}
+.select_profile_btn:focus-visible {
+  outline: none;
+}
+.select_profile_btn:hover .select_profile_pic,
+.select_profile_btn:focus-visible .select_profile_pic {
+  border-color: #FFB627;
+}
+.select_profile_btn:hover .select_profile_role,
+.select_profile_btn:focus-visible .select_profile_role {
+  color: #FFB627;
+}
+.select_profile_pic {
+  width: 4.5rem;
+  height: 4.5rem;
+  object-fit: cover;
+  border-radius: 0.5rem;
+  border: 3px solid #ffffff;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.3);
+  transition: border-color 0.15s ease;
+}
+.select_profile_info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.15rem;
+}
+.select_profile_name {
+  color: #ffffff;
+  font-size: 1.2rem;
+  font-weight: 400;
+}
+.select_profile_role {
+  color: #1B2C6E;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-shadow: none;
+  transition: color 0.15s ease;
+}
+
+.welcome_screen {
+  background: #5A7EDC;
+}
+.welcome_top_bar {
+  height: 5.5rem;
+  flex-shrink: 0;
+  background: #3333AB;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+}
+.welcome_bottom_bar {
+  height: 2.75rem;
+  flex-shrink: 0;
+  background: #3333AB;
+  border-top: 1px solid #ff9d3d;
+}
+.welcome_body {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #5A7EDC;
+}
+.welcome_text {
+  margin: 0;
+  color: #ffffff;
+  font-family: 'Helvetica Neue', Georgia, serif;
+  font-weight: 700;
+  font-style: italic;
+  font-size: 4rem;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.35), 0 0 30px rgba(255, 255, 255, 0.25);
+  opacity: 0;
+  transform: scale(0.92);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.welcome_screen.screen-active .welcome_text {
+  opacity: 1;
+  transform: scale(1);
 }
 .crt_overlay {
   position: fixed;
@@ -1589,13 +1761,6 @@ body.crt-active .crt_overlay {
   flex: 1;
   overflow: hidden;
 }
-.pt-content.loading,
-.pt-content.loading *{
-  cursor: wait;
-}
-.pt-content.loading .pt-canvas-wrap{
-  visibility: hidden;
-}
 .pt-canvas-area{
   display: block;
   width: 100%;
@@ -1623,13 +1788,6 @@ body.crt-active .crt_overlay {
   flex: 1;
   overflow: hidden;
 }
-.np-content.loading,
-.np-content.loading *{
-  cursor: wait;
-}
-.np-content.loading .np-canvas-wrap{
-  visibility: hidden;
-}
 .np-canvas-area{
   display: block;
   width: 100%;
@@ -1655,23 +1813,14 @@ body.crt-active .crt_overlay {
 .ms-canvas-wrap{
   flex: 1;
   overflow: hidden;
-}
-.ms-content.loading,
-.ms-content.loading *{
-  cursor: wait;
-}
-.ms-content.loading .ms-canvas-wrap{
-  visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #C0C0C0;
 }
 .ms-canvas-area{
   display: block;
-  width: 100%;
-  /* This clone's own "Minesweeper" title heading is a fixed 80px; its
-     difficulty buttons (Beginner/Intermediate/Expert) stay visible below
-     it since they're real game controls we can't otherwise reach — no
-     cross-origin API exists to trigger them from our own menu. */
-  height: calc(100% + 80px);
-  margin-top: -80px;
+  flex-shrink: 0;
   border: none;
   background-color: #C0C0C0;
 }
@@ -1689,13 +1838,6 @@ body.crt-active .crt_overlay {
 .sol-canvas-wrap{
   flex: 1;
   overflow: auto;
-}
-.sol-content.loading,
-.sol-content.loading *{
-  cursor: wait;
-}
-.sol-content.loading .sol-canvas-wrap{
-  visibility: hidden;
 }
 .sol-canvas-area{
   /* Self-hosted (same-origin), so its fake title bar and Game/Deal! menu

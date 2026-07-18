@@ -72,8 +72,10 @@ const iconMap = {
   '.contact_me': 'Contact Me',
 };
 Object.entries(iconMap).forEach(([selector, appName]) => {
-  document.querySelector(selector).addEventListener('click', () => {
+  const icon = document.querySelector(selector);
+  icon.addEventListener('dblclick', () => {
     appWindows.get(appName).open();
+    icon.classList.remove('selected');
   });
 });
 

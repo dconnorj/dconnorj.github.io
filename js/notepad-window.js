@@ -3,9 +3,7 @@ import { appWindows } from './windows.js';
 const notepadWindow = appWindows.get('Notepad');
 
 const NOTEPAD_SRC = 'https://98.js.org/programs/notepad/';
-const LOAD_DELAY_MS = 2000;
 
-const npContent = document.querySelector('.np-content');
 const npCanvasFrame = document.querySelector('.np-canvas-area');
 
 function resetNotepad() {
@@ -23,8 +21,6 @@ function resetNotepad() {
 let needsReset = true;
 
 notepadWindow.addEventListener('window-opened', () => {
-  npContent.classList.add('loading');
-  setTimeout(() => npContent.classList.remove('loading'), LOAD_DELAY_MS);
   if (needsReset) {
     requestAnimationFrame(resetNotepad);
     needsReset = false;

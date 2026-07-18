@@ -14,9 +14,7 @@ const paintWindow = appWindows.get('Paint');
 const BLANK_PNG =
   'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAyAAAAJYAQAAAACyDb/dAAAA6ElEQVR42u3NMQEAAAwCIPuX1hbbAwVID0QikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCL5TQZi5oNIWL0OEAAAAABJRU5ErkJggg==';
 const PAINT_SRC = `https://jspaint.app/#load:${encodeURIComponent(BLANK_PNG)}`;
-const LOAD_DELAY_MS = 2500;
 
-const ptContent = document.querySelector('.pt-content');
 const ptCanvasFrame = document.querySelector('.pt-canvas-area');
 
 function resetCanvas() {
@@ -36,8 +34,6 @@ function resetCanvas() {
 let needsReset = true;
 
 paintWindow.addEventListener('window-opened', () => {
-  ptContent.classList.add('loading');
-  setTimeout(() => ptContent.classList.remove('loading'), LOAD_DELAY_MS);
   if (needsReset) {
     requestAnimationFrame(resetCanvas);
     needsReset = false;

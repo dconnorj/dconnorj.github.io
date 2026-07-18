@@ -1,5 +1,6 @@
 import './js/boot.js';
 import './js/xp-window.js';
+import './js/desktop-select.js';
 import { loadWindows } from './js/loader.js';
 
 // Window content is fetched from windows/*.html, so anything that queries
