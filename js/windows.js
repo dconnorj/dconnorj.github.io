@@ -31,9 +31,11 @@ export const appWindows = new Map([
   ['Contact Me', document.getElementById('contactMeWindow')],
   ['Media Player', document.getElementById('mediaPlayerWindow')],
   ['Command Prompt', document.getElementById('commandPromptWindow')],
-  // Add new windows here as you build them:
-  // ['Notepad', document.getElementById('notepadWindow')],
-  // ['Minesweeper', document.getElementById('minesweeperWindow')],
+  ['Image Viewer', document.getElementById('imageViewerWindow')],
+  ['Paint', document.getElementById('paintWindow')],
+  ['Notepad', document.getElementById('notepadWindow')],
+  ['Minesweeper', document.getElementById('minesweeperWindow')],
+  ['Spider Solitaire', document.getElementById('solitaireWindow')],
 ]);
 
 // Confirm dialog
@@ -70,8 +72,10 @@ const iconMap = {
   '.contact_me': 'Contact Me',
 };
 Object.entries(iconMap).forEach(([selector, appName]) => {
-  document.querySelector(selector).addEventListener('click', () => {
+  const icon = document.querySelector(selector);
+  icon.addEventListener('dblclick', () => {
     appWindows.get(appName).open();
+    icon.classList.remove('selected');
   });
 });
 

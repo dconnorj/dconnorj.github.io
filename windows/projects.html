@@ -150,23 +150,9 @@
                     </div>
                     <div class="trivia-answer">
                       <h1>A:</h1>
-                      <button
-                        id="trivia-reveal-btn"
-                        onclick="
-                          (function () {
-                            var p = document.getElementById('trivia-answer-text'),
-                              b = document.getElementById('trivia-reveal-btn');
-                            if (p.classList.toggle('revealed')) {
-                              b.textContent = 'Hide';
-                            } else {
-                              b.textContent = 'Reveal';
-                            }
-                          })()
-                        "
-                      >
-                        Reveal
-                      </button>
-                      <p id="trivia-answer-text">Loading...</p>
+                      <div class="trivia-options" id="trivia-options">
+                        <p id="trivia-answer-text">Loading...</p>
+                      </div>
                     </div>
                   </div>
                 </template>

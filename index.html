@@ -4,13 +4,43 @@
     <title>Connor Dalley's Portfolio</title>
     <link rel="stylesheet" href="app.css" />
     <link rel="icon" type="image/png" href="/Res/Portfolio_Icon.png" />
+    <link rel="preload" as="image" href="/Res/background.jpg" />
     <meta charset="UTF-8" />
   </head>
   <body>
     <div class="boot_screen" id="bootScreen">
-      <img src="/Res/boot-animation-1.gif" alt="" class="boot_gif" />
-      <button class="boot_prompt" id="bootPrompt">Press Any Key to Start</button>
+      <video src="/Res/boot-animation-3.mp4" class="boot_gif" autoplay muted playsinline></video>
     </div>
+
+    <div class="select_screen" id="selectScreen">
+      <div class="select_top_bar"></div>
+      <div class="select_body">
+        <div class="select_left">
+          <img src="/Res/boot-up-logo-crop.png" alt="Connor Dalley XP - Software Engineer" class="select_brand_mark" />
+          <p class="select_instructions">To begin, click on Connor Dalley to log in</p>
+        </div>
+        <div class="select_divider"></div>
+        <div class="select_right">
+          <button class="select_profile_btn" id="selectProfileBtn">
+            <img src="/Res/Chess_Pieces.png" alt="Connor Dalley" class="select_profile_pic" />
+            <span class="select_profile_info">
+              <span class="select_profile_name">Connor Dalley</span>
+              <span class="select_profile_role">Software Engineer</span>
+            </span>
+          </button>
+        </div>
+      </div>
+      <div class="select_bottom_bar"></div>
+    </div>
+
+    <div class="welcome_screen" id="welcomeScreen">
+      <div class="welcome_top_bar"></div>
+      <div class="welcome_body">
+        <p class="welcome_text">welcome</p>
+      </div>
+      <div class="welcome_bottom_bar"></div>
+    </div>
+
     <main>
       <div class="main_section is-loading">
         <div class="icons">
@@ -64,9 +94,6 @@
         >
         </xp-window>
 
-        <!-- Add future windows here, e.g.: -->
-        <!-- <xp-window id="notepadWindow" title="Notepad" app-type="notepad" icon="/Res/Notepad.png"></xp-window> -->
-
         <xp-window
           id="mediaPlayerWindow"
           title="Windows Media Player"
@@ -83,6 +110,52 @@
           app-type="command-prompt"
           icon="/Res/Command Prompt.png"
           style="width: 34rem; height: 22rem"
+        >
+        </xp-window>
+
+        <xp-window
+          id="imageViewerWindow"
+          title="Image Viewer"
+          app-type="image-viewer"
+          icon="/Res/Windows Picture and Fax Viewer.png"
+          style="width: 35rem; height: 28rem"
+        >
+        </xp-window>
+
+        <xp-window
+          id="paintWindow"
+          title="Paint"
+          app-type="paint"
+          icon="/Res/Paint.png"
+          style="width: 39rem; height: 30rem"
+        >
+        </xp-window>
+
+        <xp-window
+          id="notepadWindow"
+          title="Notepad"
+          app-type="notepad"
+          icon="/Res/Notepad.png"
+          style="width: 34rem; height: 26rem"
+        >
+        </xp-window>
+
+        <xp-window
+          id="minesweeperWindow"
+          title="Minesweeper"
+          app-type="minesweeper"
+          icon="/Res/Minesweeper.png"
+          style="width: 28rem; height: 39rem"
+          disable-maximize
+        >
+        </xp-window>
+
+        <xp-window
+          id="solitaireWindow"
+          title="Spider Solitaire"
+          app-type="solitaire"
+          icon="/Res/Spider Solitaire.png"
+          style="width: 32rem; height: 27rem"
         >
         </xp-window>
 

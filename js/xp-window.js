@@ -63,6 +63,9 @@ class XPWindow extends HTMLElement {
           opacity: 0.5;
           pointer-events: none;
         }
+        :host(:not(.active-window)) .content {
+          opacity: 0.5;
+        }
         .titlebar {
           background: linear-gradient(to bottom, #3B73E8 0%, #245EDC 40%, #1A4FC4 100%);
           color: white;
@@ -96,6 +99,16 @@ class XPWindow extends HTMLElement {
         :host([hide-controls]) .minimize-window,
         :host([hide-controls]) .maximize-window {
           display: none;
+        }
+        :host([disable-maximize]) .maximize-window {
+          opacity: 50%;
+          pointer-events: none;
+        }
+        :host([app-type="minesweeper"]) .window {
+          /* Board-driven sizing (see minesweeper-window.js) can go below
+             the site-wide 500px resize floor, e.g. a scaled-down Beginner
+             board, so that floor is lifted for this app specifically. */
+          min-width: 0;
         }
         :host([chromeless]) .window {
           border: none;
@@ -350,6 +363,10 @@ class XPWindow extends HTMLElement {
   _makeResizable() {
     if (this.hasAttribute('chromeless')) return;
     const appType = this.getAttribute('app-type');
+    // Minesweeper's size is dictated entirely by the selected difficulty
+    // (see minesweeper-window.js), so manual resizing is disabled rather
+    // than letting a drag distort/clip the fixed-content board.
+    if (appType === 'minesweeper') return;
     const minW = appType === 'projects' ? 880 : 500,
       minH = appType === 'media-player' ? 380 : 300;
     const windowEl = this.shadowRoot.querySelector('.window');

@@ -5,32 +5,45 @@
   }
   .mp-top {
     display: flex;
+    align-items: flex-start;
+    width: 387px;
     z-index: 3;
+  }
+  .mp-top-left {
+    display: block;
+    width: 335.4px;
+    height: auto;
   }
   .mp-top > div {
     position: relative;
     top: 0;
     left: 0;
+    flex: 1;
   }
   .mp-top-right {
+    display: block;
     position: relative;
     top: 0;
     left: 0;
-    height: 100%;
+    width: 100%;
+    height: auto;
   }
   .mp-top-min-close-btns {
     position: absolute;
     display: flex;
-    top: 8px;
-    left: 15px;
+    top: 8.97px;
+    left: 12px;
     z-index: 3;
   }
   .mp-top-min-close-btns img {
+    width: 16.83px;
+    height: 16.83px;
     cursor: pointer;
   }
   .mp-min-btn:hover,
   .mp-close-btn:hover {
     outline: 1px solid grey;
+    background: #999999;
   }
   .mp-bottom {
     position: relative;
@@ -237,7 +250,7 @@
 </style>
 <div class="mp-player">
   <div class="mp-top" data-window-drag>
-    <img src="Res/9SeriesDefault/player_top_left.png" />
+    <img class="mp-top-left" src="Res/9SeriesDefault/player_top_left.png" />
     <div>
       <img class="mp-top-right" src="Res/9SeriesDefault/player_top_right.png" />
       <div class="mp-top-min-close-btns">

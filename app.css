@@ -189,6 +189,7 @@ main {
     background-repeat: no-repeat;
     align-items: start;
     justify-content: start;
+    position: relative;
 }
 .main_section.is-loading {
   background-image: none;
@@ -224,8 +225,17 @@ main {
   width: 3.5rem;
 }
 
-.icons button:hover {
-  background: rgba(0,0,0,0.1);
+.icons button:hover,
+.icons button.selected {
+  background: rgba(37, 99, 220, 0.45);
+}
+
+.desktop_selection_box {
+  position: absolute;
+  border: 1px solid rgba(35, 90, 195, 0.9);
+  background: rgba(90, 150, 255, 0.45);
+  pointer-events: none;
+  z-index: 5;
 }
 .start_button {
     display: flex;
@@ -563,29 +573,191 @@ start-menu img{
   height: 100%;
   object-fit: contain;
 }
-.boot_prompt {
-  position: absolute;
-  bottom: 12%;
-  left: 50%;
-  transform: translateX(-50%);
-  color: #FFFFFF;
-  font-family: 'Pixelated MS Sans Serif', Tahoma, sans-serif;
-  font-size: 1rem;
-  text-shadow: 2px 2px 3px black;
-  padding: 0.6rem 1.2rem;
-  background: rgba(0, 0, 0, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  cursor: pointer;
-  animation: boot-prompt-blink 1.4s ease-in-out infinite;
-  transition: opacity 0.3s ease;
-}
-.boot_prompt.boot-hidden {
+
+/* Shared behavior for the two full-screen overlays that sit between the
+   boot video and the desktop: hidden by default, faded in via .screen-active. */
+.select_screen,
+.welcome_screen {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 999999;
   opacity: 0;
   pointer-events: none;
+  transition: opacity 0.6s ease;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Helvetica Neue', Tahoma, sans-serif;
 }
-@keyframes boot-prompt-blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.4; }
+.select_screen.screen-active,
+.welcome_screen.screen-active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.select_screen {
+  background: #5A7EDC;
+}
+.select_top_bar {
+  height: 5.5rem;
+  flex-shrink: 0;
+  background: #3333AB;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+}
+.select_bottom_bar {
+  height: 2.75rem;
+  flex-shrink: 0;
+  background: #3333AB;
+  border-top: 1px solid #ff9d3d;
+}
+.select_body {
+  flex: 1;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  background: #5A7EDC;
+}
+.select_left,
+.select_right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.5rem;
+  min-width: 0;
+}
+.select_left {
+  align-items: flex-end;
+  padding-right: 3rem;
+  text-align: right;
+}
+.select_right {
+  align-items: flex-start;
+  padding-left: 3rem;
+}
+.select_divider {
+  width: 1px;
+  margin: 3rem 0;
+  background: rgba(255, 255, 255, 0.35);
+}
+.select_brand_mark {
+  width: 22rem;
+  max-width: 80%;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(1px 1px 3px rgba(0, 0, 0, 0.35));
+}
+.select_instructions {
+  color: #ffffff;
+  font-size: 0.95rem;
+  margin: 0;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+.select_profile_btn {
+  position: relative;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  background: transparent;
+  border: none;
+  padding: 1rem 1.5rem;
+  border-radius: 0.9rem;
+  cursor: pointer;
+}
+.select_profile_btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  right: -70%;
+  border-radius: 0.9rem;
+  background: linear-gradient(to right, rgba(10, 35, 90, 0.55) 0%, rgba(10, 35, 90, 0.4) 45%, transparent 90%);
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  z-index: -1;
+  pointer-events: none;
+}
+.select_profile_btn:hover::before,
+.select_profile_btn:focus-visible::before {
+  opacity: 1;
+}
+.select_profile_btn:focus-visible {
+  outline: none;
+}
+.select_profile_btn:hover .select_profile_pic,
+.select_profile_btn:focus-visible .select_profile_pic {
+  border-color: #FFB627;
+}
+.select_profile_btn:hover .select_profile_role,
+.select_profile_btn:focus-visible .select_profile_role {
+  color: #FFB627;
+}
+.select_profile_pic {
+  width: 4.5rem;
+  height: 4.5rem;
+  object-fit: cover;
+  border-radius: 0.5rem;
+  border: 3px solid #ffffff;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.3);
+  transition: border-color 0.15s ease;
+}
+.select_profile_info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.15rem;
+}
+.select_profile_name {
+  color: #ffffff;
+  font-size: 1.2rem;
+  font-weight: 400;
+}
+.select_profile_role {
+  color: #1B2C6E;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-shadow: none;
+  transition: color 0.15s ease;
+}
+
+.welcome_screen {
+  background: #5A7EDC;
+}
+.welcome_top_bar {
+  height: 5.5rem;
+  flex-shrink: 0;
+  background: #3333AB;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+}
+.welcome_bottom_bar {
+  height: 2.75rem;
+  flex-shrink: 0;
+  background: #3333AB;
+  border-top: 1px solid #ff9d3d;
+}
+.welcome_body {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #5A7EDC;
+}
+.welcome_text {
+  margin: 0;
+  color: #ffffff;
+  font-family: 'Helvetica Neue', Georgia, serif;
+  font-weight: 700;
+  font-style: italic;
+  font-size: 4rem;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.35), 0 0 30px rgba(255, 255, 255, 0.25);
+  opacity: 0;
+  transform: scale(0.92);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.welcome_screen.screen-active .welcome_text {
+  opacity: 1;
+  transform: scale(1);
 }
 .crt_overlay {
   position: fixed;
@@ -601,24 +773,24 @@ start-menu img{
 body.crt-active .crt_overlay {
   opacity: 1;
 
-  /* scanlines */
-  background-image: repeating-linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.15) 0px,
-    rgba(0, 0, 0, 0.15) 1px,
-    transparent 1px,
-    transparent 3px
-  );
-  background-image: repeating-linear-gradient(
-    to right,
-    rgba(0, 0, 0, 0.10) 0px,
-    rgba(0, 0, 0, 0.10) 1px,
-    transparent 1px,
-    transparent 3px
-  );
+  /* scanlines: horizontal + vertical, feathered so 1px lines don't alias
+     harshly on standard-DPI displays (they blend naturally on Retina) */
+  background-image:
+    repeating-linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.07) 0px,
+      transparent 1.5px,
+      transparent 3px
+    ),
+    repeating-linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.035) 0px,
+      transparent 1.5px,
+      transparent 3px
+    );
 
   /* vignette */
-  box-shadow: inset 0 0 10rem rgba(0, 0, 0, 0.5);
+  box-shadow: inset 0 0 10rem rgba(0, 0, 0, 0.3);
 
   animation: crt-flicker 0.5s ease-in-out infinite;
 }
@@ -650,8 +822,8 @@ body.crt-active .crt_overlay {
   font-size: 0.7rem;
   text-shadow: 1px 1px 1px black;
   padding: 0.2rem 0.6rem;
-  max-width: 9rem;
-  min-width: 4rem;
+  width: 7rem;
+  flex-shrink: 0;
   cursor: pointer;
   white-space: nowrap;
   overflow: hidden;
@@ -717,7 +889,11 @@ body.crt-active .crt_overlay {
 .am-content,
 .res-content,
 .cm-content,
-.proj-content{
+.proj-content,
+.pt-content,
+.np-content,
+.ms-content,
+.sol-content{
   display: flex;
   flex-direction: column;
   max-width: 100%;
@@ -729,7 +905,11 @@ body.crt-active .crt_overlay {
 
 .am-page-head,
 .cm-page-head,
-.proj-page-head{
+.proj-page-head,
+.pt-page-head,
+.np-page-head,
+.ms-page-head,
+.sol-page-head{
   position: sticky;      /* sticks to top of .am-content, not the viewport */
   top: 0;
   width: 100%;
@@ -739,7 +919,11 @@ body.crt-active .crt_overlay {
 .am-file-view,
 .res-file-view,
 .cm-file-view,
-.proj-file-view{
+.proj-file-view,
+.pt-file-view,
+.np-file-view,
+.ms-file-view,
+.sol-file-view{
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -749,7 +933,11 @@ body.crt-active .crt_overlay {
 .am-file-view img,
 .res-file-view img,
 .cm-file-view img,
-.proj-file-view img{
+.proj-file-view img,
+.pt-file-view img,
+.np-file-view img,
+.ms-file-view img,
+.sol-file-view img{
   height: 1.25rem;
   background-color: white;
 }
@@ -759,19 +947,35 @@ body.crt-active .crt_overlay {
 .cm-tools,
 .cm-help,
 .proj-tools,
-.proj-help{
+.proj-help,
+.pt-edit,
+.pt-tools,
+.pt-help,
+.np-edit,
+.np-search,
+.np-help,
+.ms-help,
+.sol-help{
   opacity: 50%;
 }
 .am-view-file-btns,
 .res-view-file-btns,
 .cm-view-file-btns,
-.proj-view-file-btns{
+.proj-view-file-btns,
+.pt-view-file-btns,
+.np-view-file-btns,
+.ms-view-file-btns,
+.sol-view-file-btns{
   display: flex;
 }
 .am-file-view button,
 .res-file-view button,
 .cm-file-view button,
-.proj-file-view button{
+.proj-file-view button,
+.pt-file-view button,
+.np-file-view button,
+.ms-file-view button,
+.sol-file-view button{
   color: black;
   text-shadow: none;
   font-size: 0.65rem;
@@ -781,7 +985,11 @@ body.crt-active .crt_overlay {
 .am-file-view button:not(.am-help):hover,
 .res-file-view button:not(.res-help):hover,
 .cm-file-view button:not(.cm-edit):not(.cm-tools):not(.cm-help):hover,
-.proj-file-view button:not(.proj-tools):not(.proj-help):hover {
+.proj-file-view button:not(.proj-tools):not(.proj-help):hover,
+.pt-file-view button:not(.pt-edit):not(.pt-tools):not(.pt-help):hover,
+.np-file-view button:not(.np-edit):not(.np-search):not(.np-help):hover,
+.ms-file-view button:not(.ms-help):hover,
+.sol-file-view button:not(.sol-help):hover {
   background: #1857BF;
   color: white;
   text-shadow: 1px 1px 1px black;
@@ -1334,7 +1542,11 @@ body.crt-active .crt_overlay {
 .am-dropdown-menu,
 .res-dropdown-menu,
 .cm-dropdown-menu,
-.proj-dropdown-menu {
+.proj-dropdown-menu,
+.pt-dropdown-menu,
+.np-dropdown-menu,
+.ms-dropdown-menu,
+.sol-dropdown-menu {
   position: fixed;
   background: #E1E4E2;
   border: 1px solid #A9A9A9;
@@ -1351,7 +1563,15 @@ body.crt-active .crt_overlay {
 .cm-file-popup-btns p,
 .cm-view-popup-btns p,
 .proj-file-popup-btns p,
-.proj-view-popup-btns p {
+.proj-view-popup-btns p,
+.pt-file-popup-btns p,
+.pt-view-popup-btns p,
+.np-file-popup-btns p,
+.np-view-popup-btns p,
+.ms-file-popup-btns p,
+.ms-view-popup-btns p,
+.sol-file-popup-btns p,
+.sol-view-popup-btns p {
   color: black;
   padding: 0.2rem 1rem 0.2rem 0.5rem;
   cursor: default;
@@ -1364,20 +1584,36 @@ body.crt-active .crt_overlay {
 .cm-file-popup-btns p:not(.cm-file-disabled):hover,
 .cm-view-popup-btns p:hover,
 .proj-file-popup-btns p:not(.proj-file-disabled):hover,
-.proj-view-popup-btns p:hover {
+.proj-view-popup-btns p:hover,
+.pt-file-popup-btns p:not(.pt-file-disabled):hover,
+.pt-view-popup-btns p:hover,
+.np-file-popup-btns p:not(.np-file-disabled):hover,
+.np-view-popup-btns p:hover,
+.ms-file-popup-btns p:not(.ms-file-disabled):hover,
+.ms-view-popup-btns p:hover,
+.sol-file-popup-btns p:not(.sol-file-disabled):hover,
+.sol-view-popup-btns p:hover {
   background: #1857BF;
   color: white;
 }
 .am-file-disabled,
 .res-file-disabled,
 .cm-file-disabled,
-.proj-file-disabled {
+.proj-file-disabled,
+.pt-file-disabled,
+.np-file-disabled,
+.ms-file-disabled,
+.sol-file-disabled {
   opacity: 50%;
   pointer-events: none;
 }
 
 .am-file-exit,
-.res-file-exit {
+.res-file-exit,
+.pt-file-exit,
+.np-file-exit,
+.ms-file-exit,
+.sol-file-exit {
   border-top: 1px solid #A9A9A9;
 }
 .cm-file-border,
@@ -1431,6 +1667,197 @@ body.crt-active .crt_overlay {
   .am-content-row-col img {
     display: none;
   }
+}
+
+.iv-content{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  background-color: #ECE9D8;
+}
+.iv-image-area{
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+  background-color: #999790;
+  padding: 0.5rem;
+}
+.iv-image-area img{
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+  background-color: white;
+}
+.iv-image-area.zoomed{
+  overflow: auto;
+  align-items: center;
+  justify-content: center;
+}
+.iv-image-area.zoomed img{
+  max-height: none;
+  max-width: none;
+}
+.iv-nav-bar{
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  padding: 0.4rem 0;
+  background-color: white;
+  border-top: 0.07rem solid #ACA899;
+  flex-shrink: 0;
+}
+.iv-back-next-btns,
+.iv-print-zoom-btns{
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0 1rem;
+  border-right: 0.07rem solid #D3D1C5;
+}
+.iv-save-btn{
+  margin-left: 1rem;
+}
+.iv-nav-bar button{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  font-size: 0.65rem;
+  color: black;
+  text-shadow: none;
+  border: 0.1rem solid transparent;
+  border-radius: 15%;
+  padding: 0.3rem 0.5rem;
+}
+.iv-nav-bar img{
+  height: 1.5rem;
+  width: auto;
+}
+.iv-nav-bar button:not(:disabled):hover{
+  border-color: #A9A9A9;
+  background-color: #C5C5C5;
+}
+.iv-print-btn, .iv-save-btn{
+  opacity: 50%;
+  cursor: default;
+}
+.iv-zoom-btn.active{
+  border-color: #A9A9A9;
+  background-color: #C5C5C5;
+}
+.iv-footer{
+  background: #E1E4E2;
+  font-family: 'Pixelated MS Sans Serif', Tahoma, sans-serif;
+  font-size: 0.6rem;
+  padding: 0.1rem;
+  border-top: 0.15rem solid #B8B8B8;
+  flex-shrink: 0;
+}
+
+.pt-canvas-wrap{
+  flex: 1;
+  overflow: hidden;
+}
+.pt-canvas-area{
+  display: block;
+  width: 100%;
+  /* jspaint's own menu bar (20px) and status bar (23px) are fixed-height;
+     shift the iframe up to crop the menu bar under the wrap's overflow,
+     and grow it to push the status bar past the bottom edge the same way,
+     leaving only our pt-file-view/pt-footer as the surrounding chrome. */
+  height: calc(100% + 43px);
+  margin-top: -20px;
+  border: none;
+  background-color: white;
+}
+.pt-footer{
+  background: #E1E4E2;
+  font-family: 'Pixelated MS Sans Serif', Tahoma, sans-serif;
+  font-size: 0.6rem;
+  padding: 0.1rem 0.3rem;
+  flex-shrink: 0;
+}
+.pt-footer a{
+  color: #1857BF;
+}
+
+.np-canvas-wrap{
+  flex: 1;
+  overflow: hidden;
+}
+.np-canvas-area{
+  display: block;
+  width: 100%;
+  /* 98.js's own Notepad menu bar is a fixed 20px with no status bar below
+     it, so only the top needs cropping to leave our np-file-view as the
+     sole menu bar. */
+  height: calc(100% + 20px);
+  margin-top: -20px;
+  border: none;
+  background-color: white;
+}
+.np-footer{
+  background: #E1E4E2;
+  font-family: 'Pixelated MS Sans Serif', Tahoma, sans-serif;
+  font-size: 0.6rem;
+  padding: 0.1rem 0.3rem;
+  flex-shrink: 0;
+}
+.np-footer a{
+  color: #1857BF;
+}
+
+.ms-canvas-wrap{
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #C0C0C0;
+}
+.ms-canvas-area{
+  display: block;
+  flex-shrink: 0;
+  border: none;
+  background-color: #C0C0C0;
+}
+.ms-footer{
+  background: #E1E4E2;
+  font-family: 'Pixelated MS Sans Serif', Tahoma, sans-serif;
+  font-size: 0.6rem;
+  padding: 0.1rem 0.3rem;
+  flex-shrink: 0;
+}
+.ms-footer a{
+  color: #1857BF;
+}
+
+.sol-canvas-wrap{
+  flex: 1;
+  overflow: auto;
+}
+.sol-canvas-area{
+  /* Self-hosted (same-origin), so its fake title bar and Game/Deal! menu
+     are hidden directly in Res/spider-solitaire/index.html instead of
+     via an iframe crop hack. */
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: none;
+  background-color: #ECE7D6;
+}
+.sol-footer{
+  background: #E1E4E2;
+  font-family: 'Pixelated MS Sans Serif', Tahoma, sans-serif;
+  font-size: 0.6rem;
+  padding: 0.1rem 0.3rem;
+  flex-shrink: 0;
+}
+.sol-footer a{
+  color: #1857BF;
 }
 
 .cm-toast {
@@ -1601,7 +2028,7 @@ body.crt-active .crt_overlay {
   left: 0;
   height: 100%;
   width: 0%;
-  background: #7FB1F0;
+  background: rgba(127, 177, 240, 0.55);
   animation: proj-address-grow-choppy var(--proj-load-duration, 2.5s) steps(7, jump-end) forwards;
 }
 @keyframes proj-address-grow-choppy{
@@ -1959,25 +2386,40 @@ body.crt-active .crt_overlay {
 .proj-trivia-section p{
   font-size: .85rem;
 }
-#trivia-answer-text{
-  filter: blur(5px);
-  user-select: none;
+.proj-trivia-section .trivia-options{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: stretch;
+  gap: 0.3rem;
+  flex: 1;
 }
-#trivia-answer-text.revealed{
-  filter: none;
-  user-select: text;
-}
-#trivia-reveal-btn{
+.trivia-option-btn{
   background: #824FB8;
   color: white;
   border: none;
   border-radius: 4px;
-  padding: 0.15rem 0.5rem;
-  font-size: 0.75rem;
+  padding: 0.25rem 0.4rem;
+  min-height: 2.2rem;
+  font-size: 0.7rem;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
-  flex-shrink: 0;
 }
-#trivia-reveal-btn:hover{
+.trivia-option-btn:hover:not(:disabled){
   background: #9b65d4;
+}
+.trivia-option-btn:disabled{
+  cursor: default;
+  opacity: 0.7;
+}
+.trivia-option-btn.correct{
+  background: #3C9A2A;
+  opacity: 1;
+}
+.trivia-option-btn.incorrect{
+  background: #B03A2E;
+  opacity: 1;
 }
 

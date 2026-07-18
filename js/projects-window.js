@@ -585,16 +585,26 @@ async function loadKlingonWord(dateInt) {
   );
 }
 
+function shuffle(arr) {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
 async function loadTrivia(dateKey) {
   const cacheKey = `trivia-${dateKey}`;
   let cached = null;
   try {
     cached = JSON.parse(localStorage.getItem(cacheKey));
+    if (cached && !Array.isArray(cached.options)) cached = null;
   } catch (_) {}
 
-  let question, answer, type;
+  let question, answer, type, options;
   if (cached) {
-    ({ question, answer, type } = cached);
+    ({ question, answer, type, options } = cached);
   } else {
     const res = await fetch('https://opentdb.com/api.php?amount=1&category=9');
     const data = await res.json();
@@ -602,7 +612,17 @@ async function loadTrivia(dateKey) {
     question = decodeHtmlEntities(result.question);
     answer = decodeHtmlEntities(result.correct_answer);
     type = result.type;
-    localStorage.setItem(cacheKey, JSON.stringify({ question, answer, type }));
+    options =
+      type === 'boolean'
+        ? ['True', 'False']
+        : shuffle([
+            answer,
+            ...result.incorrect_answers.map(decodeHtmlEntities),
+          ]);
+    localStorage.setItem(
+      cacheKey,
+      JSON.stringify({ question, answer, type, options })
+    );
   }
 
   const questionLabel =
@@ -610,7 +630,24 @@ async function loadTrivia(dateKey) {
       ? `Today's Trivia Question: (True or False) ${question}`
       : `Today's Trivia Question: ${question}`;
   document.getElementById('trivia-question-text').textContent = questionLabel;
-  document.getElementById('trivia-answer-text').textContent = `${answer}`;
+
+  const optionsContainer = document.getElementById('trivia-options');
+  optionsContainer.replaceChildren();
+  options.forEach((option) => {
+    const btn = document.createElement('button');
+    btn.className = 'trivia-option-btn';
+    btn.textContent = option;
+    btn.addEventListener('click', () => {
+      if (optionsContainer.classList.contains('answered')) return;
+      optionsContainer.classList.add('answered');
+      optionsContainer.querySelectorAll('.trivia-option-btn').forEach((b) => {
+        b.disabled = true;
+        if (b.textContent === answer) b.classList.add('correct');
+      });
+      if (option !== answer) btn.classList.add('incorrect');
+    });
+    optionsContainer.appendChild(btn);
+  });
 }
 
 const backToTopBtn = document.querySelector('.proj-back-to-top-btn');
