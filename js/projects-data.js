@@ -14,9 +14,9 @@ export const projects = [
     title: 'Connor Dalley XP',
     tags: ['web'],
     summary:
-      'This portfolio site itself — a Windows XP-styled desktop recreated in vanilla HTML, CSS, and JavaScript, right down to draggable windows and a working taskbar.',
+      "This portfolio site itself — a fully interactive Windows XP desktop rebuilt from the ground up in hand-written HTML, CSS, and JavaScript, right down to draggable windows, a working taskbar, and a Start menu.",
     description:
-      "This is the site you're browsing right now: a nostalgic recreation of the Windows XP desktop, built as a personal portfolio. Every window — including this Projects app — is a custom, draggable, resizable UI component built from scratch with vanilla HTML, CSS, and JavaScript, with no frameworks or build step. It handles a taskbar with running-app tracking, a Start menu, window focus/z-index management, minimize/maximize/restore transitions, and this project browser with its own back/forward history stack and tabbed navigation. The goal was to combine genuine software engineering (state management, component architecture, event handling) with a fun, detail-oriented UI project that stands out from a typical portfolio template.",
+      "This is the site you're browsing right now: a nostalgic, pixel-faithful recreation of the Windows XP desktop, engineered as a personal portfolio that stands out from a typical resume-in-a-webpage template. Every window — including this Projects app — is a custom, draggable, resizable UI component built entirely from scratch, with no UI framework and no build step: just hand-written HTML, CSS, and JavaScript doing the work a framework normally would. It drives a taskbar with live running-app tracking, a functional Start menu, full window focus/z-index management, minimize/maximize/restore transitions, and this project browser complete with its own back/forward history stack and tabbed navigation. The goal was to fuse genuine software engineering — state management, component architecture, event handling, browser API deep-dives — with a playful, obsessively detailed UI that's memorable in a way a typical portfolio site isn't.",
     techStack: ['HTML', 'CSS', 'JavaScript'],
     repoStatus: 'public',
     github: 'https://github.com/dconnorj/dconnorj.github.io',
